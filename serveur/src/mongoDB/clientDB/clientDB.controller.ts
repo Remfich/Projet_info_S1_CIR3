@@ -1,4 +1,4 @@
-import { Controller,Post,Get, Param, Body } from "@nestjs/common";
+import { Controller,Post, Body } from "@nestjs/common";
 import { ClientService } from "./clientDB.service";
 import { Client } from "./clientDB.schema"; 
 import { CreateClientDto } from "./dto/create-client-dto";

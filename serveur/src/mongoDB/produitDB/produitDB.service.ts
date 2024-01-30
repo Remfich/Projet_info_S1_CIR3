@@ -7,4 +7,11 @@ import { InjectModel } from "@nestjs/mongoose";
 export class ProduitService{
     constructor(@InjectModel(Produit.name) private ProduitModel: Model<Produit>) {}
 
+    // Créer un produit
+
+    // Supprimer un produit
+
+    // Get tous les produits
+
+    // Update un produit
 }
