@@ -9,4 +9,4 @@ import {Client,ClientSchema} from './clientDB.schema';
   controllers: [ClientController],
   providers: [ClientService],
 })
-export class CatsModule {}
+export class ClientModule {}
