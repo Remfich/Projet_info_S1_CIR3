@@ -2,6 +2,7 @@ import { Controller,Post,Get, Param, Body } from "@nestjs/common";
 import { ClientService } from "./clientDB.service";
 import { Client } from "./clientDB.schema"; 
 import { CreateClientDto } from "./dto/create-client-dto";
+import { getClientDto } from "./dto/getClient-dto";
 
 @Controller('client')
 export class ClientController {
@@ -9,10 +10,9 @@ export class ClientController {
 
     // Trouver un client
     @Post('/getClient')
-    async getClient(@Body() email_client : string) : Promise<Client>{
-        console.log(typeof(email_client));
-
-        return this.ClientService.getClientByEmail({email_client});
+    async getClient(@Body() email_client : getClientDto) : Promise<Client>{
+        const email = email_client.email;
+        return this.ClientService.getClientByEmail({email});
     }
 
     // Créer un client
@@ -20,5 +20,13 @@ export class ClientController {
     async creerClient(@Body() createClientDto : CreateClientDto) : Promise<Client>{
         return this.ClientService.createClient(createClientDto.prenom,createClientDto.nom,
             createClientDto.email,createClientDto.mdp)
+    }
+
+    // Supprimer un client
+    @Post('/deleteClient')
+    async deleteClient(@Body() email_client : getClientDto){
+        const email = email_client.email;
+        console.log(email);
+        return this.ClientService.deleteClient({email});
     }
 }

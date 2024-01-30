@@ -9,9 +9,7 @@ export class ClientService {
 
     // Trouver et retourner un client
     async getClientByEmail(email_client : FilterQuery<Client>) : Promise<Client>{
-    const temp = this.ClientModel.findOne(email_client);
-    console.log(temp);
-    return temp;
+        return this.ClientModel.findOne(email_client);
     }
 
     // Créer un client
@@ -21,7 +19,7 @@ export class ClientService {
     }
 
     // Trouve et supprime un client
-    async deleteClient(email_client : string){
-        return this.ClientModel.deleteOne({email_client});
+    async deleteClient(email_client : FilterQuery<Client>){
+        return this.ClientModel.deleteOne(email_client);
     }
 }
