@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { Produit } from './produit.schema';
+import * as mongoose from 'mongoose';
+import { Produit } from '../produitDB/produitDB.schema';
 
 export type ClientDocument = HydratedDocument<Client>;
 
@@ -18,8 +19,8 @@ export class Client {
   @Prop()
   mdp: string;
 
-  @Prop()
-  histo: Array<Produit>;
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Produit' }] })
+  histo: Produit[];
 }
 
 export const ClientSchema = SchemaFactory.createForClass(Client);
