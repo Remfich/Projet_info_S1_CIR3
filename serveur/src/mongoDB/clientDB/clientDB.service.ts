@@ -1,4 +1,4 @@
-import { Model } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Client } from './clientDB.schema';
@@ -8,8 +8,10 @@ export class ClientService {
   constructor(@InjectModel(Client.name) private ClientModel: Model<Client>) {}
 
     // Trouver et retourner un client
-    async getCLientByEmail(email_client : string) : Promise<Client>{
-    return this.ClientModel.findOne({ email_client });
+    async getClientByEmail(email_client : FilterQuery<Client>) : Promise<Client>{
+    const temp = this.ClientModel.findOne(email_client);
+    console.log(temp);
+    return temp;
     }
 
     // Créer un client
