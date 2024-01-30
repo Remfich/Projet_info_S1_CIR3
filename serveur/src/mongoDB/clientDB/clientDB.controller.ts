@@ -26,7 +26,6 @@ export class ClientController {
     @Post('/deleteClient')
     async deleteClient(@Body() email_client : getClientDto){
         const email = email_client.email;
-        console.log(email);
         return this.ClientService.deleteClient({email});
     }
 }
