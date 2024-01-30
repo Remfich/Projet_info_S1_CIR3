@@ -59,3 +59,23 @@ svg{
   background: white;
   border-radius: 24px;
 }
+
+/* Ajout du style pour le lien d'inscription */
+.box .inscription-link {
+  text-decoration: none;
+  color: #F5CB5C;
+  font-size: 14px;
+  margin-top: 10px;
+  display: block;
+  margin-left: 5px; /* Ajout d'une marge à gauche */
+  padding: 8px 12px; /* Ajustement de la taille du padding pour un meilleur design */
+  border: 1px solid #F5CB5C; /* Ajout d'une bordure */
+  border-radius: 5px; /* Bordure arrondie */
+  transition: 0.25s;
+}
+
+.box .inscription-link:hover {
+  text-decoration: underline;
+  background: #F5CB5C; /* Changement de couleur au survol */
+  color: #191919; /* Changement de couleur du texte au survol */
+}
