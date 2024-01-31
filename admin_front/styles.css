@@ -1,17 +1,24 @@
 body {
   padding-top: 20px;
+  background-color: #242423;
 }
 
-.container {
-  margin-bottom: 20px;
-}
 
 .navbar-brand {
   margin-right: auto;
+  
 }
 
+.navbar{
+  background-color: #F5CB5C;
+  margin-left: 130px;
+}
+h2 {
+  color: white;
+}
 .table {
   margin-top: 20px;
+  background-color: #CFDBD5;
 }
 
 @media (max-width: 576px) {
@@ -21,4 +28,35 @@ body {
   .navbar-nav .nav-item {
     margin-bottom: 10px;
   }
+  .sidebar {
+    background-color: #333533;
+    height: 100vh;
+    width: 200px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px;
+  }
+  .sidebar a {
+    color: #CFDBD5;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 20px;
+    text-align: center;
+  }
+  .container {
+    margin-left: 220px;
+    margin-bottom: 20px;
+  }
+  .save-button {
+    float: right;
+    margin-top: 10px;
+  }
+  .sidebar a:not(.navbar-brand) {
+    margin-top: 20px;
+  }
+  .edit-mode {
+    background-color: white;
+  }
+
 }

@@ -32,17 +32,17 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h2>Gestion de stock</h2>
-        <input type="text" class="form-control" placeholder="Rechercher un produit">
+        <h2>Gestion des Client</h2>
+        <input type="text" class="form-control" placeholder="Rechercher un Client">
         <br>
-        <a href="#" class="btn btn-primary mb-3" onclick="ajouterProduit()">Ajouter un produit</a>
+        <a href="#" class="btn btn-primary mb-3" onclick="ajouterClient()">Ajouter un client</a>
         <table class="table table-striped" id="product-table"  >
           <thead>
             <tr>
-              <th>ID du produit</th>
+              <th>Prénom du Client</th>
               <th>Nom du produit</th>
-              <th contenteditable="false">Nombre en stock</th>
-              <th contenteditable="false">Prix</th>
+              <th contenteditable="false">Email</th>
+              <th contenteditable="false">Mot de Passe</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -55,13 +55,13 @@
   </div>
 
   <script>
-    function supprimerProduit(button) {
+    function supprimerClient(button) {
       var row = button.parentNode.parentNode;
       row.parentNode.removeChild(row);
     }
   </script>
   <script>
-    function ajouterProduit() {
+    function ajouterClient() {
       var table1 = document.getElementById("product-table");
       var newRow = table1.insertRow(-1);
       newRow.innerHTML = `
@@ -69,7 +69,7 @@
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
-        <td><button class="btn btn-danger" onclick="supprimerProduit(this)">Supprimer</button></td>
+        <td><button class="btn btn-danger" onclick="supprimerClient(this)">Supprimer</button></td>
       `;
     }
   </script>
