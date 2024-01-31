@@ -1,6 +1,7 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { Produit } from "src/mongoDB/produitDB/produitDB.schema";
-import{requete} from "../utilitaire"
+import{ip_db, requete} from "../utilitaire"
+import { response } from "express";
 
 
 
@@ -22,13 +23,14 @@ export class ClientBackController {
   @Post('/ajoutPanier')
   async ajoutPanier(@Body() nom_produit:object) : Promise<boolean>{
     // On reçoit le nom d'un produit, on va interroger la DB sur ce produit pour obtenir ses informations
-    console.log(nom_produit);
-    const reponse = await requete('http://10.224.2.87:3000/produit/getProduit',nom_produit);
-    if (reponse.length>0 && reponse[0].nbstock>=0){
+    const reponse = await requete(ip_db+':3000/produit/getProduit',nom_produit);
+    if (reponse.nbstock>=0){
       // Si on a le produit en stock alors on renvoie le produit à la base de donnée et 
       // on lui demande de diminuer le stock de 1
-      reponse[0].nbstock=reponse[0].nbstock-1;
-      await requete('http://10.224.2.87:3000/produit/updateProduit',reponse[0]);
+      reponse.nbstock=reponse.nbstock-1;
+      delete reponse._id;
+      delete reponse.__v;
+      await requete(ip_db+':3000/produit/updateProduit',reponse);
       return true;
     }
     else{ // Sinon soit le produit n'existe pas soit on ne l'a plus en stock

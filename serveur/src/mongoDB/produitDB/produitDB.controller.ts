@@ -30,11 +30,11 @@ export class ProduitController{
     // Obtenir un produit en particulier
     @Post('/getProduit')
     async getProduit(@Body() nom:getProduitDto) : Promise<Produit>{
-        return this.ProduitService.getProduit({nom});
+        return this.ProduitService.getProduit(nom);
     }
 
     // Mettre à jour un produit
-    @Post('updateProduit')
+    @Post('/updateProduit')
     async updateProduit(@Body() produit:ProduitDto){
         const id = produit.id
         return this.ProduitService.updateProduit({id},produit);

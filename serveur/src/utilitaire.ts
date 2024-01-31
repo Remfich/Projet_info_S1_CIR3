@@ -1,12 +1,13 @@
 export async function requete(url:string,donnees:any) {
     try {
-      const reponse = await fetch(url, {
+      const data = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(donnees)
-      });
+      }
+      const reponse = await fetch(url, data);
       const resultat = await reponse.json();
       return resultat;
     } catch (erreur) {
@@ -14,6 +15,6 @@ export async function requete(url:string,donnees:any) {
     }
   }
 
-export const ip_serveur = "10.224.2.87"; // PC Olivier
-export const ip_db = "10.224.2.97"; // PC Esteban
+export const ip_serveur = "http://localhost";
+export const ip_db = "http://localhost";
 export const ip_front = "";
