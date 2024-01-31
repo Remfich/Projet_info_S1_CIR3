@@ -4,10 +4,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ClientModule } from './mongoDB/clientDB/clientDB.module';
 import { ProduitModule } from './mongoDB/produitDB/produitDB.module';
+import { ClientBackModule } from './client_back/client.module';
 
 @Module({
   imports: [MongooseModule.forRoot('mongodb://localhost/Projet_Info'),
-    ClientModule,ProduitModule],
+    ClientModule,ProduitModule,ClientBackModule],
   controllers: [AppController],
   providers: [AppService],
 })
