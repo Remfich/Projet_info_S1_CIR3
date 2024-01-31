@@ -5,7 +5,7 @@ export async function requete(url:string,donnees:any) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(donnees),
+        body: JSON.stringify(donnees)
       });
       const resultat = await reponse.json();
       return resultat;
