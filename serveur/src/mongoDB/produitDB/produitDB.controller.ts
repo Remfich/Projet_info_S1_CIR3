@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { ProduitService } from "./produitDB.service";
-import { ProduitDto } from "./dto/createProduit-dto";
+import { ProduitDto } from "./dto/Produit-dto";
 import { getProduitDto } from "./dto/getProduit-dto";
 import { Produit } from "./produitDB.schema";
 
