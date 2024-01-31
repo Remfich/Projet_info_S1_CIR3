@@ -8,8 +8,8 @@ export class ProduitService{
     constructor(@InjectModel(Produit.name) private ProduitModel: Model<Produit>) {}
 
     // Créer un produit
-    async createProduit(id:number,nom:string,prix:number,nbstock:number) : Promise<Produit>{
-        const produit = new this.ProduitModel({id,nom,prix,nbstock});
+    async createProduit(id:number,nom:string,prix:number,nbstock:number,categorie:string) : Promise<Produit>{
+        const produit = new this.ProduitModel({id,nom,prix,nbstock,categorie});
         return produit.save();
     }
 

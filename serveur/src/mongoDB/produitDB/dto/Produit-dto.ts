@@ -3,4 +3,5 @@ export class ProduitDto{
     nom : string
     prix : number
     nbstock : number
+    categorie : string
 }

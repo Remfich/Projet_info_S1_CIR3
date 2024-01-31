@@ -11,7 +11,7 @@ export class ProduitController{
     // Créer un produit
     @Post('/createProduit')
     async createProduit(@Body() nouv_produit : ProduitDto) : Promise<Produit>{
-        return this.ProduitService.createProduit(nouv_produit.id,nouv_produit.nom,nouv_produit.prix,nouv_produit.nbstock);
+        return this.ProduitService.createProduit(nouv_produit.id,nouv_produit.nom,nouv_produit.prix,nouv_produit.nbstock,nouv_produit.categorie);
     }
 
     // Supprimer un produit
