@@ -3,6 +3,7 @@ import { ClientService } from "./clientDB.service";
 import { Client } from "./clientDB.schema"; 
 import { CreateClientDto } from "./dto/create-client-dto";
 import { getClientDto } from "./dto/getClient-dto";
+import { updateClientDto } from "./dto/updateInfo-dto";
 
 @Controller('client')
 export class ClientController {
@@ -27,5 +28,12 @@ export class ClientController {
     async deleteClient(@Body() email_client : getClientDto){
         const email = email_client.email;
         return this.ClientService.deleteClient({email});
+    }
+
+    // Modifier un client
+    @Post('/updateClient')
+    async updateClient(@Body() nouv_client : updateClientDto){
+        const email = nouv_client.email;
+        return this.ClientService.updateClient({email},nouv_client)
     }
 }

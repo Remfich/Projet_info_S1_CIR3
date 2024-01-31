@@ -22,4 +22,9 @@ export class ClientService {
     async deleteClient(email_client : FilterQuery<Client>){
         return this.ClientModel.deleteOne(email_client);
     }
+
+    // Actualise les données d'un client
+    async updateClient(email_client : FilterQuery<Client>, client : Partial<Client>) : Promise<Client>{
+        return this.ClientModel.findOneAndUpdate(email_client,client);
+    }
 }
