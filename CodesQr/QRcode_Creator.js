@@ -11,5 +11,5 @@ function create_new_QRcode(name, link){
   });
 }
 
-create_new_QRcode("woop woop","woop woop !");
+create_new_QRcode("test","this text will be encoded in the qrcode");
 
