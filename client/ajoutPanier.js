@@ -14,3 +14,18 @@ for (let index = 0; index < ajoutPanier.children.length; index++) {
 function clique(produit_){
     console.log(tabArticles.get(produit_));
 }
+
+// Convertir l'objet Map en objet simple pour l'envoi
+let objTabArticles = Object.fromEntries(tabArticles);
+
+fetch('http://127.0.0.1:3000/api/data', {
+    method: 'Post',
+    mode:'cors',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(objTabArticles),
+})
+.then(response => response.json())
+.then(data => console.log('Success:', data))
+.catch((error) => console.error('Error:', error));
