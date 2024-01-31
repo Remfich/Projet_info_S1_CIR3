@@ -42,9 +42,8 @@ function data_pull(datalist,n,isall,option){
             let nombre = data.childNodes[x + 4].textContent;
             let prix = data.childNodes[x + 6].textContent;
 
-            let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1, action : option};
-
-
+            //let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1, action : option};
+            let donnees = [id*1,nom_produit,prix*1,nombre*1,option];
             datalist.push(donnees);
 
             if(option == !"suppr"){
@@ -85,7 +84,8 @@ function data_pull(datalist,n,isall,option){
         let nombre = data.childNodes[x + 4].textContent;
         let prix = data.childNodes[x + 6].textContent;
 
-        let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1, action : option};
+        //let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1, action : option};
+        let donnees = [id*1,nom_produit,prix*1,nombre*1,option];
         datalist.push(donnees);
 
         if(option == !"suppr"){
@@ -120,18 +120,18 @@ function data_pull(datalist,n,isall,option){
 
 
 
-function requete(url,dataraw,method){
-    // On envoie/reçoit une requête au back
-    var xhttp=new XMLHttpRequest();
-    xhttp.open(method,url,true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    console.log("data raw sent : " + JSON.stringify(dataraw));
-    xhttp.send(JSON.stringify(dataraw));
-    
-
-    // On recoit la réponse et on l'affiche (ici avec une alerte)
-    xhttp.onload = function() {
-        let tableauArticle=JSON.parse(this.responseText);
-        affiche_retour(tableauArticle);
-    };
+function requete(){//url,dataraw,method <= paramètres
+    console.log("test2");
+    var data_;
+    fetch('http://127.0.0.1:3000/api/data', {
+    method: 'Post',
+    mode:'cors',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ message: 'recupDonnees' }),
+    })
+    .then(response => response.json())
+    .then(data => console.log(data)) // [id,nom,stock,prix]
+    .catch((error) => console.error('Error:', error));
 }

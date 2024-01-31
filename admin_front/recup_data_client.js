@@ -47,8 +47,8 @@ function data_pull(datalist,n,isall,option){
             let mail = data.childNodes[x + 4].textContent;
             let mdp = data.childNodes[x + 6].textContent;
 
-            let donnees = {prenom : prenom, nom : nom, mail : mail, mdp : mdp, action : option};
-
+            //let donnees = {prenom : prenom, nom : nom, mail : mail, mdp : mdp, action : option};
+            let donnees = [prenom,nom, mail, mdp,option];
 
             datalist.push(donnees);
 
@@ -90,7 +90,8 @@ function data_pull(datalist,n,isall,option){
         let mail = data.childNodes[x + 4].textContent;
         let mdp = data.childNodes[x + 6].textContent;
 
-        let donnees = {prenom : prenom, nom : nom, mail : mail, mdp : mdp, action : option};
+        //let donnees = {prenom : prenom, nom : nom, mail : mail, mdp : mdp, action : option};
+        let donnees = [prenom,nom, mail, mdp,option];
 
 
         datalist.push(donnees);
@@ -139,6 +140,6 @@ function requete(){//url,dataraw,method <= paramètres
     body: JSON.stringify({ message: 'recupDonnees' }),
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => console.log(data)) // [id,nom,stock,prix]
     .catch((error) => console.error('Error:', error));
 }
