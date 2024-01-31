@@ -1,136 +1,138 @@
 var url = "url";
 var method = "POST";
+//http://ipdatabase:3000/client/deleteClient
+//http://ipdatabase:3000/client/createClient
 
-function recup_data(n,option){
+function recup_data(n,option,isall){
     var datalist = [];
     switch (option){
         case "modif":
             url = "modif";
+            console.log(option);
             break;
         case "suppr":
             url = "suppr";
+            console.log(option);
             break;
-        case "add":
-            url = "add";
+        case "save":
+            url = "save";
+            console.log(option);
             break;
         default:
+            console.log(option);
             break;
     }
-    if(data_pull(datalist,n)){
+       if(data_pull(datalist,n*1,isall,option)){
         for(let i =0; i < datalist.length; i++){
+
             requete(url,datalist[i],method);
         }
     }
 }
 
 
-function data_pull(datalist,n){
+function data_pull(datalist,n,isall,option){
+    if(isall == true){
+        for(var i = 0; i < n; i++){
+            var data = document.getElementById(i);
+            // prenom sur 0/1, nom produit sur 2/3, email sur 4/5, mot de passe sur 6/7
+            var x = 1;
+            let prenom = data.childNodes[x].textContent;
+            let nom = data.childNodes[x + 2].textContent;
+            let mail = data.childNodes[x + 4].textContent;
+            let mdp = data.childNodes[x + 6].textContent;
 
-    const data = document.getElementsByClassName("Clients");
-    if(n == -1){
-        for(let i = 0; i < data.length; i++){
-            // Prenom sur 0/1, nom sur 2/3, email sur 4/5, mdp sur 6/7
-            var x = 3;
-            let prenom = data[i].childNodes[x].textContent;
-            let nom = data[i].childNodes[x + 2].textContent;
-            let email = data[i].childNodes[x + 4].textContent;
-            let mdp = data[i].childNodes[x + 6].textContent;
-
-            let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1};
-
+            //let donnees = {prenom : prenom, nom : nom, mail : mail, mdp : mdp, action : option};
+            let donnees = [prenom,nom, mail, mdp,option];
 
             datalist.push(donnees);
 
-
-            document.getElementById("Warning").style.color = "red";
-            if(id == "" ){
-                document.getElementById("Warning").textContent = "Erreur : ID invalide";
-                console.log("alerte id");
-                return false;
+            if(option == !"suppr"){
+                if(prenom == "" ){
+                    alert("Erreur : prenom invalide");
+                    console.log("alerte prenom");
+                    return false;
+                }
+                else if(nom == ""){
+                    alert("Erreur : Nom invalide");
+                    console.log("alerte nom");
+                    return false;
+                }
+                else if(mail == ""){
+                    alert("Erreur : mail invalide");
+                    console.log("alerte mail");
+                    return false;
+                }
+                else if(mdp == ""){
+                    alert("Erreur : Mot de passe invalide");
+                    console.log("alerte mdp");
+                    return false;
+                }
             }
-            else if(nom_produit == ""){
-                document.getElementById("Warning").textContent = "Erreur : Nom Clients invalide";
-                console.log("alerte nom");
+            if(option == "suppr" && prenom == "" && nom == "" && mail == "" && mdp == ""){
                 return false;
-            }
-            else if(nombre == ""){
-                document.getElementById("Warning").textContent = "Erreur : Mot de passe invalide";
-
-                console.log("alerte nombre");
-                return false;
-            }
-            else if(prix == ""){
-                document.getElementById("Warning").textContent = "Erreur : Email invalide";
-                console.log("alerte prix");
-                return false;
-            }
-            else{
-                document.getElementById("Warning").textContent = "";
             }
         }
         console.log(datalist);
         return true;
     }
     else{
-        // id sur 0/1, nom produit sur 2/3, nombre sur 4/5, prix sur 6/7
-        var x = 3;
-        let id = data[n].childNodes[x].textContent;
-        let nom_produit = data[n].childNodes[x + 2].textContent;
-        let nombre = data[n].childNodes[x + 4].textContent;
-        let prix = data[n].childNodes[x + 6].textContent;
+        var data = document.getElementById(n);
+        // prenom sur 0/1, nom produit sur 2/3, email sur 4/5, mot de passe sur 6/7
+        var x = 1;
+        let prenom = data.childNodes[x].textContent;
+        let nom = data.childNodes[x + 2].textContent;
+        let mail = data.childNodes[x + 4].textContent;
+        let mdp = data.childNodes[x + 6].textContent;
 
-        let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1};
-
-
+        //let donnees = {prenom : prenom, nom : nom, mail : mail, mdp : mdp, action : option};
+        let donnees = [prenom,nom, mail, mdp,option];
         datalist.push(donnees);
 
-        document.getElementById("Warning").style.color = "red";
-        if(id == "" ){
-            document.getElementById("Warning").textContent = "Erreur : ID invalide";
-        //  document.getElementById("Warning").style.display = "block";
-            console.log("alerte id");
+        if(option == !"suppr"){
+            if(prenom == "" ){
+                alert("Erreur : prenom invalide");
+                console.log("alerte prenom");
+                return false;
+            }
+            else if(nom == ""){
+                alert("Erreur : Nom invalide");
+                console.log("alerte nom");
+                return false;
+            }
+            else if(mail == ""){
+                alert("Erreur : mail invalide");
+                console.log("alerte mail");
+                return false;
+            }
+            else if(mdp == ""){
+                alert("Erreur : Mot de passe invalide");
+                console.log("alerte mdp");
+                return false;
+            }
+        }
+        if(option == "suppr" && prenom == "" && nom == "" && mail == "" && mdp == ""){
             return false;
         }
-        else if(nom_produit == ""){
-            document.getElementById("Warning").textContent = "Erreur : Nom Produit invalide";
-        //   document.getElementById("Warning").style.display = "block";
-            console.log("alerte nom");
-            return false;
-        }
-        else if(nombre == ""){
-            document.getElementById("Warning").textContent = "Erreur : Quantité invalide";
-        //  document.getElementById("Warning").style.display = "block";
-            console.log("alerte nombre");
-            return false;
-        }
-        else if(prix == ""){
-            document.getElementById("Warning").textContent = "Erreur : Prix invalide";
-        // document.getElementById("Warning").style.display = "block";
-            console.log("alerte prix");
-            return false;
-        }
-        else{
-            document.getElementById("Warning").textContent = "";
-        }
+    }
     console.log(datalist);
     return true;
-    }
 }
 
 
 
-function requete(url,dataraw,method){
-    // On envoie/reçoit une requête au back
-    var xhttp=new XMLHttpRequest();
-    xhttp.open(method,url,true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    console.log("data raw sent : " + JSON.stringify(dataraw));
-    xhttp.send(JSON.stringify(dataraw));
-    
-
-    // On recoit la réponse et on l'affiche (ici avec une alerte)
-    xhttp.onload = function() {
-        let tableauArticle=JSON.parse(this.responseText);
-        affiche_retour(tableauArticle);
-    };
+function requete(){//url,dataraw,method <= paramètres
+    console.log("test2");
+    var data_;
+    fetch('http://127.0.0.1:3000/api/data', {
+    method: 'Post',
+    mode:'cors',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ message: 'recupDonnees' }),
+    })
+    .then(response => response.json())
+    .then(data => console.log(data)) // [id,nom,stock,prix]
+    .catch((error) => console.error('Error:', error));
 }

@@ -28,4 +28,4 @@ fetch('http://127.0.0.1:3000/api/data', {
 })
 .then(response => response.json())
 .then(data => console.log('Success:', data))
-.catch((error) => console.error('Error:', error));
+.catch((error) => console.error('Error:', error));  
