@@ -65,7 +65,7 @@
   function save(){
     recup_data(nbrow,"save",true);
   }
-    function supprimerClient(button) {
+    function supprimerClient(button,n) {
       recup_data(n,"suppr",false);
       var row = button.parentNode.parentNode;
       row.parentNode.removeChild(row);
@@ -83,7 +83,7 @@
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
-        <td><button class="btn btn-danger" onclick="supprimerClient(this)">Supprimer</button></td>
+        <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
       `;
       nbrow+=1;
     }

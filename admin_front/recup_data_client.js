@@ -1,12 +1,7 @@
-
-document.addEventListener("click", function (){
-    requete();
-});
-
 var url = "url";
 var method = "POST";
-//http://ipdatabase:3000/produit/deleteProduit
-//http://ipdatabase:3000/produit/createProduit
+//http://ipdatabase:3000/client/deleteClient
+//http://ipdatabase:3000/client/createClient
 
 function recup_data(n,option,isall){
     var datalist = [];
@@ -92,8 +87,6 @@ function data_pull(datalist,n,isall,option){
 
         //let donnees = {prenom : prenom, nom : nom, mail : mail, mdp : mdp, action : option};
         let donnees = [prenom,nom, mail, mdp,option];
-
-
         datalist.push(donnees);
 
         if(option == !"suppr"){
