@@ -4,11 +4,11 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // Définir le dossier pour les fichiers statiques
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'admin_front')));
 
 app.get('/', (req, res) => {
     // Envoyer le fichier HTML
-    res.sendFile(path.join(__dirname, '/admin_front/loginAdmin.html'));
+    res.sendFile(path.join(__dirname, 'admin_front', 'loginAdmin.html'));
 });
 
 app.listen(port, () => {
