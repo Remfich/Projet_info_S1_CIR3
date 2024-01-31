@@ -9,7 +9,7 @@ export class ClientBackController {
   @Post('/init')
   async init_client() : Promise<Produit[]>{
     // On doit demander à la DB la liste des produits pour pouvoir la renvoyer à l'utilisateur
-    const reponse = requete("10.224.2.87:3000/produit/getAllProduit",{});
+    const reponse = requete('http://localhost:3000/produit/getAllProduit',{});
     console.log(reponse);
     return ;
   }

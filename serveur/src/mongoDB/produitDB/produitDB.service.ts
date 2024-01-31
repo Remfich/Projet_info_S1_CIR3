@@ -14,8 +14,13 @@ export class ProduitService{
     }
 
     // Supprimer un produit
-    async deleteProduit(id:FilterQuery<Produit>){
-        return this.ProduitModel.deleteOne(id);
+    async deleteProduit(nom:FilterQuery<Produit>){
+        return this.ProduitModel.deleteOne(nom);
+    }
+
+    // Get un produit
+    async getProduit(nom:FilterQuery<Produit>){
+        return this.ProduitModel.findOne(nom);
     }
 
     // Get tous les produits

@@ -1,3 +1,3 @@
 export class getProduitDto{
-    id : number
+    nom : string
 }

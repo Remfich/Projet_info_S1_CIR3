@@ -7,7 +7,6 @@ export async function requete(url:string,donnees:any) {
         },
         body: JSON.stringify(donnees),
       });
-  
       const resultat = await reponse.json();
       console.log("Réussite :", resultat);
       return resultat;

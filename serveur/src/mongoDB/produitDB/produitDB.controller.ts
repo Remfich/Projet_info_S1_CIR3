@@ -16,15 +16,21 @@ export class ProduitController{
 
     // Supprimer un produit
     @Post('/deleteProduit')
-    async deleteProduit(@Body() id_produit : getProduitDto){
-        const id=id_produit.id;
-        return this.ProduitService.deleteProduit({id});
+    async deleteProduit(@Body() nom_produit : getProduitDto){
+        const nom=nom_produit.nom;
+        return this.ProduitService.deleteProduit({nom});
     }
 
     // Obtenir la liste complète des produits
     @Post('/getAllProduit')
     async getAllProduit() : Promise<Produit[]>{
         return this.ProduitService.getAllProduit();
+    }
+
+    // Obtenir un produit en particulier
+    @Post('/getProduit')
+    async getProduit(@Body() nom:getProduitDto) : Promise<Produit>{
+        return this.ProduitService.getProduit({nom});
     }
 
     // Mettre à jour un produit
