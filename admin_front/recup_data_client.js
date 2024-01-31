@@ -1,3 +1,8 @@
+
+document.addEventListener("click", function (){
+    requete();
+});
+
 var url = "url";
 var method = "POST";
 
@@ -119,18 +124,18 @@ function data_pull(datalist,n){
 
 
 
-function requete(url,dataraw,method){
-    // On envoie/reçoit une requête au back
-    var xhttp=new XMLHttpRequest();
-    xhttp.open(method,url,true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    console.log("data raw sent : " + JSON.stringify(dataraw));
-    xhttp.send(JSON.stringify(dataraw));
-    
-
-    // On recoit la réponse et on l'affiche (ici avec une alerte)
-    xhttp.onload = function() {
-        let tableauArticle=JSON.parse(this.responseText);
-        affiche_retour(tableauArticle);
-    };
+function requete(){//url,dataraw,method <= paramètres
+    console.log("test2");
+    var data_;
+    fetch('http://127.0.0.1:3000/api/data', {
+    method: 'Post',
+    mode:'cors',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ message: 'recupDonnees' }),
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => console.error('Error:', error));
 }
