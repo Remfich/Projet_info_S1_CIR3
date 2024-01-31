@@ -3,4 +3,5 @@ export class CreateClientDto{
     prenom :string;
     email : string;
     mdp : string;
+    est_admin : boolean
 }
