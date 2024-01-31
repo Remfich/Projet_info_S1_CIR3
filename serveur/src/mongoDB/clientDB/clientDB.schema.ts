@@ -19,6 +19,9 @@ export class Client {
   @Prop()
   mdp: string;
 
+  @Prop()
+  est_admin: boolean
+
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Produit' }] })
   histo: Produit[];
 }

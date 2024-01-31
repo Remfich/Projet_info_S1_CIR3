@@ -19,7 +19,7 @@ export class ClientController {
     @Post('/createClient')
     async creerClient(@Body() createClientDto : CreateClientDto) : Promise<Client>{
         return this.ClientService.createClient(createClientDto.prenom,createClientDto.nom,
-            createClientDto.email,createClientDto.mdp)
+            createClientDto.email,createClientDto.mdp,createClientDto.est_admin)
     }
 
     // Supprimer un client

@@ -13,8 +13,8 @@ export class ClientService {
     }
 
     // Créer un client
-    async createClient(nom : string, prenom : string, email : string, mdp : string){
-        const client = new this.ClientModel({nom,prenom,email,mdp});
+    async createClient(nom : string, prenom : string, email : string, mdp : string,est_admin : boolean){
+        const client = new this.ClientModel({nom,prenom,email,mdp,est_admin});
         return client.save();
     }
 
