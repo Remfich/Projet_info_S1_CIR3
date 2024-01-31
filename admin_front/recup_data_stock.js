@@ -29,12 +29,11 @@ function recup_data(n,option,isall){
 
 
 function data_pull(datalist,n,isall){
-
-    //const data = document.getElementsByClassName("Produits");
-    if(isall){
-        for(let i = 0; i < n; i++){
+    if(isall == true){
+        for(var i = 0; i < n; i++){
             var data = document.getElementById(i);
-            console.log(data);
+            console.log("aihgdhfjhegfhjkijhgf");
+            console.log("data : " + data);
             // id sur 0/1, nom produit sur 2/3, nombre sur 4/5, prix sur 6/7
             var x = 1;
             let id = data.childNodes[x].textContent;
@@ -49,25 +48,21 @@ function data_pull(datalist,n,isall){
 
 
             if(id == "" ){
-                //document.getElementById("Warning").textContent = "Erreur : ID invalide";
                 alert("Erreur : ID invalide");
                 console.log("alerte id");
                 return false;
             }
             else if(nom_produit == ""){
-                //document.getElementById("Warning").textContent = "Erreur : Nom Produit invalide";
                 alert("Erreur : Nom Produit invalide");
                 console.log("alerte nom");
                 return false;
             }
             else if(nombre == ""){
-                //document.getElementById("Warning").textContent = "Erreur : Quantité invalide";
                 alert("Erreur : Quantité invalide");
                 console.log("alerte nombre");
                 return false;
             }
             else if(prix == ""){
-                //document.getElementById("Warning").textContent = "Erreur : Prix invalide";
                 alert("Erreur : Prix invalide");
                 console.log("alerte prix");
                 return false;
@@ -79,6 +74,7 @@ function data_pull(datalist,n,isall){
     else{
         var data = document.getElementById(n);
         // id sur 0/1, nom produit sur 2/3, nombre sur 4/5, prix sur 6/7
+        console.log(data);
         var x = 1;
         let id = data.childNodes[x].textContent;
         let nom_produit = data.childNodes[x + 2].textContent;
@@ -89,26 +85,22 @@ function data_pull(datalist,n,isall){
         datalist.push(donnees);
 
         if(id == "" ){
-            //document.getElementById("Warning").textContent = "Erreur : ID invalide";
-            prompt(alert("Erreur : ID invalide"));
+            (alert("Erreur : ID invalide"));
             console.log("alerte id");
             return false;
         }
         else if(nom_produit == ""){
-            //document.getElementById("Warning").textContent = "Erreur : Nom Produit invalide";
-            prompt(alert("Erreur : Nom Produit invalide"));
+            (alert("Erreur : Nom Produit invalide"));
             console.log("alerte nom");
             return false;
         }
         else if(nombre == ""){
-            //document.getElementById("Warning").textContent = "Erreur : Quantité invalide";
-            prompt(alert("Erreur : Quantité invalide"));
+            (alert("Erreur : Quantité invalide"));
             console.log("alerte nombre");
             return false;
         }
         else if(prix == ""){
-            //document.getElementById("Warning").textContent = "Erreur : Prix invalide";
-            prompt(alert("Erreur : Prix invalide"));
+            (alert("Erreur : Prix invalide"));
             console.log("alerte prix");
             return false;
         }

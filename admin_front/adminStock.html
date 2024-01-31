@@ -55,12 +55,15 @@
             </tbody>
           </table>
         </div>
-        <button class="btn btn-success save-button" onclick='recup_data(nbrow,"save",true)'>Enregistrer</button>
+        <button class="btn btn-success save-button" onclick='save()'>Enregistrer</button>
       </div>
     </div>
   </div>
 
   <script>
+    function save(){
+      recup_data(nbrow,"save",true);
+    }
     function supprimerProduit(button,n) {
       recup_data(n,"suppr",false);
       var row = button.parentNode.parentNode;
@@ -81,6 +84,7 @@
         <td contenteditable="true"></td>
         <td><button class="btn btn-danger" onclick="supprimerProduit(this,`+ nbrow +`)">Supprimer</button></td>
       `;
+    nbrow+=1;
     }
   </script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
