@@ -136,3 +136,21 @@ function requete(){//url,dataraw,method <= paramètres
     .then(data => console.log(data)) // [id,nom,stock,prix]
     .catch((error) => console.error('Error:', error));
 }
+
+
+
+function requete2(){//url,dataraw,method <= paramètres
+    console.log("test2");
+    var tabData = [1,1,1,1,1];
+    fetch('http://127.0.0.1:3000/api/data', {
+    method: 'Post',
+    mode:'cors',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(tabData),
+    })
+    .then(response => response.json())
+    .then()
+    .catch((error) => console.error('Error:', error));
+}
