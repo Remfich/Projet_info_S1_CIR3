@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <script src="./recup_data_stock.js"></script>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <a class="navbar-brand">Nom de l'entreprise</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,27 +55,31 @@
             </tbody>
           </table>
         </div>
-        <button class="btn btn-success save-button">Enregistrer</button>
+        <button class="btn btn-success save-button" onclick='recup_data(nbrow,"save",true)'>Enregistrer</button>
       </div>
     </div>
   </div>
 
   <script>
-    function supprimerProduit(button) {
+    function supprimerProduit(button,n) {
+      recup_data(n,"suppr",false);
       var row = button.parentNode.parentNode;
       row.parentNode.removeChild(row);
     }
   </script>
   <script>
+    var nbrow = 0;
     function ajouterProduit() {
       var table1 = document.getElementById("product-table");
       var newRow = table1.insertRow(-1);
+      newRow.classList.add("Produits");
+      newRow.id = nbrow;
       newRow.innerHTML = `
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
         <td contenteditable="true"></td>
-        <td><button class="btn btn-danger" onclick="supprimerProduit(this)">Supprimer</button></td>
+        <td><button class="btn btn-danger" onclick="supprimerProduit(this,`+ nbrow +`)">Supprimer</button></td>
       `;
     }
   </script>

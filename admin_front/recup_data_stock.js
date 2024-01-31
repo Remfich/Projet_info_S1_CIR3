@@ -1,22 +1,26 @@
 var url = "url";
 var method = "POST";
 
-function recup_data(n,option){
+function recup_data(n,option,isall){
     var datalist = [];
     switch (option){
         case "modif":
             url = "modif";
+            console.log(option);
             break;
         case "suppr":
             url = "suppr";
+            console.log(option);
             break;
-        case "add":
-            url = "add";
+        case "save":
+            url = "save";
+            console.log(option);
             break;
         default:
+            console.log(option);
             break;
     }
-    if(data_pull(datalist,n)){
+       if(data_pull(datalist,n*1,isall)){
         for(let i =0; i < datalist.length; i++){
             requete(url,datalist[i],method);
         }
@@ -24,17 +28,19 @@ function recup_data(n,option){
 }
 
 
-function data_pull(datalist,n){
+function data_pull(datalist,n,isall){
 
-    const data = document.getElementsByClassName("Produits");
-    if(n == -1){
-        for(let i = 0; i < data.length; i++){
+    //const data = document.getElementsByClassName("Produits");
+    if(isall){
+        for(let i = 0; i < n; i++){
+            var data = document.getElementById(i);
+            console.log(data);
             // id sur 0/1, nom produit sur 2/3, nombre sur 4/5, prix sur 6/7
-            var x = 3;
-            let id = data[i].childNodes[x].textContent;
-            let nom_produit = data[i].childNodes[x + 2].textContent;
-            let nombre = data[i].childNodes[x + 4].textContent;
-            let prix = data[i].childNodes[x + 6].textContent;
+            var x = 1;
+            let id = data.childNodes[x].textContent;
+            let nom_produit = data.childNodes[x + 2].textContent;
+            let nombre = data.childNodes[x + 4].textContent;
+            let prix = data.childNodes[x + 6].textContent;
 
             let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1};
 
@@ -42,75 +48,69 @@ function data_pull(datalist,n){
             datalist.push(donnees);
 
 
-            document.getElementById("Warning").style.color = "red";
             if(id == "" ){
-                document.getElementById("Warning").textContent = "Erreur : ID invalide";
+                //document.getElementById("Warning").textContent = "Erreur : ID invalide";
+                alert("Erreur : ID invalide");
                 console.log("alerte id");
                 return false;
             }
             else if(nom_produit == ""){
-                document.getElementById("Warning").textContent = "Erreur : Nom Produit invalide";
+                //document.getElementById("Warning").textContent = "Erreur : Nom Produit invalide";
+                alert("Erreur : Nom Produit invalide");
                 console.log("alerte nom");
                 return false;
             }
             else if(nombre == ""){
-                document.getElementById("Warning").textContent = "Erreur : Quantité invalide";
-
+                //document.getElementById("Warning").textContent = "Erreur : Quantité invalide";
+                alert("Erreur : Quantité invalide");
                 console.log("alerte nombre");
                 return false;
             }
             else if(prix == ""){
-                document.getElementById("Warning").textContent = "Erreur : Prix invalide";
+                //document.getElementById("Warning").textContent = "Erreur : Prix invalide";
+                alert("Erreur : Prix invalide");
                 console.log("alerte prix");
                 return false;
-            }
-            else{
-                document.getElementById("Warning").textContent = "";
             }
         }
         console.log(datalist);
         return true;
     }
     else{
+        var data = document.getElementById(n);
         // id sur 0/1, nom produit sur 2/3, nombre sur 4/5, prix sur 6/7
-        var x = 3;
-        let id = data[n].childNodes[x].textContent;
-        let nom_produit = data[n].childNodes[x + 2].textContent;
-        let nombre = data[n].childNodes[x + 4].textContent;
-        let prix = data[n].childNodes[x + 6].textContent;
+        var x = 1;
+        let id = data.childNodes[x].textContent;
+        let nom_produit = data.childNodes[x + 2].textContent;
+        let nombre = data.childNodes[x + 4].textContent;
+        let prix = data.childNodes[x + 6].textContent;
 
         let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1};
-
-
         datalist.push(donnees);
 
-        document.getElementById("Warning").style.color = "red";
         if(id == "" ){
-            document.getElementById("Warning").textContent = "Erreur : ID invalide";
-        //  document.getElementById("Warning").style.display = "block";
+            //document.getElementById("Warning").textContent = "Erreur : ID invalide";
+            prompt(alert("Erreur : ID invalide"));
             console.log("alerte id");
             return false;
         }
         else if(nom_produit == ""){
-            document.getElementById("Warning").textContent = "Erreur : Nom Produit invalide";
-        //   document.getElementById("Warning").style.display = "block";
+            //document.getElementById("Warning").textContent = "Erreur : Nom Produit invalide";
+            prompt(alert("Erreur : Nom Produit invalide"));
             console.log("alerte nom");
             return false;
         }
         else if(nombre == ""){
-            document.getElementById("Warning").textContent = "Erreur : Quantité invalide";
-        //  document.getElementById("Warning").style.display = "block";
+            //document.getElementById("Warning").textContent = "Erreur : Quantité invalide";
+            prompt(alert("Erreur : Quantité invalide"));
             console.log("alerte nombre");
             return false;
         }
         else if(prix == ""){
-            document.getElementById("Warning").textContent = "Erreur : Prix invalide";
-        // document.getElementById("Warning").style.display = "block";
+            //document.getElementById("Warning").textContent = "Erreur : Prix invalide";
+            prompt(alert("Erreur : Prix invalide"));
             console.log("alerte prix");
             return false;
-        }
-        else{
-            document.getElementById("Warning").textContent = "";
         }
     console.log(datalist);
     return true;
