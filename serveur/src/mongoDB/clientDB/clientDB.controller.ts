@@ -32,7 +32,7 @@ export class ClientController {
 
     // Modifier un client
     @Post('/updateClient')
-    async updateClient(@Body() nouv_client : updateClientDto){
+    async updateClient(@Body() nouv_client : updateClientDto) : Promise<Client>{
         const email = nouv_client.email;
         return this.ClientService.updateClient({email},nouv_client)
     }

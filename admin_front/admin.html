@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand">Nom de l'entreprise</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Nom de l'entreprise</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -17,64 +17,67 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="loginAdmin.html">Déconnexion</a>
+          <a class="nav-link" href="#">Déconnexion</a>
         </li>
       </ul>
     </div>
   </nav>
 
-  <div class="sidebar">
-    <a href="admin.html">Gestion de Stock</a>
-    <br>
-    <a href="admin1.html">Gestion de Client</a>
-  </div>
-
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <h2>Gestion de stock</h2>
+        <a href="#" class="btn btn-primary mb-3">Ajouter un produit</a>
         <input type="text" class="form-control" placeholder="Rechercher un produit">
         <br>
-        <a href="#" class="btn btn-primary mb-3" onclick="ajouterProduit()">Ajouter un produit</a>
-        <table class="table table-striped" id="product-table"  >
+        <table class="table table-striped">
           <thead>
             <tr>
+              <th></th>
               <th>ID du produit</th>
               <th>Nom du produit</th>
-              <th contenteditable="false">Nombre en stock</th>
-              <th contenteditable="false">Prix</th>
-              <th>Actions</th>
+              <th>Nombre en stock</th>
+              <th>Prix</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td><button class="btn btn-sm btn-secondary" onclick="toggleEditMode(this)">Modifier</button></td>
+              <td contenteditable="false">1</td>
+              <td contenteditable="false">Produit 1</td>
+              <td contenteditable="false">10</td>
+              <td contenteditable="false">19.99</td>
+              <td><button class="btn btn-sm btn-danger">Supprimer</button></td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-sm btn-secondary" onclick="toggleEditMode(this)">Modifier</button></td>
+              <td contenteditable="false">2</td>
+              <td contenteditable="false">Produit 2</td>
+              <td contenteditable="false">5</td>
+              <td contenteditable="false">9.99</td>
+              <td><button class="btn btn-sm btn-danger">Supprimer</button></td>
+            </tr>
+            <!-- Ajoutez d'autres lignes pour plus de produits -->
           </tbody>
         </table>
-        <button class="btn btn-success save-button">Enregistrer</button>
       </div>
     </div>
   </div>
 
-  <script>
-    function supprimerProduit(button) {
-      var row = button.parentNode.parentNode;
-      row.parentNode.removeChild(row);
-    }
-  </script>
-  <script>
-    function ajouterProduit() {
-      var table1 = document.getElementById("product-table");
-      var newRow = table1.insertRow(-1);
-      newRow.innerHTML = `
-        <td contenteditable="true"></td>
-        <td contenteditable="true"></td>
-        <td contenteditable="true"></td>
-        <td contenteditable="true"></td>
-        <td><button class="btn btn-danger" onclick="supprimerProduit(this)">Supprimer</button></td>
-      `;
-    }
-  </script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script>
+    function toggleEditMode(button) {
+      var row = button.parentNode.parentNode;
+      var cells = row.getElementsByTagName("td");
+
+      for (var i = 1; i < cells.length - 1; i++) {
+        var cell = cells[i];
+        cell.contentEditable = !cell.isContentEditable;
+      }
+    }
+  </script>
 </body>
 </html>
