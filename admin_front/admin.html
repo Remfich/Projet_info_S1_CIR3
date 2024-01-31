@@ -42,7 +42,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr class="Produits">
               <td><button class="btn btn-sm btn-secondary" onclick="toggleEditMode(this)">Modifier</button></td>
               <td contenteditable="false">1</td>
               <td contenteditable="false">Produit 1</td>
@@ -50,7 +50,7 @@
               <td contenteditable="false">19.99</td>
               <td><button class="btn btn-sm btn-danger">Supprimer</button></td>
             </tr>
-            <tr>
+            <tr class="Produits">
               <td><button class="btn btn-sm btn-secondary" onclick="toggleEditMode(this)">Modifier</button></td>
               <td contenteditable="false">2</td>
               <td contenteditable="false">Produit 2</td>
@@ -64,11 +64,14 @@
       </div>
     </div>
   </div>
+  <div id="Warning"></div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="../client_front/recup_data.js"></script>
   <script>
+    var flip = 0;
     function toggleEditMode(button) {
       var row = button.parentNode.parentNode;
       var cells = row.getElementsByTagName("td");
@@ -76,6 +79,11 @@
       for (var i = 1; i < cells.length - 1; i++) {
         var cell = cells[i];
         cell.contentEditable = !cell.isContentEditable;
+      }
+
+      flip = (flip+1)%2;
+      if(flip == 0){
+        recup_data();
       }
     }
   </script>
