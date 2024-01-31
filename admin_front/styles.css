@@ -3,19 +3,18 @@ body {
   background-color: #242423;
 }
 
-
 .navbar-brand {
   margin-right: auto;
-  
 }
 
-.navbar{
+.navbar {
   background-color: #F5CB5C;
-  margin-left: 130px;
 }
+
 h2 {
   color: white;
 }
+
 .table {
   margin-top: 20px;
   background-color: #CFDBD5;
@@ -28,35 +27,19 @@ h2 {
   .navbar-nav .nav-item {
     margin-bottom: 10px;
   }
-  .sidebar {
-    background-color: #333533;
-    height: 100vh;
-    width: 200px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    padding: 20px;
-  }
-  .sidebar a {
-    color: #CFDBD5;
-    display: block;
-    margin-bottom: 10px;
-    font-size: 20px;
-    text-align: center;
-  }
+  
   .container {
-    margin-left: 220px;
+    margin-left: 0;
     margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   .save-button {
     float: right;
     margin-top: 10px;
   }
-  .sidebar a:not(.navbar-brand) {
-    margin-top: 20px;
-  }
+ 
   .edit-mode {
     background-color: white;
   }
-
 }
