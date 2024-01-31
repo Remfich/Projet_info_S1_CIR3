@@ -1,10 +1,22 @@
 var url = "url";
-var method = "method";
+var method = "POST";
 
-
-function recup_data(){
+function recup_data(n,option){
     var datalist = [];
-    if(data_pull(datalist,-1)){
+    switch (option){
+        case "modif":
+            url = "modif";
+            break;
+        case "suppr":
+            url = "suppr";
+            break;
+        case "add":
+            url = "add";
+            break;
+        default:
+            break;
+    }
+    if(data_pull(datalist,n)){
         for(let i =0; i < datalist.length; i++){
             requete(url,datalist[i],method);
         }
@@ -29,28 +41,26 @@ function data_pull(datalist,n){
 
             datalist.push(donnees);
 
+
             document.getElementById("Warning").style.color = "red";
             if(id == "" ){
                 document.getElementById("Warning").textContent = "Erreur : ID invalide";
-            //  document.getElementById("Warning").style.display = "block";
                 console.log("alerte id");
                 return false;
             }
             else if(nom_produit == ""){
                 document.getElementById("Warning").textContent = "Erreur : Nom Produit invalide";
-            //   document.getElementById("Warning").style.display = "block";
                 console.log("alerte nom");
                 return false;
             }
             else if(nombre == ""){
                 document.getElementById("Warning").textContent = "Erreur : Quantité invalide";
-            //  document.getElementById("Warning").style.display = "block";
+
                 console.log("alerte nombre");
                 return false;
             }
             else if(prix == ""){
                 document.getElementById("Warning").textContent = "Erreur : Prix invalide";
-            // document.getElementById("Warning").style.display = "block";
                 console.log("alerte prix");
                 return false;
             }
@@ -102,9 +112,9 @@ function data_pull(datalist,n){
         else{
             document.getElementById("Warning").textContent = "";
         }
-    }
     console.log(datalist);
     return true;
+    }
 }
 
 

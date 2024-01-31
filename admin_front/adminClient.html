@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <a class="navbar-brand">Nom de l'entreprise</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mx-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="adminStock.html">Gestion de Stock</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="adminClient.html">Gestion des Clients</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="loginAdmin.html">Déconnexion</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+<br><br><br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Gestion des Clients</h2>
+      <input type="text" class="form-control" placeholder="Rechercher un client">
+      <br>
+      <a href="#" class="btn btn-primary mb-3" onclick="ajouterClient()">Ajouter un client</a>
+      <div class="table-responsive">
+        <table class="table table-striped" id="product-table">
+          <thead>
+            <tr>
+              <th>Prénom</th>
+              <th>Nom</th>
+              <th contenteditable="false">Email</th>
+              <th contenteditable="false">Mot de Passe</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <button class="btn btn-success save-button">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+  <script>
+    function supprimerClient(button) {
+      var row = button.parentNode.parentNode;
+      row.parentNode.removeChild(row);
+    }
+  </script>
+  <script>
+    function ajouterClient() {
+      var table1 = document.getElementById("product-table");
+      var newRow = table1.insertRow(-1);
+      newRow.innerHTML = `
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td contenteditable="true"></td>
+        <td><button class="btn btn-danger" onclick="supprimerClient(this)">Supprimer</button></td>
+      `;
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
