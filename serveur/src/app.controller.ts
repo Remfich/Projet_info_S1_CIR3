@@ -12,42 +12,35 @@ export class AppController {
   }
   @Post('/afficheClients')
   async receiveData(@Body() data: any) {
-    if(data.message == "recupDonnees"){//récup de données
-      const tabClients = await requete('http://127.0.0.1:3000/clients/getAllClient',{});
-      return { data: tabClients };
-    }
-    else{//Maj de données de la BDD
-      return {message : "test"};
-    }
+    const tabClients = await requete('http://127.0.0.1:3000/client/getAllClient',{});
+    return { data: tabClients };
   }
+
   @Post('/ajoutClient')
   async AjoutClient(@Body() client: any) {
-    await requete('http://127.0.0.1:3000/clients/ajoutClient',client);
+    await requete('http://127.0.0.1:3000/client/createClient',client);
     console.log(client, " a bien été ajouté à la BDD.")
   }
+
   @Post('/suprClient')
   async SuprClient(@Body() client: any) {
-    await requete('http://127.0.0.1:3000/clients/suprClient',client);
+    await requete('http://127.0.0.1:3000/client/deleteClient',client);
     console.log(client, " va être supprimé.")
   }
   @Post('/afficheStock')
   async receiveStock(@Body() data: any) {
-    if(data.message == "recupDonnees"){//récup de données
-      const tabStocks = await requete('http://127.0.0.1:3000/stocks/getAllStock',{});
-      return { data: tabStocks };
-    }
-    else{//Maj de données de la BDD
-      return {message : "test"};
-    }
+    const tabStocks = await requete('http://127.0.0.1:3000/produit/getAllProduit',{});
+    return { data: tabStocks };
   }
+
   @Post('/ajoutStock')
   async AjoutStock(@Body() stock: any) {
-    await requete('http://127.0.0.1:3000/stocks/ajoutStock',stock);
+    await requete('http://127.0.0.1:3000/produit/createProduit',stock);
     console.log(stock, " a bien été ajouté à la BDD.")
   }
   @Post('/suprStock')
   async SuprStock(@Body() stock: any) {
-    await requete('http://127.0.0.1:3000/stocks/suprStock',stock);
+    await requete('http://127.0.0.1:3000/produit/deleteProduit',stock);
     console.log(stock, " va être supprimé.")
   }
 }
