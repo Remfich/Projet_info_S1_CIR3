@@ -212,9 +212,17 @@ h5 {
   margin-bottom: 10px;
 }
 
+
+header a{
+  grid-column: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .bouton_scan{
-  width: 90%;
-  height: 80px;
+  width: 70%;
+  height: 60px;
   background-color: #f5cb5c;
   border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
