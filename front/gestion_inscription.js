@@ -1,17 +1,48 @@
-const loginForm = document.getElementById("inscription");
-const loginButton = document.getElementById("inscriptionsubmit");
-
-loginButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    const email = loginForm.email.value;
-    const password = loginForm.password.value;
-    const nom = loginForm.nom.value;
-    const prenom = loginForm.prenom.value;
-    
-    if (email == "Em@il" && nom == "Nom" && prenom == "Prenom" && password == "MotDePasse") {
-        alert("You have successfully logged in.");
-        window.location.replace("adminClient.html");
-    } else {
-        alert("login invalide");
+async function requete(url,donnees) {
+    try {
+      const data = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(donnees)
+      }
+      const reponse = await fetch(url, data);
+      const resultat = await reponse.json();
+      return resultat;
+    } catch (erreur) {
+      return undefined;
     }
-})
+  }
+
+const ip_serveur = "http://localhost";
+const ip_db = "http://localhost";
+const ip_front = "http://localhost";
+
+async function inscription(){
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("mdp").value;
+    const nom = document.getElementById("nom").value;
+    const prenom = document.getElementById("prenom").value;
+    
+    const data={
+        nom : nom,
+        prenom : prenom,
+        email : email,
+        mdp : password
+    }
+
+    const reponse = await requete(ip_serveur+":3000/connexion_back/creation",data);
+    if(reponse==false){ // S'il y a un echec dans la requête
+        window.alert("Cette adresse email est déjà prise.");
+    }
+    else{
+        // Code pour les cookies ici
+        if (reponse.est_admin){ // Si c'est un admin on ouvre la page des admins
+            window.open(ip_front+":3001/adminStock.html","_self");
+        }
+        else{  // Sinon c'est que c'est un client
+            window.open(ip_front+":3001/catalogue.html","_self");
+        }
+    }
+}

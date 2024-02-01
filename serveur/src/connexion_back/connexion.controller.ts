@@ -25,9 +25,15 @@ export class ConnexionBackController{
 
     @Post("/creation")
     async creationClient(@Body() nouv_client : any) : Promise<boolean|Client>{
+        // On doit vérifier que l'adresse email est disponible au préalable
         try{
-            const client = await requete(ip_db+":3000/client/createClient",nouv_client);
-            return client;
+            const verif = await requete(ip_db+":3000/client/getClient",{email:nouv_client.email});
+            if (verif!=undefined){
+                return false;
+            } else{
+                const client = await requete(ip_db+":3000/client/createClient",nouv_client);
+                return client;
+            }
         }
         catch(e){
             return false;
