@@ -1,33 +1,44 @@
+async function requete(url,donnees) {
+    try {
+      const data = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(donnees)
+      }
+      const reponse = await fetch(url, data);
+      const resultat = await reponse.json();
+      return resultat;
+    } catch (erreur) {
+      return undefined;
+    }
+  }
+
+const ip_serveur = "http://localhost";
+const ip_db = "http://localhost";
+const ip_front = "";
+
 var nbrow = 0;
 async function affichageStocksBDD(){//Pour récupérer tous les clients de la BDD
-    fetch('http://127.0.0.1:3000/api/data/afficheStock', {
-    method: 'Post',
-    mode:'cors',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(),
-    })
-    if(rep.ok){
-        var data = await rep.json();
-        var stock = data.data;
-        console.log("Stocks",stock);
+    const reponse= await requete(ip_serveur+':3000/api/data/afficheStock',{})
+    var stock = reponse.data;
+    console.log("Stocks chargés");
 
-        for (let index = 0; index < stock.length; index++) {
-            const element = stock[index];
-            var table1 = document.getElementById("product-table");
-            var newRow = table1.insertRow(-1);
-            newRow.classList.add("Produits");
-            newRow.id = nbrow;
-            newRow.innerHTML = `
-            <td contenteditable="true">`+element.id+`</td> 
-            <td contenteditable="true">`+element.nom+`</td>
-            <td contenteditable="true">`+element.nbstock+`</td>
-            <td contenteditable="true">`+element.prix+`</td>
-            <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
-            `;
-            nbrow+=1;
-        }
+    for (let index = 0; index < stock.length; index++) {
+        const element = stock[index];
+        var table1 = document.getElementById("product-table");
+        var newRow = table1.insertRow(-1);
+        newRow.classList.add("Produits");
+        newRow.id = nbrow;
+        newRow.innerHTML = `
+        <td contenteditable="true">`+element.id+`</td> 
+        <td contenteditable="true">`+element.nom+`</td>
+        <td contenteditable="true">`+element.nbstock+`</td>
+        <td contenteditable="true">`+element.prix+`</td>
+        <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
+        `;
+        nbrow+=1;
     }
 }
 
@@ -70,7 +81,6 @@ function recup_data(n,option,isall){
                     suprStockBDD(datalist[i]);
                     break;
                 case "save":
-                    console.log(option);
                     ajoutStockBDD(datalist[i]);
                     break;
                 default:
@@ -175,18 +185,14 @@ function data_pull(datalist,n,isall,option){
 }
 
 
-function ajoutStockBDD(stock){//tableau contenant toutes les infos du stock
-    fetch('http://127.0.0.1:3000/api/data/ajoutStock', {
-    method: 'Post',
-    mode:'cors',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(stock),
-    })
-    .then(response => response.json())
-    .then(console.log("Stock ajouté !"))
-    .catch((error) => console.error('Error:', error));
+async function ajoutStockBDD(stock){//tableau contenant toutes les infos du stock
+    data={
+        id : stock[0],
+        nom : stock[1],
+        prix : stock[2],
+        nbstock : stock[3]
+    }
+   await requete(ip_serveur+':3000/api/data/ajoutStock',data)
 }
 function suprStockBDD(stock){//tableau du stock qui sera supprimé
     fetch('http://127.0.0.1:3000/api/data/suprStock', {
@@ -201,7 +207,3 @@ function suprStockBDD(stock){//tableau du stock qui sera supprimé
     .then(console.log("Stock supprimé !"))
     .catch((error) => console.error('Error:', error));
 }
-
-
-
-affichageStocksBDD();
