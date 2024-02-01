@@ -1,26 +1,37 @@
-var url = "url";
-var method = "POST";
-//http://ipdatabase:3000/produit/deleteProduit
-//http://ipdatabase:3000/produit/createProduit
-
 var nbrow = 0;
-var stock = affichageStocksBDD();
-for (let index = 0; index < stock.length; index++) {
-    const element = stock[index];
-    var table1 = document.getElementById("product-table");
-    var newRow = table1.insertRow(-1);
-    newRow.classList.add("Clients");
-    newRow.id = nbrow;
-    newRow.innerHTML = `
-    <td contenteditable="true">`+element[0]+`</td>
-    <td contenteditable="true">`+element[1]+`</td>
-    <td contenteditable="true">`+element[2]+`</td>
-    <td contenteditable="true">`+element[3]+`</td>
-    <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
-    `;
-    nbrow+=1;
+async function affichageStocksBDD(){//Pour récupérer tous les clients de la BDD
+    fetch('http://127.0.0.1:3000/api/data/afficheStock', {
+    method: 'Post',
+    mode:'cors',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(),
+    })
+    if(rep.ok){
+        var data = await rep.json();
+        var stock = data.data;
+        console.log("Stocks",stock);
+
+        for (let index = 0; index < stock.length; index++) {
+            const element = stock[index];
+            var table1 = document.getElementById("product-table");
+            var newRow = table1.insertRow(-1);
+            newRow.classList.add("Produits");
+            newRow.id = nbrow;
+            newRow.innerHTML = `
+            <td contenteditable="true">`+element.id+`</td> 
+            <td contenteditable="true">`+element.nom+`</td>
+            <td contenteditable="true">`+element.nbstock+`</td>
+            <td contenteditable="true">`+element.prix+`</td>
+            <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
+            `;
+            nbrow+=1;
+        }
+    }
 }
 
+affichageStocksBDD();
 
 function save(){
     recup_data(nbrow,"save",true);
