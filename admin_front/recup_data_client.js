@@ -1,9 +1,10 @@
 var url = "url";
 var method = "POST";
 
-var clients = affichageClientBDD();
-for (let index = 0; index < stock.length; index++) {
-    const element = stock[index];
+var clients = affichageClientsBDD();
+console.log(clients);
+for (let index = 0; index < clients.length; index++) {
+    const element = clients[index];
     var table1 = document.getElementById("product-table");
     var newRow = table1.insertRow(-1);
     newRow.classList.add("Clients");
