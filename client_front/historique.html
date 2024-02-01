@@ -11,9 +11,9 @@
 <body>
     <!-- barre latérale à gauche de la page -->
     <div class="barre-lat">
-        <!-- affichage du logo -->
+        <!-- affichage du logo du site-->
         <div class="logo">
-            <img src="./img/logo.png" alt="">
+            <img src="./img/logo.png" alt=""> 
         </div>
         <!-- partie qui affiche les catégories de produits -->
         <div class="categorizes">
@@ -23,25 +23,33 @@
                     <h2>Scan Articles</h2>
                 </div>
             </a>
-            <div class="category">
-                <a href=""></a>
-            </div>
+            <!-- affichage des catégories -->
         </div>
     </div>
     <!-- partie principale de la page (partie à droite) -->
     <div class="main-part">
         <!-- header avec un fond blanc comprenant titre, profil -->
         <header>
-            <h1>Historique</h1>
-        </header>
+            <h1>Nos produits</h1>
+            <div class="panier">
+                <img src="./img/utilisateur-de-profil.png" alt="">
+                <a href="../front_client_panier/index.html">
+				    <img src="./img/impot.png" alt="">
+                </a>
+                <a href="../front_client_panier/index.html">
+                    <img src="./img/paniers.png" alt="">
+                </a>
+
+            </div>
+            </header>
         <!-- partie qui scroll -->
         <div class="main">
             <!-- Conteneur principal pour les factures -->
-            <div id="facturesContainer"></div>
-
+            <div id="facturesContainer">
             <!-- Script pour éditer les factures -->
             <script src="historique.js"></script>
             <!-- Fin du script pour éditer les factures -->
+        </div>
         </div>
     </div>
 </body>

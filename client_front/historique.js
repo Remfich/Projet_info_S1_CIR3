@@ -43,9 +43,9 @@ async function requete(url,donnees) {
                     facture.id = 'facture' + factureId;
 
                     // Ajouter le contenu de la facture (similaire à votre structure existante)
-                    var contenuFacture = '<div class="entete"><h1>Facture ' + factureId + '</h1></div>';
+                    var contenuFacture = '<div><div class="entete"><h1>Facture ' + factureId + '</h1></div>';
                     contenuFacture += '<div class="details-facture"><h2>Détails de la facture</h2><table><tr>';
-                    contenuFacture += '<th>Produit</th><th>Quantité</th><th>Prix unitaire</th><th>Total</th></tr>';
+                    contenuFacture += '<th>Produit</th><th>Quantté</th><th>Prix unitaire</th><th>Total</th></tr></div>';
 
                     // Calculer les totaux pour chaque produit
                     var totalFacture = 0;
