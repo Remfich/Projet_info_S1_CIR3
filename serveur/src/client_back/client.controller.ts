@@ -22,6 +22,7 @@ export class ClientBackController {
 
   @Post('/ajoutPanier')
   async ajoutPanier(@Body() nom_produit:object) : Promise<boolean>{
+    console.log(nom_produit);
     // On reçoit le nom d'un produit, on va interroger la DB sur ce produit pour obtenir ses informations
     const reponse = await requete(ip_db+':3000/produit/getProduit',nom_produit);
     if (reponse.nbstock>=0){
@@ -64,13 +65,26 @@ export class ClientBackController {
   // Prend une donnée de la forme 
   // {email:"emailduclient",commande:[{nom:"nomProdui1",prix:prixProduit1,quantite:quantiteProduit1},...]}
   @Post('/achatPanier')
-  async achatPanier(@Body() panier:any){
+  async achatPanier(@Body() panier:any) : Promise<boolean>{
+    try{
     // Ici on va "transvaser" le contenu du panier dans l'historique du client
     // Commençons par identifier le client
     const client = await requete(ip_db+":3000/client/getClient",{email:panier.email});
     // Une fois qu'on a le client on récupère son historique déjà présent et on y ajoute la nouvelle commande
     client.histo.push(panier.commande);
     // On renvoie une requete pour mettre à jour le client dans la DB
-    await requete(ip_db+":3000/client/updateClient",{email:panier.email, histo : panier.histo})
+    await requete(ip_db+":3000/client/updateClient",{email:panier.email, histo : client.histo})
+    }catch (e){
+      console.log(e);
+      return false;
+    }
+    return true
+  }
+
+  @Post('/getHisto')
+  async getHisto(@Body() email_client : any) : Promise<Object[][]>{
+    // On va récupérer le client et renvoyer son historique
+    const client = await requete(ip_db+":3000/client/getClient",{email : email_client.email});
+    return client.histo;
   }
 }

@@ -22,8 +22,8 @@ export class Client {
   @Prop()
   est_admin: boolean
 
-  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Produit' }] })
-  histo: Produit[];
+  @Prop()
+  histo: Produit[][];
 }
 
 export const ClientSchema = SchemaFactory.createForClass(Client);
