@@ -1,3 +1,7 @@
+import "../utilitaire";
+import { isconnectedclient } from "../utilitaire";
+isconnectedclient();
+
 const ip_serveur = "http://10.224.2.87";
 
 async function requete(url,donnees) {
