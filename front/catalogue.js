@@ -19,6 +19,12 @@ async function requete(url,donnees) {
 const ip_serveur = "http://localhost";
 const ip_db = "http://localhost";
 const ip_front = "http://localhost";
+import "../utilitaire";
+import { isconnectedclient } from "../utilitaire";
+isconnectedclient();
+
+let url = "http://127.0.0.1:3000/api/data";
+let method = "POST";
 var noms = [];
 var categories = [];
 

@@ -1,6 +1,9 @@
+import "../utilitaire";
+import { isconnectedadmin } from "../utilitaire";
+
+isconnectedadmin();
+
 var nbrow = 0;
-
-
 async function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
     var test;
     var rep = await fetch('http://127.0.0.1:3000/api/data/afficheClients', {

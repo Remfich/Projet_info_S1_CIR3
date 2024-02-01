@@ -18,6 +18,9 @@ async function requete(url,donnees) {
 const ip_serveur = "http://localhost";
 const ip_db = "http://localhost";
 const ip_front = "";
+import "../utilitaire";
+import { isconnectedadmin } from "../utilitaire";
+isconnectedadmin();
 
 var nbrow = 0;
 async function affichageStocksBDD(){//Pour récupérer tous les clients de la BDD
