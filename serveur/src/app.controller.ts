@@ -11,7 +11,7 @@ export class AppController {
     return this.appService.getHello();
   }
   @Post('/afficheClients')
-  async receiveData(@Body() data: any) {
+  async receiveData() {
     const tabClients = await requete('http://127.0.0.1:3000/client/getAllClient',{});
     return { data: tabClients };
   }
@@ -25,7 +25,6 @@ export class AppController {
   @Post('/suprClient')
   async SuprClient(@Body() client: any) {
     await requete('http://127.0.0.1:3000/client/deleteClient',client);
-    console.log(client, " va être supprimé.")
   }
   @Post('/afficheStock')
   async receiveStock(@Body() data: any) {
