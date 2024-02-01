@@ -6,11 +6,6 @@ document.addEventListener('click', (event)=>{
     suprClientBDD([1,1,1,1,1]);
 })
 
-var clients = affichageClientBDD();
-for (let index = 0; index < stock.length; index++) {
-    const element = stock[index];
-}
-
 function recup_data(n,option,isall){
     var datalist = [];
     if(data_pull(datalist,n*1,isall,option)){
@@ -165,6 +160,8 @@ function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
     body: JSON.stringify(),
     })
     .then(response => response.json())
-    .then(data => {return data})
+    .then(data => {return data.data})
     .catch((error) => console.error('Error:', error));
 }
+
+affichageClientsBDD()
