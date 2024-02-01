@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname)));
 
 app.get('/', (req, res) => {
     // Envoyer le fichier HTML
-    res.sendFile(path.join(__dirname, 'admin_front/loginAdmin.html'));
+    res.sendFile(path.join(__dirname, 'admin_front', 'loginAdmin.html'));
 });
 
 app.listen(port, () => {
