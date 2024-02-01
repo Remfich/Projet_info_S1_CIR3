@@ -3,6 +3,26 @@ var noms = [];
 var categories = [];
 let url = "http://10.224.2.87:3000/client_back/init";
 
+let id = 0;
+
+
+
+
+
+// Fonction pour récupérer la valeur d'un cookie en fonction de son nom
+function getCookie(cookieName) {
+  var name = cookieName + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var cookieArray = decodedCookie.split(';');
+  for (var i = 0; i < cookieArray.length; i++) {
+    var cookie = cookieArray[i].trim();
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return "";
+}
+
 
 async function returnStock() {
   try {
@@ -19,13 +39,16 @@ async function returnStock() {
       console.log(resultat);
 
       resultat.forEach(article => {
-        const id = article.id;
+        const id = article.i;
         const nom = article.nom;
         const prix = article.prix;
         const nbStock = article.nbstock;
         const categorie = article.categorie;
 
-  
+        noms.push(nom);
+
+        console.log(noms);
+        
         // Utilisez ces valeurs comme vous le souhaitez
         console.log(`ID: ${id}, Nom: ${nom}, Prix: ${prix}, NbStock: ${nbStock}, Categorie: ${categorie}`);
         if (!categories.includes(categorie)) {
@@ -41,6 +64,49 @@ async function returnStock() {
   } catch (error) {
     console.error('Erreur lors de la requête :', error);
   }
+};
+
+
+
+
+async function ajoutPanier (id) {
+  console.log(id);
+  let url2 = "http://10.224.2.87:3000/client_back/ajoutPanier"
+  const dataraw = {
+     nom: noms[id]
+  };
+  console.log(url2);
+  console.log(method);
+  console.log(dataraw);
+  
+  try {
+    const response2 = await fetch(url2, { 
+      method: method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataraw),
+    });
+    
+
+    if (response2.ok) {
+      console.log("Article ajouté avec succès !");
+      console.log(noms[id - 1]);
+      mettreDansPanier(noms[id - 1]);
+     
+
+    } else {
+      console.error(
+        "Erreur lors de l'ajout de l'article :",
+        response2.statusText
+      );
+    
+    }
+  } catch (error) {
+    console.error("Erreur lors de la requête :", error);
+    
+  }
+
 };
 
 
@@ -94,10 +160,41 @@ function createCategory(nomCategorie, imgCategory) {
   title_categ.innerHTML = text_categ;
   bouton_categ.appendChild(title_categ);
 
+
+  
+
   i++; //ON RAJOUTE UN NUMERO AU NOM DE LA CATEGORIE
 
   ////////////////////////////////////////////////////////////////
 }
+
+
+// CREATION DES COOKIES////////////////////////////////////////////////////////////////////
+// Fonction pour créer ou mettre à jour le cookie "panier"
+function mettreDansPanier(nomArticle) {
+  // Lire le cookie "panier"
+  var panierJSON = getCookie("panier");
+  var panier = [];
+
+  if (panierJSON) {
+    // Convertir la chaîne JSON en tableau d'objets
+    panier = JSON.parse(panierJSON);
+  }
+
+  // Ajouter le nom de l'article au panier
+  panier.push({ nom: nomArticle });
+
+  // Convertir le tableau mis à jour en une chaîne JSON
+  var nouveauPanierJSON = JSON.stringify(panier);
+
+  // Mettre à jour le cookie "panier" avec le nouveau contenu
+  document.cookie = "panier=" + nouveauPanierJSON;
+  
+}
+
+// Utilisation de la fonction pour ajouter un article au panier
+
+
 
 // CREATION DES PRODUITS////////////////////////////////////////////////////////////////////
 
@@ -116,6 +213,8 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit) {
   var button = document.createElement("button");
   button.className = "hidden-button";
   button.innerHTML = "<h3>+</h3>";
+  button.setAttribute("data-id", id);
+  button.type = "submit";
 
   // Ajout du bouton à la div "product"
   lien.appendChild(button);
@@ -144,47 +243,24 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit) {
   priceDiv.appendChild(priceH4);
   productDiv.appendChild(priceDiv);
 
-var nom = document
-  .querySelector(".products")
-  .children[0].querySelector(".title_produit").children[0].innerHTML;
-noms.push(nom);
 
-//REQUETE POST------------------------------------------------------------------------------------------------------------------
 
-button.addEventListener("click",(function (index) {
-     return  async function () {
-      url = "http://10.224.2.87:3000/client_back/ajoutPanier"
-      const dataraw = {
-        nom: noms[index - 1],
-      };
-      try {
-        const response = await fetch(url, {
-          method: method,
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(dataraw),
-        });
+  button.addEventListener("click", function(event) {
+    var buttonId = event.currentTarget.getAttribute("data-id");
+    console.log(buttonId);
+   
+    ajoutPanier(buttonId);
+    
+    
+  });
 
-        if (response.ok) {
-          console.log("Article ajouté avec succès !");
-          
-
-        } else {
-          console.error(
-            "Erreur lors de l'ajout de l'article :",
-            response.statusText
-          );
-        }
-      } catch (error) {
-        console.error("Erreur lors de la requête :", error);
-      }
-    };
-  })(i)
-);
-//FIN REQUETE POST------------------------------------------------------------------------------------------------------------------
+  id++;
+  
 }
 
 returnStock();
+
+
+
 
 
