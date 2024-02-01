@@ -73,7 +73,8 @@ function data_pull(datalist,n,isall,option){
                     return false;
                 }
             }
-            if(option == "suppr" && prenom == "" && nom == "" && mail == "" && mdp == ""){
+            if(prenom == "" && nom == "" && mail == "" && mdp == ""){
+                option = "void";
                 return false;
             }
             } catch (error) {
