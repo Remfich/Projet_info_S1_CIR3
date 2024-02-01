@@ -304,6 +304,25 @@ a:visited {
 .total p {
   font-weight: bold;
 }
+.menu{
+  display: none;
+}
+
+
+.menucat{
+  display: none;
+
+}
+
+.menucat img{
+  width: 40px;
+  height: 40px;
+  transition: 0.1s;
+}
+
+.menucat img:hover{
+  transform: scale(0.9);
+}
 
 @media only screen and (max-width: 768px) {
   .container {
@@ -318,8 +337,32 @@ a:visited {
   .facture {
       max-width: 100%;
   }
+  body {
+      grid-template-columns: 1fr; /* Single column layout for small screens */
+  }
+
+  .menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .barre-lat {
+      display: none; /* Hide the sidebar on small screens */
+  }
+
+  .main-part {
+      width: 100%; /* Make the main part take the full width on small screens */
+
+  }
+
+  header {
+      grid-template-columns: repeat(4,1fr); /* Adjust the header to a single column layout */
+  }
+
+  header h1{
+    grid-column: 2/4;
+    font-size: 25px;
+  }
 }
-
-
-  
-  
