@@ -1,6 +1,5 @@
 import "../utilitaire";
 import { isconnectedadmin } from "../utilitaire";
-
 isconnectedadmin();
 
 var nbrow = 0;
