@@ -9,9 +9,10 @@ var method = "POST";
 })*/
 var nbrow = 0;
 
-var clients = affichageClientBDD();
-for (let index = 0; index < stock.length; index++) {
-    const element = stock[index];
+var clients = affichageClientsBDD();
+console.log(clients);
+for (let index = 0; index < clients.length; index++) {
+    const element = clients[index];
     var table1 = document.getElementById("product-table");
     var newRow = table1.insertRow(-1);
     newRow.classList.add("Clients");
@@ -205,6 +206,6 @@ function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
     body: JSON.stringify(),
     })
     .then(response => response.json())
-    .then(data => {return data})
+    .then(data => {return data.data})
     .catch((error) => console.error('Error:', error));
 }
