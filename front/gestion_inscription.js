@@ -37,12 +37,15 @@ async function inscription(){
         window.alert("Cette adresse email est déjà prise.");
     }
     else{
+        document.cookie = "user=" +data.email+", path=/, max-age=86400";
         // Code pour les cookies ici
         if (reponse.est_admin){ // Si c'est un admin on ouvre la page des admins
             window.open(ip_front+":3001/adminStock.html","_self");
+            document.cookie = "admin=true, path=/,  max-age=86400";
         }
         else{  // Sinon c'est que c'est un client
             window.open(ip_front+":3001/catalogue.html","_self");
+            document.cookie = "admin=false , path=/,  max-age=86400";
         }
     }
 }
