@@ -3,10 +3,51 @@ var method = "POST";
 //http://ipdatabase:3000/produit/deleteProduit
 //http://ipdatabase:3000/produit/createProduit
 
+var nbrow = 0;
 var stock = affichageStocksBDD();
 for (let index = 0; index < stock.length; index++) {
     const element = stock[index];
+    var table1 = document.getElementById("product-table");
+    var newRow = table1.insertRow(-1);
+    newRow.classList.add("Clients");
+    newRow.id = nbrow;
+    newRow.innerHTML = `
+    <td contenteditable="true">`+element[0]+`</td>
+    <td contenteditable="true">`+element[1]+`</td>
+    <td contenteditable="true">`+element[2]+`</td>
+    <td contenteditable="true">`+element[3]+`</td>
+    <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
+    `;
+    nbrow+=1;
 }
+
+
+function save(){
+    recup_data(nbrow,"save",true);
+ }
+function supprimerProduit(button,n) {
+    recup_data(n,"suppr",false);
+    var row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+}
+
+
+function ajouterProduit() {
+    var table1 = document.getElementById("product-table");
+    var newRow = table1.insertRow(-1);
+    newRow.classList.add("Produits");
+    newRow.id = nbrow;
+    newRow.innerHTML = `
+    <td contenteditable="true"></td>
+    <td contenteditable="true"></td>
+    <td contenteditable="true"></td>
+    <td contenteditable="true"></td>
+    <td><button class="btn btn-danger" onclick="supprimerProduit(this,`+ nbrow +`)">Supprimer</button></td>
+    `;
+    nbrow+=1;
+}
+
+
 
 function recup_data(n,option,isall){
     var datalist = [];
