@@ -1,15 +1,48 @@
 var url = "url";
 var method = "POST";
-//http://ipdatabase:3000/client/deleteClient
-//http://ipdatabase:3000/client/createClient
-document.addEventListener('click', (event)=>{
-    suprClientBDD([1,1,1,1,1]);
-})
 
-var clients = affichageClientBDD();
-for (let index = 0; index < stock.length; index++) {
-    const element = stock[index];
+var clients = affichageClientsBDD();
+console.log(clients);
+for (let index = 0; index < clients.length; index++) {
+    const element = clients[index];
+    var table1 = document.getElementById("product-table");
+    var newRow = table1.insertRow(-1);
+    newRow.classList.add("Clients");
+    newRow.id = nbrow;
+    newRow.innerHTML = `
+    <td contenteditable="true">`+element[0]+`</td>
+    <td contenteditable="true">`+element[1]+`</td>
+    <td contenteditable="true">`+element[2]+`</td>
+    <td contenteditable="true">`+element[3]+`</td>
+    <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
+    `;
+    nbrow+=1;
 }
+
+function save(){
+    recup_data(nbrow,"save",true);
+}
+function supprimerClient(button,n) {
+    recup_data(n,"suppr",false);
+    var row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+}
+
+function ajouterClient() {
+  var table1 = document.getElementById("product-table");
+  var newRow = table1.insertRow(-1);
+  newRow.classList.add("Clients");
+  newRow.id = nbrow;
+  newRow.innerHTML = `
+    <td contenteditable="true"></td>
+    <td contenteditable="true"></td>
+    <td contenteditable="true"></td>
+    <td contenteditable="true"></td>
+    <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
+  `;
+  nbrow+=1;
+}
+
 
 function recup_data(n,option,isall){
     var datalist = [];
@@ -165,6 +198,8 @@ function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
     body: JSON.stringify(),
     })
     .then(response => response.json())
-    .then(data => {return data})
+    .then(data => {return data.data})
     .catch((error) => console.error('Error:', error));
 }
+
+affichageClientsBDD()
