@@ -2,22 +2,51 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="QRcode.css">
+    
 
 <body>
-  <div class="row">
-    <div class="col">
-      <div style="width:500px;" id="reader"></div>
+    <!-- barre latérale à gauche de la page -->
+    <div class="barre-lat">
+        <!-- affichage du logo du site-->
+        <div class="logo">
+            <img src="../front/img/logo.png" alt="">
+        </div>
+        <!-- partie qui affiche les catégories de produits -->
+        <div class="categorizes">
+            <a href="Qrcode_Reader.html">
+                <div class="bouton_scan">
+                    <img src="../front/img/analyse-du-code-qr.png" alt="">
+                    <h2>Scan Articles</h2>
+                </div>
+            </a>
+            <!-- affichage des catégories -->
+        </div>
     </div>
-    <a href="../front_client_catalog/index.html">
-      <button>Retour</button>
-    </a>
-    <h1 id="message"></h1>
-  </div>
+    <!-- partie principale de la page (partie à droite) -->
+    <div class="main-part">
+        <!-- header avec un fond blanc comprenant titre, profil -->
+        <header>
+            <h1>Scan</h1>
+            <div class="panier">
+                <img src="../front/img/utilisateur-de-profil.png" alt="">
+                <a href="">
+				<img src="../front/img/impot.png" alt="">
+                </a>
+                <a href="../front/index.html">
+                    <img src="../front/img/paniers.png" alt="">
+                </a>
+
+            </div>
+
+			</header>
+		<div class="main">
+		<div class="row">
+    <div class="col">
+      <div style="width:500%;" id="reader"></div>
   <script src="node_modules/html5-qrcode/html5-qrcode.min.js"></script>
   <script type="text/javascript" src="scan.js"></script>
 </body>

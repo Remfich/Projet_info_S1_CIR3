@@ -41,9 +41,19 @@ function createCategory(nomCategorie, imgCategory) {
     .addEventListener("click", function () {
       var id_clicked = this.getAttribute("id");
       var nmbr_clicked = id_clicked[8];
+      const mediaQuery = window.matchMedia('(max-width: 600px)');
       location.href = "#category_product" + nmbr_clicked;
-        document.querySelector(".barre-lat").style["display"]="none";
-        document.querySelector(".main-part").style["display"]="block";
+      // Fonction de rappel pour gérer les changements de média
+      function handleMediaChange(event) {
+          if (event.matches) {
+            location.href = "#category_product" + nmbr_clicked;
+            document.querySelector(".barre-lat").style["display"]="none";
+            document.querySelector(".main-part").style["display"]="block";
+          }
+      }
+      // Appelez la fonction de rappel une fois au chargement de la page pour initialiser le style
+      handleMediaChange(mediaQuery);
+
     });
   var img_categ = document.createElement("img");
   img_categ.src = imgCategory;

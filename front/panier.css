@@ -82,20 +82,30 @@ main{
 }
 
 
-
-
-
-  
-
-.Modifier{
+.Vider{
     width: 100%;
-    background-color: #f5cb5c;
+    background-color: red;
     border-radius: 10px;
     margin: 15px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 0.1s;
+
+
+}
+
+.Vider:hover{
+
+   transform: scale(0.9);
+   cursor: pointer;
+
+}
+
+
+.Vider h2{
+    color: white;
 }
 
 .scroll{
