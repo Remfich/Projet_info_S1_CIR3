@@ -37,6 +37,7 @@ function recup_data(n,option,isall){
 function data_pull(datalist,n,isall,option){
     if(isall == true){
         for(var i = 0; i < n; i++){
+            try {
             var data = document.getElementById(i);
             // prenom sur 0/1, nom produit sur 2/3, email sur 4/5, mot de passe sur 6/7
             var x = 1;
@@ -75,6 +76,10 @@ function data_pull(datalist,n,isall,option){
             if(option == "suppr" && prenom == "" && nom == "" && mail == "" && mdp == ""){
                 return false;
             }
+            } catch (error) {
+                console.log(error)
+            }
+            
         }
         console.log(datalist);
         return true;

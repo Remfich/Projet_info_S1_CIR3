@@ -33,43 +33,48 @@ function recup_data(n,option,isall){
 function data_pull(datalist,n,isall,option){
     if(isall == true){
         for(var i = 0; i < n; i++){
-            var data = document.getElementById(i);
-            // id sur 0/1, nom produit sur 2/3, nombre sur 4/5, prix sur 6/7
-            var x = 1;
-            let id = data.childNodes[x].textContent;
-            let nom_produit = data.childNodes[x + 2].textContent;
-            let nombre = data.childNodes[x + 4].textContent;
-            let prix = data.childNodes[x + 6].textContent;
-
-            //let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1, action : option};
-            let donnees = [id*1,nom_produit,prix*1,nombre*1,option];
-            datalist.push(donnees);
-
-            if(option == !"suppr"){
-                if(id == "" ){
-                    alert("Erreur : ID invalide");
-                    console.log("alerte id");
-                    return false;
+            try {
+                var data = document.getElementById(i);
+                // id sur 0/1, nom produit sur 2/3, nombre sur 4/5, prix sur 6/7
+                var x = 1;
+                let id = data.childNodes[x].textContent;
+                let nom_produit = data.childNodes[x + 2].textContent;
+                let nombre = data.childNodes[x + 4].textContent;
+                let prix = data.childNodes[x + 6].textContent;
+    
+                //let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1, action : option};
+                let donnees = [id*1,nom_produit,prix*1,nombre*1,option];
+                datalist.push(donnees);
+    
+                if(option == !"suppr"){
+                    if(id == "" ){
+                        alert("Erreur : ID invalide");
+                        console.log("alerte id");
+                        return false;
+                    }
+                    else if(nom_produit == ""){
+                        alert("Erreur : Nom Produit invalide");
+                        console.log("alerte nom");
+                        return false;
+                    }
+                    else if(nombre == ""){
+                        alert("Erreur : Quantité invalide");
+                        console.log("alerte nombre");
+                        return false;
+                    }
+                    else if(prix == ""){
+                        alert("Erreur : Prix invalide");
+                        console.log("alerte prix");
+                        return false;
+                    }
                 }
-                else if(nom_produit == ""){
-                    alert("Erreur : Nom Produit invalide");
-                    console.log("alerte nom");
+                if(option == "suppr" && id == "" && nom_produit == "" && nombre == "" && prix == ""){
                     return false;
-                }
-                else if(nombre == ""){
-                    alert("Erreur : Quantité invalide");
-                    console.log("alerte nombre");
-                    return false;
-                }
-                else if(prix == ""){
-                    alert("Erreur : Prix invalide");
-                    console.log("alerte prix");
-                    return false;
-                }
+                } 
+            } catch (error) {
+                console.log(error);
             }
-            if(option == "suppr" && id == "" && nom_produit == "" && nombre == "" && prix == ""){
-                return false;
-            }
+            
         }
         console.log(datalist);
         return true;
