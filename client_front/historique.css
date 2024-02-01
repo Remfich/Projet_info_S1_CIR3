@@ -189,7 +189,7 @@ body {
     margin: 20px;
     border: 1px solid #ccc;
     padding: 20px;
-    background-color: ##cfdbd5; /* Couleur de fond de la facture */
+    background-color: #cfdbd5; /* Couleur de fond de la facture */
 }
 
 .entete h1 {
