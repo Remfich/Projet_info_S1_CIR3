@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 // Définir le dossier pour les fichiers statiques
-app.use(express.static(path.join(__dirname , 'front')));
+app.use(express.static(path.join(__dirname , './front')));
 
 app.get('/', (req, res) => {
     // Envoyer le fichier HTML
