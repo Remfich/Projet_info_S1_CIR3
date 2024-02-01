@@ -203,4 +203,5 @@ function suprStockBDD(stock){//tableau du stock qui sera supprimé
 }
 
 
+
 affichageStocksBDD();
