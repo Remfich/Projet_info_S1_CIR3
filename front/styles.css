@@ -1,0 +1,45 @@
+body {
+  padding-top: 20px;
+  background-color: #242423;
+}
+
+.navbar-brand {
+  margin-right: auto;
+}
+
+.navbar {
+  background-color: #F5CB5C;
+}
+
+h2 {
+  color: white;
+}
+
+.table {
+  margin-top: 20px;
+  background-color: #CFDBD5;
+}
+
+@media (max-width: 576px) {
+  .navbar-nav {
+    flex-direction: column;
+  }
+  .navbar-nav .nav-item {
+    margin-bottom: 10px;
+  }
+  
+  .container {
+    margin-left: 0;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .save-button {
+    float: right;
+    margin-top: 10px;
+  }
+ 
+  .edit-mode {
+    background-color: white;
+  }
+}

@@ -35,9 +35,6 @@ header img:hover{
 }
 
 
-
-
-
 .panier{
   grid-column: 4/5;
   display: flex;
@@ -273,68 +270,56 @@ a:visited {
 }
 
 
-.bouton_categ img{
-  width: 40px;
-  height: 40px;
+.facture {
+  margin: 20px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: #cfdbd5; /* Couleur de fond de la facture */
+  border-radius : 30px;
 }
 
-.categName{
-  margin:20px;
+.entete h1 {
+  margin: 0;
 }
 
-
-.bouton_categ{
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+.details-facture table {
   width: 100%;
-  
+  border-collapse: collapse;
+  margin-top: 10px;
 }
 
+.details-facture table, .details-facture th, .details-facture td {
+  border: 1px solid #090909;
+}
 
+.details-facture th, .details-facture td {
+  padding: 10px;
+  text-align: left;
+}
 
+.total {
+  margin-top: 20px;
+}
 
+.total p {
+  font-weight: bold;
+}
 
-/* responsive */
 @media only screen and (max-width: 768px) {
-  body {
-      grid-template-columns: 1fr; /* Single column layout for small screens */
-  }
-
-  .barre-lat {
-      display: none; /* Hide the sidebar on small screens */
+  .container {
+      flex-direction: column;
+      align-items: center;
   }
 
   .main-part {
-      width: 100%; /* Make the main part take the full width on small screens */
-      overflow-y: auto;
+      margin-left: 0;
   }
 
-  header {
-      grid-template-columns: 1fr; /* Adjust the header to a single column layout */
-  }
-
-  .main {
-      height: auto; /* Adjust the height of the main content area */
-  }
-
-  .products {
-      grid-template-columns: repeat(2, 1fr); /* Adjust the product grid for smaller screens */
-      margin: 15px; /* Add some margin for better spacing on small screens */
-  }
-  .hidden-button {
-    display: flex ;
+  .facture {
+      max-width: 100%;
   }
 }
 
 
-.product img,
-.logo img,
-.bouton_scan img,
-.bouton_categ img {
-    max-width: 100%;
-    height: auto;
-}
-
-
-
+  
+  
