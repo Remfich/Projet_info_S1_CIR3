@@ -35,9 +35,6 @@ header img:hover{
 }
 
 
-
-
-
 .panier{
   grid-column: 4/5;
   display: flex;
@@ -272,24 +269,6 @@ a:visited {
   transform: scale(0.9);
 }
 
-
-.bouton_categ img{
-  width: 40px;
-  height: 40px;
-}
-
-.categName{
-  margin:20px;
-}
-
-
-.bouton_categ{
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-  
-}
 
 .facture {
   margin: 20px;

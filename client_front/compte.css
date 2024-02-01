@@ -1,0 +1,410 @@
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  height: 100%;
+  overflow: hidden;
+}
+
+.main-part {
+  background-color: #efefef;
+  height: 100%;
+}
+
+header {
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 75px;
+}
+
+
+header img{
+  width: 40px;
+  height: 40px;
+  transition: transform 0.1s;
+}
+
+
+header img:hover{
+  transform: scale(0.9);
+}
+
+
+
+
+
+.panier{
+  grid-column: 4/5;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.title {
+  grid-column: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-family: Verdana, Geneva, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #242423;
+}
+
+h2 {
+  font-family: Verdana, sans-serif;
+  font-weight: 300;
+  color: #242423;
+  margin: 0;
+  font-size: 20px;
+}
+
+.main {
+  overflow: auto;
+
+  height: calc(100vh - 75px);
+}
+
+.main h1{
+  display: flex;
+  justify-content: left;
+}
+
+.Categorie{
+  margin: 20px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  margin: 30px;
+  grid-gap: 30px;
+}
+
+.product {
+  background-color: #242423;
+  border-radius: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  width: 100%;
+  height: 220px;
+  position: relative;
+}
+
+/* affichage du bouton lors du survol sur le produit */
+.product:hover .hidden-button {
+  display: flex;
+}
+
+/* zoom sur le bouton lors du survol */
+.hidden-button:hover {
+  transform: scale(1.1);
+}
+
+/* texte "+" */
+h3 {
+  font-size: 30px;
+  margin: 0;
+}
+
+/* bouton ajouter */
+.hidden-button {
+  display: none;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  border-radius: 10px;
+  border: none;
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.1s;
+  animation: fadein 0.5s;
+  cursor: pointer;
+}
+
+/* animation du bouton ajouter en fondu */
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+h4,
+h5 {
+  color: white;
+  margin: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h5 {
+  font-weight: 100;
+}
+
+.title_produit {
+  position: absolute;
+  bottom: 50px;
+
+  margin-left: 15px;
+}
+
+.prix_produit {
+  position: absolute;
+  bottom: 20px;
+  margin-left: 15px;
+}
+
+.product img {
+  width: 100px;
+  height: 100px;
+  margin-top: 20px;
+  
+}
+
+.image_produit {
+  display: flex;
+  justify-content: center;
+}
+
+/* -------------------------------------- */
+/* scrollbar design */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: grey;
+}
+/* ----------------------------- */
+
+.barre-lat {
+  height: 100vh;
+  background-color: #cfdbd5;
+  overflow: auto;
+}
+
+.logo img{
+  width: 250px;
+}
+
+.logo{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.bouton_scan{
+  width: 90%;
+  height: 80px;
+  background-color: #f5cb5c;
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+
+.bouton_scan:hover{
+  transform: scale(0.90);
+}
+
+.bouton_scan img{
+  width: 30px;
+}
+
+.categorizes a{
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+.categorizes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+  
+}
+
+
+.category{
+  width: 90%;
+  height: 80px;
+  border-radius: 20px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: transform 0.1s;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.category:hover{
+  transform: scale(0.9);
+}
+
+
+.bouton_categ img{
+  width: 40px;
+  height: 40px;
+}
+
+.categName{
+  margin:20px;
+}
+
+
+.bouton_categ{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  
+}
+
+
+
+
+
+/* responsive */
+@media only screen and (max-width: 768px) {
+  body {
+      grid-template-columns: 1fr; /* Single column layout for small screens */
+  }
+
+  .barre-lat {
+      display: none; /* Hide the sidebar on small screens */
+  }
+
+  .main-part {
+      width: 100%; /* Make the main part take the full width on small screens */
+      overflow-y: auto;
+  }
+
+  header {
+      grid-template-columns: 1fr; /* Adjust the header to a single column layout */
+  }
+
+  .main {
+      height: auto; /* Adjust the height of the main content area */
+  }
+
+  .products {
+      grid-template-columns: repeat(2, 1fr); /* Adjust the product grid for smaller screens */
+      margin: 15px; /* Add some margin for better spacing on small screens */
+  }
+  .hidden-button {
+    display: flex ;
+  }
+}
+
+
+.product img,
+.logo img,
+.bouton_scan img,
+.bouton_categ img {
+    max-width: 100%;
+    height: auto;
+}
+.info {
+  margin: 20px;
+}
+
+.info h3 {
+  font-weight: 400;
+  margin: 10px 0;
+}
+
+.eye-icon {
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.buttons button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #f5cb5c;
+  border: none;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  cursor: pointer;
+}
+
+.buttons button:hover {
+  transform: scale(0.9);
+}
+table {
+  width: 70%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  font-family: Baskerville, sans-serif;
+  
+}
+
+th, td {
+  padding: 30px;
+  border: none;
+}
+
+th {
+  text-align: left;
+  
+}
+
+.modifier {
+  display: flex;
+  margin: auto;
+  background-color:#f5cb5c; 
+  border-radius: 800px;
+  justify-content: space-evenly;
+  align-items: center;
+  transition: transform 0.5s;
+  font-family: Baskerville, sans-serif;
+}
+.delete-button {
+    background-color: rgb(223, 52, 52);
+    border-radius: 800px;
+    font-family: Baskerville, sans-serif;
+  }
+  
+.save-button {
+    background-color: #333533;
+    border-radius: 800px;
+    color: #cfdbd5;
+    font-family: Baskerville, sans-serif;
+  }

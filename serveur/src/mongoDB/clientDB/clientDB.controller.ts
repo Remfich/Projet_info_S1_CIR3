@@ -38,6 +38,6 @@ export class ClientController {
     // Mettre à jour un client
     @Post('/updateClient')
     async updateClient(@Body() client : ClientDto){
-        return this.ClientService.updateClient({email : client.email},{histo : client.histo})
+        return this.ClientService.updateClient({email : client.email},client)
     }
 }

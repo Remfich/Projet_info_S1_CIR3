@@ -71,7 +71,6 @@ h2 {
 
 .main {
   overflow: auto;
-
   height: calc(100vh - 75px);
 }
 
@@ -291,15 +290,60 @@ a:visited {
   
 }
 
+.menu{
+  display: none;
+}
+
+
+.menucat{
+  display: none;
+
+}
+
+.menucat img{
+  width: 40px;
+  height: 40px;
+  transition: 0.1s;
+}
+
+.menucat img:hover{
+  transform: scale(0.9);
+}
+
+
+
+
+
 
 
 
 
 /* responsive */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 600px) {
   body {
       grid-template-columns: 1fr; /* Single column layout for small screens */
   }
+
+  .menucat{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 20px;
+  }
+
+  .menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .panier img{
+    width: 30px;
+    height: 30px;
+  }
+
+
 
   .barre-lat {
       display: none; /* Hide the sidebar on small screens */
@@ -307,16 +351,23 @@ a:visited {
 
   .main-part {
       width: 100%; /* Make the main part take the full width on small screens */
-      overflow-y: auto;
+
   }
 
   header {
-      grid-template-columns: 1fr; /* Adjust the header to a single column layout */
+      grid-template-columns: repeat(4,1fr); /* Adjust the header to a single column layout */
   }
 
-  .main {
-      height: auto; /* Adjust the height of the main content area */
+  header h1{
+    grid-column: 2/4;
+    font-size: 25px;
   }
+
+  .panier{
+    grid-column: 4;
+  }
+
+
 
   .products {
       grid-template-columns: repeat(2, 1fr); /* Adjust the product grid for smaller screens */

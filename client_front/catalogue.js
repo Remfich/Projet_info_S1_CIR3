@@ -1,118 +1,12 @@
+let url = "http://127.0.0.1:3000/api/data";
 let method = "POST";
 var noms = [];
-var categories = [];
-let url = "http://10.224.2.92:3000/client_back/init";
-
-let id = 0;
-
-
-
-
-
-// Fonction pour récupérer la valeur d'un cookie en fonction de son nom
-function getCookie(cookieName) {
-  var name = cookieName + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var cookieArray = decodedCookie.split(';');
-  for (var i = 0; i < cookieArray.length; i++) {
-    var cookie = cookieArray[i].trim();
-    if (cookie.indexOf(name) === 0) {
-      return cookie.substring(name.length, cookie.length);
-    }
-  }
-  return "";
-}
-
-
-async function returnStock() {
-  try {
-    const response = await fetch(url, {
-      method: method,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-
-    if (response.ok) {
-      console.log('Stock chargé avec succès');
-      const resultat = await response.json()
-      console.log(resultat);
-
-      resultat.forEach(article => {
-        const id = article.id;
-        const nom = article.nom;
-        const prix = article.prix;
-        const nbStock = article.nbstock;
-        const categorie = article.categorie;
-
-     
-        
-        // Utilisez ces valeurs comme vous le souhaitez
-        console.log(`ID: ${id}, Nom: ${nom}, Prix: ${prix}, NbStock: ${nbStock}, Categorie: ${categorie}`);
-        if (!categories.includes(categorie)) {
-          createCategory(categorie, "./img/coke.png");
-          categories.push(categorie);
-        }
-        createProduct(nom, prix, categorie, "./img/coke.png");
-      });
-
-       } else {
-      console.error('Erreur lors du chargement du stock', response.statusText);
-    }
-  } catch (error) {
-    console.error('Erreur lors de la requête :', error);
-  }
-};
-
-
-
-
-async function ajoutPanier (id) {
-  console.log(id);
-  let url2 = "http://10.224.2.92:3000/client_back/ajoutPanier"
-  const dataraw = {
-     nom: noms[id]
-  };
-  console.log(url2);
-  console.log(method);
-  console.log(dataraw);
-  
-  try {
-    const response2 = await fetch(url2, { 
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(dataraw),
-    });
-    
-
-    if (response2.ok) {
-      console.log("Article ajouté avec succès !");
-      console.log(noms[id - 1]);
-      mettreDansPanier(noms[id - 1]);
-     
-
-    } else {
-      console.error(
-        "Erreur lors de l'ajout de l'article :",
-        response2.statusText
-      );
-    
-    }
-  } catch (error) {
-    console.error("Erreur lors de la requête :", error);
-    
-  }
-
-};
-
-
-
 var i = 1;
 
 var productsDiv; //variables globales
 
+
+var category_tab=[]
 
 function createCategory(nomCategorie, imgCategory) {
   var category_product = document.createElement("div");
@@ -143,11 +37,13 @@ function createCategory(nomCategorie, imgCategory) {
   categoryDiv.appendChild(bouton_categ);
   // ramène à la catégorie en question au clic
   document
-    .querySelector("#bouton_categ" + i)
+    .querySelector("#category" + i)
     .addEventListener("click", function () {
       var id_clicked = this.getAttribute("id");
-      var nmbr_clicked = id_clicked[12];
+      var nmbr_clicked = id_clicked[8];
       location.href = "#category_product" + nmbr_clicked;
+        document.querySelector(".barre-lat").style["display"]="none";
+        document.querySelector(".main-part").style["display"]="block";
     });
   var img_categ = document.createElement("img");
   img_categ.src = imgCategory;
@@ -157,41 +53,10 @@ function createCategory(nomCategorie, imgCategory) {
   title_categ.innerHTML = text_categ;
   bouton_categ.appendChild(title_categ);
 
-
-  
-
   i++; //ON RAJOUTE UN NUMERO AU NOM DE LA CATEGORIE
 
   ////////////////////////////////////////////////////////////////
 }
-
-
-// CREATION DES COOKIES////////////////////////////////////////////////////////////////////
-// Fonction pour créer ou mettre à jour le cookie "panier"
-function mettreDansPanier(nomArticle) {
-  // Lire le cookie "panier"
-  var panierJSON = getCookie("panier");
-  var panier = [];
-
-  if (panierJSON) {
-    // Convertir la chaîne JSON en tableau d'objets
-    panier = JSON.parse(panierJSON);
-  }
-
-  // Ajouter le nom de l'article au panier
-  panier.push({ nom: nomArticle });
-
-  // Convertir le tableau mis à jour en une chaîne JSON
-  var nouveauPanierJSON = JSON.stringify(panier);
-
-  // Mettre à jour le cookie "panier" avec le nouveau contenu
-  document.cookie = "panier=" + nouveauPanierJSON;
-  
-}
-
-// Utilisation de la fonction pour ajouter un article au panier
-
-
 
 // CREATION DES PRODUITS////////////////////////////////////////////////////////////////////
 
@@ -210,8 +75,6 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit) {
   var button = document.createElement("button");
   button.className = "hidden-button";
   button.innerHTML = "<h3>+</h3>";
-  button.setAttribute("data-id", id);
-  button.type = "submit";
 
   // Ajout du bouton à la div "product"
   lien.appendChild(button);
@@ -228,8 +91,11 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit) {
   var titleDiv = document.createElement("div");
   titleDiv.className = "title_produit";
   var titleH4 = document.createElement("h4");
+  var titleH5=document.createElement("h5");
   titleH4.textContent = nomProduit;
+  titleH5.textContent = "Stock :"
   titleDiv.appendChild(titleH4);
+  titleDiv.appendChild(titleH5);
   productDiv.appendChild(titleDiv);
 
   // Création de la div avec la classe "prix_produit" et le prix à l'intérieur
@@ -240,29 +106,87 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit) {
   priceDiv.appendChild(priceH4);
   productDiv.appendChild(priceDiv);
 
+  var nom = document
+    .querySelector(".products")
+    .children[0].querySelector(".title_produit").children[0].innerHTML;
+  noms.push(nom);
 
-  var nom = document.querySelector(".category_product").children[1].children[0].children[2].children[0].innerHTML;
-  console.log("nom : " + nomProduit);
-  noms.push(nomProduit);
-  console.log(noms);
+  //REQUETE POST------------------------------------------------------------------------------------------------------------------
 
 
 
-  button.addEventListener("click", function(event) {
-    var buttonId = event.currentTarget.getAttribute("data-id");
-    console.log(buttonId);
-   
-    ajoutPanier(buttonId);
-    
-    
-  });
 
-  id++;
-  
+
+  button.addEventListener(
+    "click",
+    (function (index) {
+      return async function () {
+        const dataraw = {
+          nom: noms[index - 1],
+        };
+        try {
+          const response = await fetch(url, {
+            method: method,
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dataraw),
+          });
+
+          if (response.ok) {
+            console.log("Article ajouté avec succès !");
+          } else {
+            console.error(
+              "Erreur lors de l'ajout de l'article :",
+              response.statusText
+            );
+          }
+        } catch (error) {
+          console.error("Erreur lors de la requête :", error);
+        }
+      };
+    })(i)
+  );
+  //FIN REQUETE POST------------------------------------------------------------------------------------------------------------------
 }
 
-returnStock();
 
+// TEST
+createCategory("Boissons");
+createProduct("Fanta",3,"Boissons","./img/fanta.png");
+
+createCategory("Pates");
+createProduct("Coca",3,"Pates","./img/coke.png");
+createProduct("Coca",3,"Pates","./img/coke.png");
+createProduct("Coca",3,"Pates","./img/coke.png");
+createCategory("Pains");
+createProduct("Coca",3,"Pains","./img/coke.png");
+createProduct("Coca",3,"Pains","./img/coke.png");
+createCategory("Frais");
+createProduct("Coca",3,"Frais","./img/coke.png");
+createProduct("Coca",3,"Frais","./img/coke.png");
+createCategory("Boucherie");
+createProduct("Coca",3,"Boucherie","./img/coke.png");
+createProduct("Coca",3,"Boucherie","./img/coke.png");
+createProduct("Coca",3,"Boucherie","./img/coke.png");
+createProduct("Coca",3,"Boucherie","./img/coke.png");
+createCategory("Fromager");
+createProduct("Coca",3,"Fromager","./img/coke.png");
+createCategory("Surgelés");
+createCategory("Surgelés");
+createCategory("Surgelés");
+
+
+
+document.querySelector(".menu").onclick = function(){
+  document.querySelector(".barre-lat").style["display"]="block";
+  document.querySelector(".main-part").style["display"]="none";
+};
+
+document.querySelector(".menucat").onclick = function(){
+  document.querySelector(".barre-lat").style["display"]="none";
+  document.querySelector(".main-part").style["display"]="block";
+};
 
 
 

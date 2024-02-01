@@ -7,7 +7,7 @@
   </head>
   <body>
     <!-- Mise en place balise Form + Action -->
-    <form class="box" id="login">
+    <form class="box" method="post" action="adminStock.html">
       <!-- Mise en place du SVG "user" -->
       <svg width="30" height="30" viewBox="0 0 24 24">
         <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"></path>
@@ -15,14 +15,20 @@
       <!-- Titre -->
       <h1>Connexion</h1>
       <!-- Champs Utilisateur -->
-      <input type="text" name="email" placeholder="Votre email">
+      <input type="email" name="" placeholder="Votre email" required>
       <!-- Champs Mot de Passe -->
-      <input type="password" name="password" placeholder="Votre Mot De Passe">
+      <input type="password" name="" placeholder="Votre Mot De Passe" required>
+      <!-- Rester connecté -->
+      <div class="checkbox">
+        <input type="checkbox" id="rester-connecte" name="rester-connecte">
+        <label for="rester-connecte">Rester connecté</label>
+      </div>
       <!-- Bouton de connexion -->
-      <input type="submit" name="submit" id="submit" value="Connexion">
+      <input type="submit" name="" value="Connexion">
       <!-- Lien vers la page d'inscription -->
-      <a href="inscriptionAdmin.html"  class="inscription-link">Inscription</a>
+      <a href="inscriptionAdmin.html" class="inscription-link">Inscription</a>
     </form>
+    <script src="cookieAdmin.js"></script>
     <script src="gestion_login.js"></script>
   </body>
 </html>
