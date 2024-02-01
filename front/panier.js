@@ -1,4 +1,5 @@
 
+
 // test//
 var i = 0;
 var prix_stock = [];
@@ -63,13 +64,14 @@ titleProduit.appendChild(quantity);
   var prix = document.createElement("h2");
   prix.textContent = prixProduit*Quantite + "€";
   prix_product.appendChild(prix);
-  prix_stock.push(prixProduit);
+  prix_stock.push(prixProduit*Quantite);
     
 
   i++;
 }
 
 function createButton(text, index) {
+    var positif = 0;
     var bouton = document.createElement("button");
     bouton.setAttribute("id", "bouton_" + text + index);
     bouton.textContent = text;
@@ -82,30 +84,61 @@ function createButton(text, index) {
         console.log(currentQuantityText);
         if (!isNaN(currentQuantity)) { // Vérification pour éviter NaN
           if (text === "+") {
+            positif = 1;
             currentQuantity++;
           } else if (text === "-" && currentQuantity > 1) {
             currentQuantity--;
           } else if (text === "-" && currentQuantity === 1) {
             // Supprimer l'article parent du bouton "-"
+            prix_stock.splice(index, 1);
+            prix_stock.splice(index, 0, 0); // Insérez l'élément à l'index désiré (nouvelIndex)
+            calculPrixTotal();
             var articleASupprimer = bouton.parentElement.parentElement.parentElement;
             articleASupprimer.remove();
+            
+           
             return; // Arrêtez l'exécution ici pour éviter de mettre à jour la quantité après la suppression
           } else if (text === "x") {
+            prix_stock.splice(index, 1);
+            prix_stock.splice(index, 0, 0); // Insérez l'élément à l'index désiré (nouvelIndex)
+            calculPrixTotal();
             // Supprimer l'article parent du bouton "x"
             var articleASupprimer = bouton.parentElement.parentElement.parentElement;
             articleASupprimer.remove();
+            
+          
             return; // Arrêtez l'exécution ici pour éviter de mettre à jour la quantité après la suppression
           }
           
           currentQuantityElement.textContent = "Qté : " + currentQuantity;
-          var prixTotal = prix_stock[index] * currentQuantity; // Calcule le prix total basé sur le prix initial
+          if(positif == 1){
+            var prixTotal = prix_stock[index] + (prix_stock[index] / (currentQuantity - 1)); // Calcule le prix total basé sur le prix initial
+            }else{
+            var prixTotal = prix_stock[index] - (prix_stock[index] / (currentQuantity + 1)); // Calcule le prix total basé sur le prix initial
+            }
           var prixProduitElement = currentQuantityElement.parentElement.nextElementSibling.nextElementSibling;
-         // prixProduitElement.remove();
+          var prixProduitElement2 = currentQuantityElement.parentElement.nextElementSibling
+         prixProduitElement.remove();
+          
+
+
+
+          
+
          
-            var prix = document.createElement("h2");
-            prix.textContent = prixTotal + "€";
-            prixProduitElement.appendChild(prix);
-            prix_stock.push(prix_stock[index]);
+          var prix_product = document.createElement("div");
+        prix_product.className = "prixProduit";
+        currentQuantityElement.parentElement.parentElement.appendChild(prix_product);
+        
+        
+        var prix = document.createElement("h2");
+        prix.textContent = prixTotal + "€";
+        currentQuantityElement.parentElement.parentElement.lastElementChild.appendChild(prix);
+        
+        prix_stock.splice(index, 1); // Supprimez l'élément de son emplacement actuel
+        prix_stock.splice(index, 0, prixTotal); // Insérez l'élément à l'index désiré (nouvelIndex)
+        //prix_stock.push(prix_stock[index]);
+        calculPrixTotal();
     
         }
       }
@@ -126,6 +159,10 @@ boutonViderPanier.addEventListener("click", function () {
   articlesPanier.forEach(function (article) {
     article.remove();
   });
+  
+    prix_stock = [];
+
+  calculPrixTotal();
 });
 
 
@@ -142,17 +179,20 @@ document.querySelector(".chatgpt").onclick = function () {
         document.querySelector(".assistant").style["display"]="block";
     }
 };
+function calculPrixTotal(){
+    console.log(prix_stock);
+    // Calcul du prix total du panier en additionnant chaque valeur dans le tableau prix_stock converti en entier pour l'addition
+    var prixTotalCalculé = prix_stock.reduce(function (a, b) {
+        return parseInt(a) + parseInt(b);
+    }, 0); 
+    
+    
 
-const openai = new OpenAI({ apiKey: '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' });
+    // Sélectionnez l'élément HTML où vous souhaitez afficher le prix total
+    var totalElement = document.querySelector(".total h1");
 
-async function main() {
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "donne moi l'équation de schrodinger "}],
-    model: "gpt-3.5-turbo",
-   
-  });
-
-  console.log(completion.choices[0]);
+    // Mettez à jour le contenu de l'élément avec le prix total calculé
+    totalElement.textContent = "Total : " + prixTotalCalculé + "€";
 }
 
-main();
+calculPrixTotal();
