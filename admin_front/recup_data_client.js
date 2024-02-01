@@ -6,32 +6,32 @@ document.addEventListener('click', (event)=>{
     suprClientBDD([1,1,1,1,1]);
 })
 
+var clients = affichageClientBDD();
+for (let index = 0; index < stock.length; index++) {
+    const element = stock[index];
+}
+
 function recup_data(n,option,isall){
     var datalist = [];
-    switch (option){
-        case "modif":
-            url = "modif";
-            console.log(option);
-            break;
-        case "suppr":
-            url = "suppr";
-            console.log(option);
-            break;
-        case "save":
-            url = "save";
-            console.log(option);
-            break;
-        default:
-            console.log(option);
-            break;
-    }
-       if(data_pull(datalist,n*1,isall,option)){
+    if(data_pull(datalist,n*1,isall,option)){
         for(let i =0; i < datalist.length; i++){
-
-            requete(url,datalist[i],method);
+            switch (option){
+                case "suppr":
+                    console.log(option);
+                    suprClientBDD(datalist[i]);
+                    break;
+                case "save":
+                    console.log(option);
+                    ajoutClientBDD(datalist[i]);
+                    break;
+                default:
+                    console.log(option);
+                    break;
+            }
         }
     }
 }
+
 
 
 function data_pull(datalist,n,isall,option){
@@ -122,6 +122,11 @@ function data_pull(datalist,n,isall,option){
     return true;
 }
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 function ajoutClientBDD(client){//tableau contenant toutes les infos du client
     fetch('http://127.0.0.1:3000/api/data/ajoutClient', {
     method: 'Post',
@@ -133,6 +138,12 @@ function ajoutClientBDD(client){//tableau contenant toutes les infos du client
     })
     .then(response => response.json())
     .then(console.log("Client ajouté !"))
+<<<<<<< Updated upstream
+    .catch((error) => console.error('Error:', error));
+}
+function suprClientBDD(client){//tableau du client qui sera supprimé
+    fetch('http://127.0.0.1:3000/api/data/suprClient', {
+=======
     .catch((error) => console.error('Error:', error));
 }
 function suprClientBDD(client){//tableau du client qui sera supprimé
@@ -142,6 +153,22 @@ function suprClientBDD(client){//tableau du client qui sera supprimé
     headers: {
         'Content-Type': 'application/json',
     },
+    body: JSON.stringify(client),
+    })
+    .then(response => response.json())
+    .then(console.log("Client supprimé !"))
+    .catch((error) => console.error('Error:', error));
+}
+
+function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
+    fetch('http://127.0.0.1:3000/api/data/afficheClients', {
+>>>>>>> Stashed changes
+    method: 'Post',
+    mode:'cors',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+<<<<<<< Updated upstream
     body: JSON.stringify(client),
     })
     .then(response => response.json())
@@ -158,6 +185,11 @@ function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
     body: JSON.stringify(),
     })
     .then(response => response.json())
+=======
+    body: JSON.stringify(),
+    })
+    .then(response => response.json())
+>>>>>>> Stashed changes
     .then(data => {return data})
     .catch((error) => console.error('Error:', error));
 }

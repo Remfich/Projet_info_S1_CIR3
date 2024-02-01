@@ -3,29 +3,28 @@ var method = "POST";
 //http://ipdatabase:3000/produit/deleteProduit
 //http://ipdatabase:3000/produit/createProduit
 
+var stock = affichageStocksBDD();
+for (let index = 0; index < stock.length; index++) {
+    const element = stock[index];
+}
+
 function recup_data(n,option,isall){
     var datalist = [];
-    switch (option){
-        case "modif":
-            url = "modif";
-            console.log(option);
-            break;
-        case "suppr":
-            url = "suppr";
-            console.log(option);
-            break;
-        case "save":
-            url = "save";
-            console.log(option);
-            break;
-        default:
-            console.log(option);
-            break;
-    }
-       if(data_pull(datalist,n*1,isall,option)){
+    if(data_pull(datalist,n*1,isall,option)){
         for(let i =0; i < datalist.length; i++){
-
-            requete(url,datalist[i],method);
+            switch (option){
+                case "suppr":
+                    console.log(option);
+                    suprStockBDD(datalist[i]);
+                    break;
+                case "save":
+                    console.log(option);
+                    ajoutStockBDD(datalist[i]);
+                    break;
+                default:
+                    console.log(option);
+                    break;
+            }
         }
     }
 }
@@ -120,7 +119,10 @@ function data_pull(datalist,n,isall,option){
 
 
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 function ajoutStockBDD(stock){//tableau contenant toutes les infos du stock
     fetch('http://127.0.0.1:3000/api/data/ajoutStock', {
     method: 'Post',
@@ -132,6 +134,7 @@ function ajoutStockBDD(stock){//tableau contenant toutes les infos du stock
     })
     .then(response => response.json())
     .then(console.log("Stock ajouté !"))
+<<<<<<< Updated upstream
     .catch((error) => console.error('Error:', error));
 }
 function suprStockBDD(stock){//tableau du stock qui sera supprimé
@@ -147,6 +150,35 @@ function suprStockBDD(stock){//tableau du stock qui sera supprimé
     .then(console.log("Stock supprimé !"))
     .catch((error) => console.error('Error:', error));
 }
+function affichageStocksBDD(){//Pour récupérer tous les clients de la BDD
+    fetch('http://127.0.0.1:3000/api/data/afficheStock', {
+    method: 'Post',
+    mode:'cors',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(),
+    })
+    .then(response => response.json())
+    .then(data => {return data})
+=======
+>>>>>>> Stashed changes
+    .catch((error) => console.error('Error:', error));
+}
+function suprStockBDD(stock){//tableau du stock qui sera supprimé
+    fetch('http://127.0.0.1:3000/api/data/suprStock', {
+    method: 'Post',
+    mode:'cors',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(stock),
+    })
+    .then(response => response.json())
+    .then(console.log("Stock supprimé !"))
+    .catch((error) => console.error('Error:', error));
+}
+
 function affichageStocksBDD(){//Pour récupérer tous les clients de la BDD
     fetch('http://127.0.0.1:3000/api/data/afficheStock', {
     method: 'Post',
