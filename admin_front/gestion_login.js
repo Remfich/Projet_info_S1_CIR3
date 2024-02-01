@@ -13,3 +13,8 @@ loginButton.addEventListener("click", (e) => {
         alert("login invalide");
     }
 })
+
+
+function recup_all_login_data(){
+
+}
