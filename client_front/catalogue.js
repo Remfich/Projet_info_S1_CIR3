@@ -1,7 +1,7 @@
 let method = "POST";
 var noms = [];
 var categories = [];
-let url = "http://10.224.2.87:3000/client_back/init";
+let url = "http://10.224.2.92:3000/client_back/init";
 
 let id = 0;
 
@@ -39,15 +39,13 @@ async function returnStock() {
       console.log(resultat);
 
       resultat.forEach(article => {
-        const id = article.i;
+        const id = article.id;
         const nom = article.nom;
         const prix = article.prix;
         const nbStock = article.nbstock;
         const categorie = article.categorie;
 
-        noms.push(nom);
-
-        console.log(noms);
+     
         
         // Utilisez ces valeurs comme vous le souhaitez
         console.log(`ID: ${id}, Nom: ${nom}, Prix: ${prix}, NbStock: ${nbStock}, Categorie: ${categorie}`);
@@ -71,7 +69,7 @@ async function returnStock() {
 
 async function ajoutPanier (id) {
   console.log(id);
-  let url2 = "http://10.224.2.87:3000/client_back/ajoutPanier"
+  let url2 = "http://10.224.2.92:3000/client_back/ajoutPanier"
   const dataraw = {
      nom: noms[id]
   };
@@ -111,7 +109,6 @@ async function ajoutPanier (id) {
 
 
 
-// url = "http://10.224.2.87:3000/api/data";
 var i = 1;
 
 var productsDiv; //variables globales
@@ -242,6 +239,12 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit) {
   priceH4.textContent = prixProduit + "€";
   priceDiv.appendChild(priceH4);
   productDiv.appendChild(priceDiv);
+
+
+  var nom = document.querySelector(".category_product").children[1].children[0].children[2].children[0].innerHTML;
+  console.log("nom : " + nomProduit);
+  noms.push(nomProduit);
+  console.log(noms);
 
 
 
