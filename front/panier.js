@@ -4,12 +4,12 @@
 var i=0
 var Quantité=1;
 
-addArticle("../front_client_catalog/img/coke.png","2","Coca");
-addArticle("../front_client_catalog/img/coke.png","2","Coca");
-addArticle("../front_client_catalog/img/coke.png","2","Coca");
-addArticle("../front_client_catalog/img/coke.png","2","Coca");
-addArticle("../front_client_catalog/img/coke.png","2","Coca");
-addArticle("../front_client_catalog/img/coke.png","2","Coca");
+addArticle("./img/coke.png","2","Coca");
+addArticle("./img/coke.png","2","Coca");
+addArticle("./img/coke.png","2","Coca");
+addArticle("./img/coke.png","2","Coca");
+addArticle("./img/coke.png","2","Coca");
+addArticle("./img/coke.png","2","Coca");
 
 function addArticle(imgProduit,prixProduit,titreProduit){
 
