@@ -171,8 +171,8 @@ a:visited {
     border-radius: 10px;
     padding: 20px;
     margin: 20px;
-    width: 70vw; /* Utilisez vw (viewport width) pour la largeur */
-    height: 70vh; /* Utilisez vh (viewport height) pour la hauteur */
+    width: 55vw; /* Utilisez vw (viewport width) pour la largeur */
+    height: 55vh; /* Utilisez vh (viewport height) pour la hauteur */
     display: flex;
     justify-content: center;
     align-items: center;
