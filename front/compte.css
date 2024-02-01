@@ -54,6 +54,8 @@ header img:hover{
 
 h1 {
   font-family: Verdana, Geneva, sans-serif;
+  font-weight: bold;
+  font-size: 30px;
   margin: 0;
   display: flex;
   justify-content: center;
@@ -211,6 +213,7 @@ h5 {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 
 
 header a{
