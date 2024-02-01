@@ -12,34 +12,31 @@ export class AppController {
   }
   @Post('/afficheClients')
   async receiveData() {
-    const tabClients = await requete('http://127.0.0.1:3000/client/getAllClient',{});
+    const tabClients = await requete(ip_db+':3000/client/getAllClient',{});
     return { data: tabClients };
   }
 
   @Post('/ajoutClient')
   async AjoutClient(@Body() client: any) {
-    await requete('http://127.0.0.1:3000/client/createClient',client);
-    console.log(client, " a bien été ajouté à la BDD.")
+    await requete(ip_db+':3000/client/createClient',client);
   }
 
   @Post('/suprClient')
   async SuprClient(@Body() client: any) {
-    await requete('http://127.0.0.1:3000/client/deleteClient',client);
+    await requete(ip_db+':3000/client/deleteClient',client);
   }
   @Post('/afficheStock')
   async receiveStock(@Body() data: any) {
-    const tabStocks = await requete('http://127.0.0.1:3000/produit/getAllProduit',{});
+    const tabStocks = await requete(ip_db+':3000/produit/getAllProduit',{});
     return { data: tabStocks };
   }
 
   @Post('/ajoutStock')
   async AjoutStock(@Body() stock: any) {
-    await requete('http://127.0.0.1:3000/produit/createProduit',stock);
-    console.log(stock, " a bien été ajouté à la BDD.")
+    await requete(ip_db+':3000/produit/createProduit',stock);
   }
   @Post('/suprStock')
   async SuprStock(@Body() stock: any) {
-    await requete('http://127.0.0.1:3000/produit/deleteProduit',stock);
-    console.log(stock, " va être supprimé.")
+    await requete(ip_db+':3000/produit/deleteProduit',stock);
   }
 }
