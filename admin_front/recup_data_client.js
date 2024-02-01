@@ -1,23 +1,40 @@
-var url = "url";
-var method = "POST";
+var nbrow = 0;
 
-var clients = affichageClientsBDD();
-console.log(clients);
-for (let index = 0; index < clients.length; index++) {
-    const element = clients[index];
-    var table1 = document.getElementById("product-table");
-    var newRow = table1.insertRow(-1);
-    newRow.classList.add("Clients");
-    newRow.id = nbrow;
-    newRow.innerHTML = `
-    <td contenteditable="true">`+element[0]+`</td>
-    <td contenteditable="true">`+element[1]+`</td>
-    <td contenteditable="true">`+element[2]+`</td>
-    <td contenteditable="true">`+element[3]+`</td>
-    <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
-    `;
-    nbrow+=1;
+
+async function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
+    var test;
+    var rep = await fetch('http://127.0.0.1:3000/api/data/afficheClients', {
+    method: 'Post',
+    mode:'cors',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(),
+    })
+    if(rep.ok){
+        var data = await rep.json();
+        var clients = data.data;
+        console.log("clients",clients);
+
+        for (let index = 0; index < clients.length; index++) {
+            const element = clients[index];
+            var table1 = document.getElementById("product-table");
+            var newRow = table1.insertRow(-1);
+            newRow.classList.add("Clients");
+            newRow.id = nbrow;
+            newRow.innerHTML = `
+            <td contenteditable="true">`+element.nom+`</td> 
+            <td contenteditable="true">`+element.prenom+`</td>
+            <td contenteditable="true">`+element.email+`</td>
+            <td contenteditable="true">`+element.mdp+`</td>
+            <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
+            `;
+            nbrow+=1;
+        }
+    }
 }
+
+affichageClientsBDD();
 
 function save(){
     recup_data(nbrow,"save",true);
@@ -188,18 +205,3 @@ function suprClientBDD(client){//tableau du client qui sera supprimé
     .then(console.log("Client supprimé !"))
     .catch((error) => console.error('Error:', error));
 }
-function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
-    fetch('http://127.0.0.1:3000/api/data/afficheClients', {
-    method: 'Post',
-    mode:'cors',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(),
-    })
-    .then(response => response.json())
-    .then(data => {return data.data})
-    .catch((error) => console.error('Error:', error));
-}
-
-affichageClientsBDD()
