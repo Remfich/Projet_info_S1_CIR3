@@ -26,14 +26,16 @@ export class AppController {
   async SuprClient(@Body() client: any) {
     await requete(ip_db+':3000/client/deleteClient',client);
   }
+
   @Post('/afficheStock')
-  async receiveStock(@Body() data: any) {
+  async receiveStock() {
     const tabStocks = await requete(ip_db+':3000/produit/getAllProduit',{});
     return { data: tabStocks };
   }
 
   @Post('/ajoutStock')
   async AjoutStock(@Body() stock: any) {
+    console.log("Ajout Stock",stock);
     await requete(ip_db+':3000/produit/createProduit',stock);
   }
   @Post('/suprStock')
