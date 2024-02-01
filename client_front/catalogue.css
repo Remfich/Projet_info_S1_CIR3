@@ -22,6 +22,29 @@ header {
   height: 75px;
 }
 
+
+header img{
+  width: 40px;
+  height: 40px;
+  transition: transform 0.1s;
+}
+
+
+header img:hover{
+  transform: scale(0.9);
+}
+
+
+
+
+
+.panier{
+  grid-column: 4/5;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 .title {
   grid-column: 1;
   display: flex;
@@ -240,7 +263,8 @@ a:visited {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  transition: transform 0.3s;
+  transition: transform 0.1s;
+  cursor: pointer;
   margin: 10px;
 }
 
@@ -271,10 +295,46 @@ a:visited {
 
 
 
+/* responsive */
+@media only screen and (max-width: 768px) {
+  body {
+      grid-template-columns: 1fr; /* Single column layout for small screens */
+  }
+
+  .barre-lat {
+      display: none; /* Hide the sidebar on small screens */
+  }
+
+  .main-part {
+      width: 100%; /* Make the main part take the full width on small screens */
+      overflow-y: auto;
+  }
+
+  header {
+      grid-template-columns: 1fr; /* Adjust the header to a single column layout */
+  }
+
+  .main {
+      height: auto; /* Adjust the height of the main content area */
+  }
+
+  .products {
+      grid-template-columns: repeat(2, 1fr); /* Adjust the product grid for smaller screens */
+      margin: 15px; /* Add some margin for better spacing on small screens */
+  }
+  .hidden-button {
+    display: flex ;
+  }
+}
 
 
-
-
+.product img,
+.logo img,
+.bouton_scan img,
+.bouton_categ img {
+    max-width: 100%;
+    height: auto;
+}
 
 
 
