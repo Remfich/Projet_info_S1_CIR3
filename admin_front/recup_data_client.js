@@ -158,8 +158,6 @@ function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
     body: JSON.stringify(),
     })
     .then(response => response.json())
-    .then(console.log("Clients affichés !"))
+    .then(data => {return data})
     .catch((error) => console.error('Error:', error));
-
-    return listeClients;
 }

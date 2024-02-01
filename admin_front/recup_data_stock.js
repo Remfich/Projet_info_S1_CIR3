@@ -157,6 +157,6 @@ function affichageStocksBDD(){//Pour récupérer tous les clients de la BDD
     body: JSON.stringify(),
     })
     .then(response => response.json())
-    .then(console.log("Stock affiché !"))
+    .then(data => {return data})
     .catch((error) => console.error('Error:', error));
 }
