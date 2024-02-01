@@ -15,6 +15,11 @@ export class ClientController {
         return this.ClientService.getClientByEmail({email});
     }
 
+    @Post('/getAllClient')
+    async getAllClient() : Promise<Client[]>{
+        return this.ClientService.getAllClient();
+    }
+
     // Créer un client
     @Post('/createClient')
     async creerClient(@Body() createClientDto : ClientDto) : Promise<Client>{

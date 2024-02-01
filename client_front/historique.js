@@ -5,7 +5,8 @@ import {requete,ip_serveur} from '../serveur/src/utilitaire'
                     var container = document.getElementById('facturesContainer');
 
                     // Données d'entrée
-                    var histo = requete(ip_serveur+":3000/client_back/histo",{});
+                    var histo = requete(ip_serveur+":3000/client_back/getHisto",{});
+                    console.log(histo)
 
                     // Parcourir les données et générer les factures
                     for (var i = 0; i < histo.length; i++) {

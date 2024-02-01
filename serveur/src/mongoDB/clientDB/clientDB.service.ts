@@ -12,6 +12,11 @@ export class ClientService {
         return this.ClientModel.findOne(email_client);
     }
 
+    // Retourne tous les clients
+    async getAllClient() : Promise<Client[]>{
+        return this.ClientModel.find({});
+    }
+
     // Créer un client
     async createClient(nom : string, prenom : string, email : string, mdp : string,est_admin : boolean){
         const client = new this.ClientModel({nom,prenom,email,mdp,est_admin});
