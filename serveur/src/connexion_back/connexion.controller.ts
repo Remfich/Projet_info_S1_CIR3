@@ -10,9 +10,10 @@ export class ConnexionBackController{
     // Le format des données info_client est {email:"emailclient",mdp:"mdpclient"}
     @Post('/connexion')
     async connectClient(@Body() info_client : any) : Promise<Client|boolean>{
+        console.log(info_client)
         // Ici on va checker si le client appartient à la DB et s'il est oui ou non un admin
         // On interroge la BD pour avoir le client
-        const client = await requete(ip_db+":3000/client/getClient",info_client.email);
+        const client = await requete(ip_db+":3000/client/getClient",{email : info_client.email});
         if(client==undefined){ // Si on ne trouve pas de client
             return false;
         }
@@ -26,7 +27,7 @@ export class ConnexionBackController{
     @Post("/creation")
     async creationClient(@Body() nouv_client : any) : Promise<boolean|Client>{
         try{
-            const client = await requete(ip_db+":3000/createClient",nouv_client);
+            const client = await requete(ip_db+":3000/client/createClient",nouv_client);
             return client;
         }
         catch(e){

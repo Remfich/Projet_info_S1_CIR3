@@ -11,7 +11,7 @@ export async function requete(url:string,donnees:any) {
       const resultat = await reponse.json();
       return resultat;
     } catch (erreur) {
-      console.error("Erreur :", erreur);
+      return undefined;
     }
   }
 
