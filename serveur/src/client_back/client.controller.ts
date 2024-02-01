@@ -1,7 +1,5 @@
 import { Body, Controller, Post } from "@nestjs/common";
-import { Produit } from "src/mongoDB/produitDB/produitDB.schema";
 import{ip_db, requete} from "../utilitaire"
-import { response } from "express";
 
 
 
@@ -25,7 +23,7 @@ export class ClientBackController {
     console.log(nom_produit);
     // On reçoit le nom d'un produit, on va interroger la DB sur ce produit pour obtenir ses informations
     const reponse = await requete(ip_db+':3000/produit/getProduit',nom_produit);
-    if (reponse.nbstock>=0){
+    if (reponse.nbstock>0){
       // Si on a le produit en stock alors on renvoie le produit à la base de donnée et 
       // on lui demande de diminuer le stock de 1
       reponse.nbstock=reponse.nbstock-1;

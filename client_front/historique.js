@@ -1,13 +1,31 @@
-import {requete,ip_serveur} from '../serveur/src/utilitaire'
+const ip_serveur = "http://10.224.2.87";
+
+async function requete(url,donnees) {
+    try {
+      const data = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(donnees)
+      }
+      const reponse = await fetch(url, data);
+      const resultat = await reponse.json();
+      return resultat;
+    } catch (erreur) {
+      console.error("Erreur :", erreur);
+    }
+  }
+
+
 // Fonction pour générer le corps de la page
-                function genererCorpsDePage() {
+                async function genererCorpsDePage() {
                     // Créer le conteneur principal
                     var container = document.getElementById('facturesContainer');
 
                     // Données d'entrée
-                    var histo = requete(ip_serveur+":3000/client_back/getHisto",{});
-                    console.log(histo)
-
+                    var histo = await requete(ip_serveur+":3000/client_back/getHisto",{email : "star.morte@gmail.com"});
+                    console.log(histo);
                     // Parcourir les données et générer les factures
                     for (var i = 0; i < histo.length; i++) {
                         var facture = genererFacture(i + 1, histo[i]);
