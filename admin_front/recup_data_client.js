@@ -2,6 +2,9 @@ var url = "url";
 var method = "POST";
 //http://ipdatabase:3000/client/deleteClient
 //http://ipdatabase:3000/client/createClient
+document.addEventListener('click', (event)=>{
+    suprClientBDD([1,1,1,1,1]);
+})
 
 function recup_data(n,option,isall){
     var datalist = [];
@@ -119,38 +122,44 @@ function data_pull(datalist,n,isall,option){
     return true;
 }
 
-
-
-function requete(){//url,dataraw,method <= paramètres
-    console.log("test2");
-    var data_;
-    fetch('http://127.0.0.1:3000/api/data', {
+function ajoutClientBDD(client){//tableau contenant toutes les infos du client
+    fetch('http://127.0.0.1:3000/api/data/ajoutClient', {
     method: 'Post',
     mode:'cors',
     headers: {
         'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ message: 'recupDonnees' }),
+    body: JSON.stringify(client),
     })
     .then(response => response.json())
-    .then(data => console.log(data)) // [id,nom,stock,prix]
+    .then(console.log("Client ajouté !"))
     .catch((error) => console.error('Error:', error));
 }
-
-
-
-function requete2(){//url,dataraw,method <= paramètres
-    console.log("test2");
-    var tabData = [1,1,1,1,1];
-    fetch('http://127.0.0.1:3000/api/data', {
+function suprClientBDD(client){//tableau du client qui sera supprimé
+    fetch('http://127.0.0.1:3000/api/data/suprClient', {
     method: 'Post',
     mode:'cors',
     headers: {
         'Content-Type': 'application/json',
     },
-    body: JSON.stringify(tabData),
+    body: JSON.stringify(client),
     })
     .then(response => response.json())
-    .then()
+    .then(console.log("Client supprimé !"))
     .catch((error) => console.error('Error:', error));
+}
+function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
+    fetch('http://127.0.0.1:3000/api/data/afficheClients', {
+    method: 'Post',
+    mode:'cors',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(),
+    })
+    .then(response => response.json())
+    .then(console.log("Clients affichés !"))
+    .catch((error) => console.error('Error:', error));
+
+    return listeClients;
 }
