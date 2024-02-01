@@ -122,11 +122,7 @@ function data_pull(datalist,n,isall,option){
     return true;
 }
 
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> Stashed changes
 function ajoutClientBDD(client){//tableau contenant toutes les infos du client
     fetch('http://127.0.0.1:3000/api/data/ajoutClient', {
     method: 'Post',
@@ -138,12 +134,6 @@ function ajoutClientBDD(client){//tableau contenant toutes les infos du client
     })
     .then(response => response.json())
     .then(console.log("Client ajouté !"))
-<<<<<<< Updated upstream
-    .catch((error) => console.error('Error:', error));
-}
-function suprClientBDD(client){//tableau du client qui sera supprimé
-    fetch('http://127.0.0.1:3000/api/data/suprClient', {
-=======
     .catch((error) => console.error('Error:', error));
 }
 function suprClientBDD(client){//tableau du client qui sera supprimé
@@ -153,22 +143,6 @@ function suprClientBDD(client){//tableau du client qui sera supprimé
     headers: {
         'Content-Type': 'application/json',
     },
-    body: JSON.stringify(client),
-    })
-    .then(response => response.json())
-    .then(console.log("Client supprimé !"))
-    .catch((error) => console.error('Error:', error));
-}
-
-function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
-    fetch('http://127.0.0.1:3000/api/data/afficheClients', {
->>>>>>> Stashed changes
-    method: 'Post',
-    mode:'cors',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-<<<<<<< Updated upstream
     body: JSON.stringify(client),
     })
     .then(response => response.json())
@@ -185,11 +159,6 @@ function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
     body: JSON.stringify(),
     })
     .then(response => response.json())
-=======
-    body: JSON.stringify(),
-    })
-    .then(response => response.json())
->>>>>>> Stashed changes
     .then(data => {return data})
     .catch((error) => console.error('Error:', error));
 }
