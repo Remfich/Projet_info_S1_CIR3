@@ -22,28 +22,27 @@ const ip_front = "http://localhost";
 const loginForm = document.getElementById("login");
 const loginButton = document.getElementById("submit");
 
-loginButton.addEventListener("click", async (e) => {
-    e.preventDefault();
-    const email = loginForm.email.value;
-    const mdp = loginForm.password.value;
-
+async function connexion(){
+    const email = document.getElementById("mail").value;
+    const mdp = document.getElementById("mdp").value;
+    console.log(email,mdp);
     const data = {
         email : email,
         mdp : mdp
     }
     const reponse = await requete(ip_serveur+":3000/connexion_back/connexion",data);
+    console.log(reponse);
     if(reponse==false){
+      console.log(1);
         window.alert("Cet email n'a pas de compte");
     }
     else if (reponse.est_admin){ // Si c'est un admin on ouvre la page des admins
-        window.open(ip_front+":3000/admin_front/adminStock.html","_self");
+      console.log(2);
+        window.open(ip_front+":3001/front/adminStock.html","_self");
     }
-    else{  // Sinon c'est que c'est un 
-        window.open(ip_front+":3000/client_front/catalogue.html","_self");
+    else{  // Sinon c'est que c'est un client
+      console.log(3);
+        window.open(ip_front+":3001/front/catalogue.html","_self");
     }
-});
-
-
-function recup_all_login_data(){
-
+    window.open(ip_front+":3001/front/loginAdmin.html","_self");
 }

@@ -15,20 +15,20 @@
       <!-- Titre -->
       <h1>Connexion</h1>
       <!-- Champs Utilisateur -->
-      <input type="email" name="" placeholder="Votre email" required>
+      <input type="email" name="" placeholder="Votre email" required id="mail">
       <!-- Champs Mot de Passe -->
-      <input type="password" name="" placeholder="Votre Mot De Passe" required>
+      <input type="password" name="" placeholder="Votre Mot De Passe" required id="mdp">
       <!-- Rester connecté -->
       <div class="checkbox">
         <input type="checkbox" id="rester-connecte" name="rester-connecte">
         <label for="rester-connecte">Rester connecté</label>
       </div>
       <!-- Bouton de connexion -->
-      <input type="submit" name="" value="Connexion">
+      <input type="submit" name="" value="Connexion" onclick="connexion()">
       <!-- Lien vers la page d'inscription -->
       <a href="inscriptionAdmin.html" class="inscription-link">Inscription</a>
     </form>
-    <script src="cookieAdmin.js"></script>
+    <!-- <script src="cookieAdmin.js"></script> -->
     <script src="gestion_login.js"></script>
   </body>
 </html>
