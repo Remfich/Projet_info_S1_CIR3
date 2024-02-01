@@ -9,8 +9,9 @@ export class ClientBackController {
   // Requête pour récupérer les articles de la base de données à l'initialisation de la page
   @Post('/init')
   async init_client() : Promise<Object[]>{
+    console.log("Init");
     // On doit demander à la DB la liste des produits pour pouvoir la renvoyer à l'utilisateur
-    const reponse = await requete('http://10.224.2.87:3000/produit/getAllProduit',{});
+    const reponse = await requete(ip_db+':3000/produit/getAllProduit',{});
     for (let i=0;i<reponse.length;i++){
       delete reponse[i]._id;
       delete reponse[i].__v;
@@ -20,7 +21,7 @@ export class ClientBackController {
 
   @Post('/ajoutPanier')
   async ajoutPanier(@Body() nom_produit:object) : Promise<boolean>{
-    console.log(nom_produit);
+    console.log("AjoutPanier : "+nom_produit);
     // On reçoit le nom d'un produit, on va interroger la DB sur ce produit pour obtenir ses informations
     const reponse = await requete(ip_db+':3000/produit/getProduit',nom_produit);
     if (reponse.nbstock>0){
