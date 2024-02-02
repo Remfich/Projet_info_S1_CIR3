@@ -55,6 +55,7 @@ function logout(){
 
 async function envoigpt(){
   // On récupère la liste d'achats pour envoyer à chatgpt une question
+  console.log("On est là");
   data={
     liste:JSON.parse("["+getCookie("panier")+"]")
   };

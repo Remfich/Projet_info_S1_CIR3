@@ -15,7 +15,6 @@ export class AppController {
   async receiveData() : Promise<Client[]>{
     console.log("Demande liste client");
     const tabClients = await requete(ip_db+':3000/client/getAllClient',{});
-    console.log(tabClients);
     return tabClients;
   }
 
