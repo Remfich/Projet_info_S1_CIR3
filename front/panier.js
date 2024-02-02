@@ -1,5 +1,7 @@
 var ip_front = "http://10.224.2.92";
 const ip_serveur = "http://10.224.2.87";
+var prix_stock = [];
+var listeNoms = [];
 
 async function requete(url,donnees) {
   try {
@@ -200,6 +202,7 @@ function createButton(text, index) {
             listeNoms.splice(index, 1);
             var articleASupprimer = bouton.parentElement.parentElement.parentElement;
             articleASupprimer.remove();
+           
             
            
             return; // Arrêtez l'exécution ici pour éviter de mettre à jour la quantité après la suppression
@@ -219,9 +222,11 @@ function createButton(text, index) {
           
           currentQuantityElement.textContent = "Qté : " + currentQuantity;
           if(positif == 1){
-            var prixTotal = prix_stock[index] + (prix_stock[index] / (currentQuantity - 1)); // Calcule le prix total basé sur le prix initial
+            var prixTotal = prix_stock[index-1] + (prix_stock[index] / (currentQuantity - 1)); // Calcule le prix total basé sur le prix initial
+            
             }else{
-            var prixTotal = prix_stock[index] - (prix_stock[index] / (currentQuantity + 1)); // Calcule le prix total basé sur le prix initial
+            var prixTotal = prix_stock[index-1] - (prix_stock[index] / (currentQuantity + 1)); // Calcule le prix total basé sur le prix initial
+            console.log(prixTotal);
             }
           var prixProduitElement = currentQuantityElement.parentElement.nextElementSibling.nextElementSibling;
           var prixProduitElement2 = currentQuantityElement.parentElement.nextElementSibling
@@ -267,6 +272,9 @@ boutonViderPanier.addEventListener("click", function () {
     article.remove();
   });
   
+  // Créer le cookie en écrasant le cookie existant avec la même nom
+  document.cookie = "panier=; max-duration=0; path=/";
+  
     prix_stock = [];
 
   calculPrixTotal();
@@ -289,19 +297,20 @@ document.querySelector(".chatgpt").onclick = function () {
 function calculPrixTotal(){
     //console.log(prix_stock);
     // Calcul du prix total du panier en additionnant chaque valeur dans le tableau prix_stock converti en entier pour l'addition
-    var prixTotalCalculé = prix_stock.reduce(function (a, b) {
-        console.log(a);
-        return parseInt(a) + parseInt(b);
-    }, 0); 
+    var somme = 0;
+    for (var i = 0; i < prix_stock.length; i++) {
+      somme += prix_stock[i];
+    } 
+  
     
-    console.log(prixTotalCalculé);
+    console.log(somme);
     
 
     // Sélectionnez l'élément HTML où vous souhaitez afficher le prix total
     var totalElement = document.querySelector(".total h1");
 
     // Mettez à jour le contenu de l'élément avec le prix total calculé
-    totalElement.textContent = "Total : " + prixTotalCalculé + "€";
+    totalElement.textContent = "Total : " + somme + "€";
 }
 /*
 
