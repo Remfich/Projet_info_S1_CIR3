@@ -1,4 +1,4 @@
-var ip_front = "http://localhost";
+var ip_front = "http://10.224.2.92";
 function isconnectedclient(){
   let user = getCookie("user");
   let admin = getCookie("admin");
@@ -44,8 +44,7 @@ async function requete(url,donnees) {
   }
 }
 
-const ip_serveur = "http://localhost";
-const ip_db = "http://localhost";
+const ip_serveur = "http://10.224.2.87";
 
 isconnectedclient();
 
@@ -91,10 +90,11 @@ async function returnStock() {
         const categorie = article.categorie;
 
         if (!categories.includes(categorie)) {
-          createCategory(categorie, "./img/coke.png");
+          createCategory(categorie, "./img/"+categorie+".png");
           categories.push(categorie);
         }
-        createProduct(nom, prix, categorie, "./img/coke.png", nbStock);
+       
+        createProduct(nom, prix, categorie, "./img/"+id+".png", nbStock);
       });
 
        } else {
@@ -172,23 +172,27 @@ function createCategory(nomCategorie, imgCategory) {
 function mettreDansPanier(nomArticle) {
 
 
- // var panierJSON = getCookie("panier");
- // var panier = [];
-  //alert("panierjson :",panierJSON);
+ var panierJSON = getCookie("panier");
+ var panier = [];
+if(panierJSON != ""){
+// Convertir la chaîne JSON en tableau d'objets
+    panier = JSON.parse(panierJSON);
+}
+else{
+  document.cookie = "panier=, path=/,  max-age=86400";
   
-    // Convertir la chaîne JSON en tableau d'objets
-   // panier = JSON.parse(panierJSON);
-  
+} 
 
   // Ajouter le nom de l'article au panier
- // panier.push({ nom: nomArticle });
+ panier.push({ nom: nomArticle });
 
   // Convertir le tableau mis à jour en une chaîne JSON
-  //var nouveauPanierJSON = JSON.stringify(panier);
-  document.cookie = "admin=true, path=/,  max-age=86400";
-  alert(document.cookie);
+var nouveauPanierJSON = JSON.stringify(panier);
+document.cookie = "panier="+nouveauPanierJSON+", path=/,  max-age=86400";
+//alert("nouveaupanierjson",nouveauPanierJSON);
   // Mettre à jour le cookie "panier" avec le nouveau contenu
-  
+
+
   
   //alert("cookies :",document.cookie);
   
