@@ -1,4 +1,5 @@
 var ip_front = "http://10.224.2.92";
+const ip_serveur = "http://10.224.2.87";
 
 function getCookie(cname) {
   let name = cname + "=";

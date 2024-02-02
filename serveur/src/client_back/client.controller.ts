@@ -24,7 +24,6 @@ export class ClientBackController {
     console.log("Get Produit");
     console.log(nom_produit);
     const reponse = await requete(ip_db+":3000/produit/getProduit",nom_produit);
-    console.log(reponse);
     return reponse.prix;
   }
 
