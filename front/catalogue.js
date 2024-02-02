@@ -172,23 +172,28 @@ function createCategory(nomCategorie, imgCategory) {
 function mettreDansPanier(nomArticle) {
 
 
- var panierJSON = getCookie("panier");
+ var panierJSON = getCookie("panier");//"lecontenudetonputaindecookie"
  var panier = [];
 if(panierJSON != ""){
 // Convertir la chaîne JSON en tableau d'objets
-    panier = JSON.parse(panierJSON);
+  console.log("panierjson",panierJSON);
+   
 }
 else{
-  document.cookie = "panier=, path=/,  max-age=86400";
+  document.cookie = "panier= , path=/ ,  max-age=86400;";
   
 } 
-
+var panierJSON2 = panierJSON.substring(0, panierJSON.length );
+if(panierJSON != ""){
+    var panierJSON3= panierJSON2+","+nomArticle;
+}
+else{
+  var panierJSON3= panierJSON2+nomArticle;
+}
   // Ajouter le nom de l'article au panier
- panier.push({ nom: nomArticle });
 
   // Convertir le tableau mis à jour en une chaîne JSON
-var nouveauPanierJSON = JSON.stringify(panier);
-document.cookie = "panier="+nouveauPanierJSON+", path=/,  max-age=86400";
+document.cookie = "panier="+panierJSON3;
 //alert("nouveaupanierjson",nouveauPanierJSON);
   // Mettre à jour le cookie "panier" avec le nouveau contenu
 
@@ -267,8 +272,15 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit, nbStock
     var buttonId = event.currentTarget.getAttribute("data-id");
     //si le nom n'existe pas dans le panier, on l'ajoute sinon on augmente sa quantité dans le panier
     var nomArticle = noms[buttonId];
-    mettreDansPanier(nomArticle);
-    alert(nomArticle + " ajouté au panier !");
+    //si il y en a en stock
+    if(nbStock>0){
+      mettreDansPanier(nomArticle);
+      alert(nomArticle + " ajouté au panier !");
+      nbStock--;
+      
+    }else{
+      alert("Stock épuisé !");
+    }
     
     
   });
