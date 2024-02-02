@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import{ip_db, requete} from "./utilitaire"
+import { Client } from './mongoDB/clientDB/clientDB.schema';
 
 @Controller('api/data')
 export class AppController {
@@ -11,15 +12,23 @@ export class AppController {
     return this.appService.getHello();
   }
   @Post('/afficheClients')
-  async receiveData() {
+  async receiveData() : Promise<Client[]>{
     const tabClients = await requete(ip_db+':3000/client/getAllClient',{});
     console.log(tabClients);
-    return { data: tabClients };
+    return tabClients;
   }
 
   @Post('/ajoutClient')
   async AjoutClient(@Body() client: any) {
-    await requete(ip_db+':3000/client/createClient',client);
+    // On doit d'abord vérifier que le client existe ou pas dans la DB
+    const verif = await requete(ip_db+":3000/client/getClient",{email : client.email});
+    if(verif==undefined){
+      await requete(ip_db+':3000/client/createClient',client);
+    }
+    else{
+      await requete(ip_db+":3000/client/updateClient",client);
+    }
+    
   }
 
   @Post('/suprClient')
