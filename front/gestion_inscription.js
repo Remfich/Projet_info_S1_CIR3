@@ -1,5 +1,18 @@
-import "../utilitaire";
-import { getCookie } from "../utilitaire";
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+var ip_front = "http://localhost";
 
 checkconnect();
 function checkconnect(){
@@ -9,13 +22,13 @@ function checkconnect(){
   if (user != "") {
     alert("C'est un utilisateur");
     alert(admin);
-    if (admin == true){ // Si c'est un admin on ouvre la page des admins
+    if (admin != ""){ // Si c'est un admin on ouvre la page des admins
       alert("C'est un admin");
-      window.location.href(ip_front+":3001/adminStock.html","_self");
+      window.location.href(ip_front+":3001/adminStock.html");
     }
-    else if (admin !="") {  // Sinon c'est que c'est un client
+    else{  // Sinon c'est que c'est un client
       alert("C'est un client");
-      window.location.href(ip_front+":3001/catalogue.html","_self");
+      window.location.href(ip_front+":3001/catalogue.html");
     }
   }
 }
@@ -39,7 +52,6 @@ async function requete(url,donnees) {
 
 const ip_serveur = "http://localhost";
 const ip_db = "http://localhost";
-const ip_front = "http://localhost";
 
 async function inscription(){
     const email = document.getElementById("email").value;

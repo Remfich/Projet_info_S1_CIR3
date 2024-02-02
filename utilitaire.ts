@@ -19,6 +19,7 @@ export const ip_serveur = "http://localhost";
 export const ip_db = "http://localhost";
 export const ip_front = "";
 
+
 export function getCookie(cname) {
   let name = cname + "=";
   let ca = document.cookie.split(';');
@@ -59,3 +60,8 @@ export function isconnectedclient(){
   }
 }
 
+export function disconnect(){
+  document.cookie = "user=; max-duration = 0; path=/;";
+  document.cookie = "admin=; max-duration = 0; path=/;";
+
+}
