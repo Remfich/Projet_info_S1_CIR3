@@ -15,19 +15,20 @@ async function requete(url,donnees) {
     } catch (erreur) {
       console.error("Erreur :", erreur);
     }
-  }
-  function onScanSuccess(message) {
+}
+/*
+function onScanSuccess(message) {
     alert("Article Scanné");
     var url = ip_serveur +":3000/client_back/ajoutPanier";
     
-    console.log(data);
+    console.log(message);
     try{var data = JSON.parse(message)}
     catch(erreur){
       console.log("erreur",erreur);
     }
     
     requete(url,data);
-}
+}*/
 
 async function logout(){
   document.cookie = "user=; max-duration = 0; path=/;";
@@ -37,5 +38,20 @@ async function logout(){
 }
 
 
-var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
-html5QrcodeScanner.render(onScanSuccess);
+function onScanSuccess(qrCodeMessage) {
+  alert("Article Scanné");
+  var url = ip_serveur +":3000/client_back/ajoutPanier";
+  console.log(qrCodeMessage);
+  var data = JSON.parse(qrCodeMessage);
+  requete(url,data);
+}
+
+function onScanError(errorMessage) {
+  console.log(errorMessage);
+}
+
+
+
+var html5QrcodeScanner = new Html5QrcodeScanner(
+  "reader", { fps: 10, qrbox: 250 });
+html5QrcodeScanner.render(onScanSuccess, onScanError);
