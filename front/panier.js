@@ -33,18 +33,19 @@ var prix_stock = [];
 var listeNoms = [];
 
 
-addArticle("./img/coke.png", "2", "Coca", 1);
-addArticle("./img/coke.png", "2", "Coca", 2);
-addArticle("./img/coke.png", "2", "Coca", 1);
-addArticle("./img/coke.png", "2", "Coca", 2);
-addArticle("./img/coke.png", "2", "Coca", 1);
-addArticle("./img/coke.png", "2", "Coca", 2);
+addArticle("2", "Coca", 1);
+addArticle("2", "Coca", 2);
+addArticle("2", "Coca", 1);
+addArticle("2", "Coca", 2);
+addArticle("2", "Coca", 1);
+addArticle("2", "Coca", 2);
 
 
 
 
 
-function addArticle(imgProduit, prixProduit, titreProduit, Quantite) {
+function addArticle(prixProduit, titreProduit, Quantite) {
+  var imgProduit = "./img/"+titreProduit+".png";
   var article = document.createElement("div");
   article.className = "Produit";
   document.querySelector(".articles").appendChild(article);
