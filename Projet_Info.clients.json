@@ -1,0 +1,33 @@
+[{
+  "_id": {
+    "$oid": "65bca0e83bbdfa3d3977fbba"
+  },
+  "nom": "Le Vendeur ",
+  "prenom": "Francis",
+  "email": "adminj@gmail.com",
+  "mdp": "Fv59",
+  "est_admin": 1,
+  "histo": []
+},
+{
+  "_id": {
+    "$oid": "65bca0e83bbdfa3d3977fbbb"
+  },
+  "nom": "Papeghin",
+  "prenom": "Olivier",
+  "email": "olivier@gmail.com",
+  "mdp": "test123",
+  "est_admin": 0,
+  "histo": []
+},
+{
+  "_id": {
+    "$oid": "65bca0e83bbdfa3d3977fbbc"
+  },
+  "nom": "Buriez",
+  "prenom": "Auguste",
+  "email": "auguste@gmail.com",
+  "mdp": "test456",
+  "est_admin": 0,
+  "histo": []
+}]
