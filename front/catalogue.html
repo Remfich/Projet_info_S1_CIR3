@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="catalogue.css">
-    
+</head>
 
 <body>
     <!-- barre latérale à gauche de la page -->
@@ -14,43 +14,52 @@
         <!-- affichage du logo du site-->
         <!-- <div class="logo">
         </div> -->
+        <div class="logo">
+            <img src="./img/logo.png" alt="">
+        </div>
         <div class="menucat">
             <img src="./img/croix.png" alt="">
         </div>
         <!-- partie qui affiche les catégories de produits -->
         <div class="categorizes">
-            <a href="../CodesQr/Qrcode_Reader.html">
-                <div class="bouton_scan">
-                    <img src="./img/analyse-du-code-qr.png" alt="">
-                    <h2>Scan Articles</h2>
-                </div>
-            </a>
+
             <!-- affichage des catégories -->
         </div>
     </div>
     <!-- partie principale de la page (partie à droite) -->
     <div class="main-part">
+
         <!-- header avec un fond blanc comprenant titre, profil -->
         <header>
             <div class="menu">
                 <img src="./img/menu.png" alt="">
             </div>
             <h1>Nos produits</h1>
+            <a href="../CodesQr/Qrcode_Reader.html">
+                <div class="bouton_scan">
+                    <img src="./img/analyse-du-code-qr.png" alt="">
+                    <h2>Scan</h2>
+                </div>
+            </a>
             <div class="panier">
-                <img src="./img/utilisateur-de-profil.png" alt="">
                 <a href="./panier.html">
                     <img src="./img/paniers.png" alt="">
                 </a>
+                <a href="historique.html">
+                    <img src="../front/img/impot.png" alt="">
+                </a>
+                <a href="./compte.html">
+                    <img src="./img/utilisateur-de-profil.png" alt="">
+                </a>
 
-            </div>
 
 
         </header>
         <!-- partie qui scroll -->
         <div class="main">
 
-        <!-- affichage des produits -->
-                
+            <!-- affichage des produits -->
+
         </div>
     </div>
     <script src="./catalogue.js"></script>
