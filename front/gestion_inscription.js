@@ -69,15 +69,15 @@ async function inscription(){
         window.alert("Cette adresse email est déjà prise.");
     }
     else{
-        document.cookie = "user=" +data.email+", path=/, max-age=86400";
+        document.cookie = "user=" +data.email+" ; path=/ ; max-age=86400 ;";
         // Code pour les cookies ici
         if (reponse.est_admin){ // Si c'est un admin on ouvre la page des admins
           window.location.replace(ip_front+":3001/adminStock.html");
-            document.cookie = "admin=true, path=/,  max-age=86400";
+            document.cookie = "admin=true ; path=/ ;  max-age=86400 ;";
         }
         else{  // Sinon c'est que c'est un client
           window.location.replace(ip_front+":3001/catalogue.html");
-            document.cookie = "admin= , path=/,  max-age=0";
+            document.cookie = "admin= ; path=/ ;  max-age=0 ;";
         }
     }
 }
