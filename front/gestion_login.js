@@ -38,6 +38,7 @@ checkconnect();
 function checkconnect(){
     var user = getCookie("user");
     var admin = getCookie("admin");
+    alert()
     if (user != "") {
       if(admin != ""){ // Si c'est un admin on ouvre la page des admins
         alert("C'est un admin");
@@ -71,6 +72,7 @@ async function connexion(){
     }
     else{  // Sinon c'est que c'est un client
       document.cookie = "user=" +data.email+", path=/, max-age=86400";
+      document.cookie = "admin=, path=/,  max-age=0";
       window.location.replace(ip_front+":3001/catalogue.html");
     }
 }

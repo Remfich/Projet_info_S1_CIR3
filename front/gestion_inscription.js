@@ -15,22 +15,21 @@ function getCookie(cname) {
 var ip_front = "http://10.224.2.92";
 
 checkconnect();
+
 function checkconnect(){
-  alert(document.cookie);
-  var user = getCookie("user");
-  var admin = getCookie("admin");
-  if (user != "") {
-    alert("C'est un utilisateur");
-    alert(admin);
-    if (admin != ""){ // Si c'est un admin on ouvre la page des admins
-      alert("C'est un admin");
-      window.location.href(ip_front+":3001/adminStock.html");
+    var user = getCookie("user");
+    var admin = getCookie("admin");
+    alert()
+    if (user != "") {
+      if(admin != ""){ // Si c'est un admin on ouvre la page des admins
+        alert("C'est un admin");
+        window.location.replace(ip_front+":3001/adminStock.html");
+      }
+      else {  // Sinon c'est que c'est un client
+        alert("C'est un client");
+        window.location.replace(ip_front+":3001/catalogue.html");
+      }
     }
-    else{  // Sinon c'est que c'est un client
-      alert("C'est un client");
-      window.location.href(ip_front+":3001/catalogue.html");
-    }
-  }
 }
 
 async function requete(url,donnees) {
@@ -74,12 +73,12 @@ async function inscription(){
         document.cookie = "user=" +data.email+", path=/, max-age=86400";
         // Code pour les cookies ici
         if (reponse.est_admin){ // Si c'est un admin on ouvre la page des admins
-          window.location.href(ip_front+":3001/adminStock.html","_self");
+          window.location.replace(ip_front+":3001/adminStock.html");
             document.cookie = "admin=true, path=/,  max-age=86400";
         }
         else{  // Sinon c'est que c'est un client
-          window.location.href(ip_front+":3001/catalogue.html","_self");
-            document.cookie = "admin=false , path=/,  max-age=86400";
+          window.location.replace(ip_front+":3001/catalogue.html");
+            document.cookie = "admin= , path=/,  max-age=0";
         }
     }
 }
