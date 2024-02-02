@@ -38,14 +38,13 @@ checkconnect();
 function checkconnect(){
     var user = getCookie("user");
     var admin = getCookie("admin");
-    alert()
     if (user != "") {
       if(admin != ""){ // Si c'est un admin on ouvre la page des admins
-        alert("C'est un admin");
+        alert("Bonjour admin " +user);
         window.location.replace(ip_front+":3001/adminStock.html");
       }
       else {  // Sinon c'est que c'est un client
-        alert("C'est un client");
+        alert("Bienvenue client "+user);
         window.location.replace(ip_front+":3001/catalogue.html");
       }
     }

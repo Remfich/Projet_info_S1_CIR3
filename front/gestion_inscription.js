@@ -19,7 +19,6 @@ checkconnect();
 function checkconnect(){
     var user = getCookie("user");
     var admin = getCookie("admin");
-    alert()
     if (user != "") {
       if(admin != ""){ // Si c'est un admin on ouvre la page des admins
         alert("C'est un admin");
