@@ -109,8 +109,8 @@ h2 {
 }
 
 .bouton_scan{
-  width: 90%;
-  height: 80px;
+  width: 70%;
+  height: 60px;
   background-color: #f5cb5c;
   border-radius: 20px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -118,15 +118,28 @@ h2 {
   justify-content: space-evenly;
   align-items: center;
   transition: transform 0.3s;
+  
 }
 
 
 .bouton_scan:hover{
   transform: scale(0.90);
+  cursor: pointer;
 }
 
 .bouton_scan img{
   width: 30px;
+  height: 30px;
+}
+
+header a{
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-column: 3;
 }
 
 .categorizes a{
