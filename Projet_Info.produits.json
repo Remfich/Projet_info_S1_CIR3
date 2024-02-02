@@ -1,0 +1,135 @@
+[{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbab"
+  },
+  "nom": "Fanta Orange ",
+  "prix": 1,
+  "nbstock": 666,
+  "categorie": "Boissons"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbac"
+  },
+  "nom": "Chips Lays - Barbecue",
+  "prix": 3.99,
+  "nbstock": 400,
+  "categorie": "Snacks"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbad"
+  },
+  "nom": "CocaCola ",
+  "prix": 1.98,
+  "nbstock": 0,
+  "categorie": "Boissons"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbae"
+  },
+  "nom": "Pringles - Nature ",
+  "prix": 3.5,
+  "nbstock": 2,
+  "categorie": "Snacks"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbaf"
+  },
+  "nom": "Scoubidou Lutti",
+  "prix": 2.67,
+  "nbstock": 102,
+  "categorie": "Sucreries"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbb0"
+  },
+  "nom": "Petits Poids Carottes Bonduelle",
+  "prix": 4.98,
+  "nbstock": 231,
+  "categorie": "Conserves"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbb1"
+  },
+  "nom": "Lentilles - Auchan",
+  "prix": 4.15,
+  "nbstock": 59,
+  "categorie": "Conserves"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbb2"
+  },
+  "nom": "Pépito Pocket LU",
+  "prix": 1.99,
+  "nbstock": 83,
+  "categorie": "Biscuits"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbb3"
+  },
+  "nom": "Mikado LU",
+  "prix": 1.19,
+  "nbstock": 21,
+  "categorie": "Biscuits"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbb4"
+  },
+  "nom": "Fraises Tagada Harribo",
+  "prix": 3.78,
+  "nbstock": 123,
+  "categorie": "Sucreries"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbb5"
+  },
+  "nom": "TUC Original LU",
+  "prix": 2.85,
+  "nbstock": 193,
+  "categorie": "Snacks"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbb6"
+  },
+  "nom": "Eau Evian",
+  "prix": 1.35,
+  "nbstock": 293,
+  "categorie": "Boissons"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbb7"
+  },
+  "nom": "Kinder Bueno",
+  "prix": 2.75,
+  "nbstock": 121,
+  "categorie": "Biscuits"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbb8"
+  },
+  "nom": "Couscous Royal - Garbit",
+  "prix": 4.79,
+  "nbstock": 76,
+  "categorie": "Conserves"
+},
+{
+  "_id": {
+    "$oid": "65bc9ee83bbdfa3d3977fbb9"
+  },
+  "nom": "Les Schtroumpfs Harribo",
+  "prix": 3.38,
+  "nbstock": 32,
+  "categorie": "Sucreries"
+}]
