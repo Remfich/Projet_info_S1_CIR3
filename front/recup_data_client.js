@@ -1,8 +1,41 @@
-import "../utilitaire";
-import { isconnectedadmin } from "../utilitaire";
-isconnectedadmin();
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+var ip_front="http://localhost";
+  
+function isconnectedadmin(){
+    let user = getCookie("user");
+    let admin = getCookie("admin");
+    if(user != "" && admin != ""){
+      //c'est bon
+    }
+    else{    
+        alert("Accès refusé, vous n'êtes pas connecté en tant qu'admin");
+        window.location.replace(ip_front+":3001/catalogue.html");
+    }
+}
 
+isconnectedadmin();
 var nbrow = 0;
+
+function logout(){
+    document.cookie = "user=; max-duration = 0; path=/;";
+    document.cookie = "admin=; max-duration = 0; path=/;";
+    alert(document.cookie);
+    document.location.replace(ip_front +":3001/loginAdmin.html")
+}
+
 async function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
     var test;
     var rep = await fetch('http://127.0.0.1:3000/api/data/afficheClients', {
