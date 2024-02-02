@@ -27,6 +27,7 @@ function isconnectedadmin(){
 }
 
 isconnectedadmin();
+
 async function requete(url,donnees) {
     try {
       const data = {
@@ -43,6 +44,15 @@ async function requete(url,donnees) {
       return undefined;
     }
   }
+  
+function logout(){
+    document.cookie = "user=; max-duration = 0; path=/;";
+    document.cookie = "admin=; max-duration = 0; path=/;";
+    alert(document.cookie);
+    document.location.replace(ip_front +":3001/loginAdmin.html")
+}
+
+
 
 const ip_serveur = "http://localhost";
 const ip_db = "http://localhost";
