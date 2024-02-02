@@ -65,13 +65,13 @@ async function connexion(){
       window.alert("Cet email n'a pas de compte");
     }
     else if (reponse.est_admin){ // Si c'est un admin on ouvre la page des admins
-      document.cookie = "user=" +data.email+", path=/, max-age=86400";
+      document.cookie = "user=" +data.email+" ; path=/ ; max-age=86400 ;";
       window.location.replace(ip_front+":3001/adminStock.html");
-      document.cookie = "admin=true, path=/,  max-age=86400";
+      document.cookie = "admin=true ; path=/ ;  max-age=86400 ;";
     }
     else{  // Sinon c'est que c'est un client
-      document.cookie = "user=" +data.email+", path=/, max-age=86400";
-      document.cookie = "admin=, path=/,  max-age=0";
+      document.cookie = "user=" +data.email+" ; path=/ ; max-age=86400 ;";
+      document.cookie = "admin= ; path=/ ;  max-age=0 ;";
       window.location.replace(ip_front+":3001/catalogue.html");
     }
 }
