@@ -42,16 +42,12 @@ function onScanSuccess(qrCodeMessage) {
   alert("Article Scanné");
   var url = ip_serveur +":3000/client_back/ajoutPanier";
   console.log(qrCodeMessage);
-  var data = JSON.parse(qrCodeMessage);
+  var data = qrCodeMessage;
   requete(url,data);
-}
-
-function onScanError(errorMessage) {
-  console.log(errorMessage);
 }
 
 
 
 var html5QrcodeScanner = new Html5QrcodeScanner(
   "reader", { fps: 10, qrbox: 250 });
-html5QrcodeScanner.render(onScanSuccess, onScanError);
+html5QrcodeScanner.render(onScanSuccess);
