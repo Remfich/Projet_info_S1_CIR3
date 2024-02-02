@@ -36,7 +36,14 @@ export class AppController {
   @Post('/ajoutStock')
   async AjoutStock(@Body() stock: any) {
     console.log("Ajout Stock",stock);
-    await requete(ip_db+':3000/produit/createProduit',stock);
+    // On doit regarder si le produit existe déjà ou non
+    const existe = await requete(ip_db+":3000/produit/getProduit",{id : stock.id});
+    if (existe!=undefined){ // Si l'ip est déjà attribué
+      await requete(ip_db+":3000/produit/updateProduit",stock);
+    }
+    else{
+      await requete(ip_db+':3000/produit/createProduit',stock);
+    }
   }
   @Post('/suprStock')
   async SuprStock(@Body() stock: any) {

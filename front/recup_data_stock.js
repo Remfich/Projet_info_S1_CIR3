@@ -57,7 +57,7 @@ const ip_db = "http://localhost";
 
 
 var nbrow = 0;
-async function affichageStocksBDD(){//Pour récupérer tous les clients de la BDD
+async function affichageStocksBDD(){//Pour récupérer tous les produits de la BDD
     const reponse= await requete(ip_serveur+':3000/api/data/afficheStock',{})
     var stock = reponse.data;
     console.log("Stocks chargés");
@@ -69,11 +69,12 @@ async function affichageStocksBDD(){//Pour récupérer tous les clients de la BD
         newRow.classList.add("Produits");
         newRow.id = nbrow;
         newRow.innerHTML = `
-        <td contenteditable="true">`+element.id+`</td> 
+        <td contenteditable="false">`+element.id+`</td> 
         <td contenteditable="true">`+element.nom+`</td>
         <td contenteditable="true">`+element.nbstock+`</td>
         <td contenteditable="true">`+element.prix+`</td>
-        <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
+        <td contenteditable="true">`+element.categorie+`</td>
+        <td><button class="btn btn-danger" onclick="supprimerProduit(this,`+nbrow+`)">Supprimer</button></td>
         `;
         nbrow+=1;
     }
@@ -84,6 +85,7 @@ affichageStocksBDD();
 function save(){
     recup_data(nbrow,"save",true);
  }
+
 function supprimerProduit(button,n) {
     recup_data(n,"suppr",false);
     var row = button.parentNode.parentNode;
@@ -97,6 +99,7 @@ function ajouterProduit() {
     newRow.classList.add("Produits");
     newRow.id = nbrow;
     newRow.innerHTML = `
+    <td contenteditable="true"></td>
     <td contenteditable="true"></td>
     <td contenteditable="true"></td>
     <td contenteditable="true"></td>
@@ -140,34 +143,45 @@ function data_pull(datalist,n,isall,option){
                 let nom_produit = data.childNodes[x + 2].textContent;
                 let nombre = data.childNodes[x + 4].textContent;
                 let prix = data.childNodes[x + 6].textContent;
+                let categorie = data.childNodes[x+8].textContent;
     
                 //let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1, action : option};
-                let donnees = [id*1,nom_produit,prix*1,nombre*1,option];
+                let donnees = [id*1,nom_produit,prix*1,nombre*1,categorie,option];
                 datalist.push(donnees);
     
-                if(option == !"suppr"){
-                    if(id == "" ){
-                        alert("Erreur : ID invalide");
-                        console.log("alerte id");
-                        return false;
-                    }
-                    else if(nom_produit == ""){
-                        alert("Erreur : Nom Produit invalide");
-                        console.log("alerte nom");
-                        return false;
-                    }
-                    else if(nombre == ""){
-                        alert("Erreur : Quantité invalide");
-                        console.log("alerte nombre");
-                        return false;
-                    }
-                    else if(prix == ""){
-                        alert("Erreur : Prix invalide");
-                        console.log("alerte prix");
+                if(id == "" ){
+                    alert("Erreur : ID invalide");
+                    console.log("alerte id");
+                    return false;
+                }
+                else if(nom_produit == ""){
+                    alert("Erreur : Nom Produit invalide");
+                    console.log("alerte nom");
+                    return false;
+                }
+                else if(nombre == ""){
+                    alert("Erreur : Quantité invalide");
+                    console.log("alerte nombre");
+                    return false;
+                }
+                else if(prix == ""){
+                    alert("Erreur : Prix invalide");
+                    console.log("alerte prix");
+                    return false;
+                }
+                else if(categorie = ""){
+                    alert("Erreur : Catégorie invalide");
+                    console.log("alerte catégorie");
+                    return false;
+                }
+                // On regarde si l'id n'est pas déjà pris
+                for(let i = 0;i<datalist.length-1;i++){
+                    if (id==datalist[i][0]){
+                        alert("Erreur : Il y a une redondance d'Id");
                         return false;
                     }
                 }
-                if(option == "suppr" && id == "" && nom_produit == "" && nombre == "" && prix == ""){
+                if(option == "suppr" && id == "" && nom_produit == "" && nombre == "" && prix == "" && categorie==""){
                     return false;
                 } 
             } catch (error) {
@@ -186,37 +200,41 @@ function data_pull(datalist,n,isall,option){
         let nom_produit = data.childNodes[x + 2].textContent;
         let nombre = data.childNodes[x + 4].textContent;
         let prix = data.childNodes[x + 6].textContent;
+        let categorie = data.childNodes[x+8].textContent;
 
         //let donnees = {id : id*1, nom : nom_produit, prix : prix*1, nbstock : nombre*1, action : option};
-        let donnees = [id*1,nom_produit,prix*1,nombre*1,option];
+        let donnees = [id*1,nom_produit,prix*1,nombre*1,categorie,option];
         datalist.push(donnees);
 
-        if(option == !"suppr"){
-            if(id == "" ){
-                alert("Erreur : ID invalide");
-                console.log("alerte id");
-                return false;
-            }
-            else if(nom_produit == ""){
-                alert("Erreur : Nom Produit invalide");
-                console.log("alerte nom");
-                return false;
-            }
-            else if(nombre == ""){
-                alert("Erreur : Quantité invalide");
-                console.log("alerte nombre");
-                return false;
-            }
-            else if(prix == ""){
-                alert("Erreur : Prix invalide");
-                console.log("alerte prix");
-                return false;
-            }
-        }
-        if(option == "suppr" && id == "" && nom_produit == "" && nombre == "" && prix == ""){
+        if(id == "" ){
+            alert("Erreur : ID invalide");
+            console.log("alerte id");
             return false;
         }
-    console.log(datalist);
+        else if(nom_produit == ""){
+            alert("Erreur : Nom Produit invalide");
+            console.log("alerte nom");
+            return false;
+        }
+        else if(nombre == ""){
+            alert("Erreur : Quantité invalide");
+            console.log("alerte nombre");
+            return false;
+        }
+        else if(prix == ""){
+            alert("Erreur : Prix invalide");
+            console.log("alerte prix");
+            return false;
+        }
+        else if(categorie == ""){
+            alert("Erreur : Catégorie invalide");
+            console.log("alerte ctegorie");
+            return false;
+        }
+        
+        if(option == "suppr" && id == "" && nom_produit == "" && nombre == "" && prix == "" && categorie == ""){
+            return false;
+        }
     return true;
     }
 }
@@ -227,20 +245,19 @@ async function ajoutStockBDD(stock){//tableau contenant toutes les infos du stoc
         id : stock[0],
         nom : stock[1],
         prix : stock[2],
-        nbstock : stock[3]
+        nbstock : stock[3],
+        categorie : stock[4]
     }
    await requete(ip_serveur+':3000/api/data/ajoutStock',data)
+   open(ip_front+":3001/adminStock.html");
 }
-function suprStockBDD(stock){//tableau du stock qui sera supprimé
-    fetch('http://127.0.0.1:3000/api/data/suprStock', {
-    method: 'Post',
-    mode:'cors',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(stock),
-    })
-    .then(response => response.json())
-    .then(console.log("Stock supprimé !"))
-    .catch((error) => console.error('Error:', error));
+async function suprStockBDD(stock){//tableau du stock qui sera supprimé
+    data={
+        id : stock[0],
+        nom : stock[1],
+        prix : stock[2],
+        nbstock : stock[3],
+        categorie : stock[4]
+    }
+    await requete(ip_serveur+":3000/api/data/suprStock",data);
 }
