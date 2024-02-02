@@ -1,7 +1,7 @@
 statsProduits();
 async function statsProduits(){//Pour récupérer tous les clients de la BDD
     console.log("balala");
-    var rep = await fetch('http://127.0.0.1:3000/api/data/statsVentes', {
+    var rep = await fetch('http://10.224.2.87:3000/api/data/statsVentes', {
     method: 'Post',
     mode:'cors',
     headers: {

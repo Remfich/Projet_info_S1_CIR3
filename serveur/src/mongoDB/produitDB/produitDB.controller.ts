@@ -24,6 +24,7 @@ export class ProduitController{
     // Obtenir la liste complète des produits
     @Post('/getAllProduit')
     async getAllProduit() : Promise<Produit[]>{
+        console.log("GetAll");
         return this.ProduitService.getAllProduit();
     }
 

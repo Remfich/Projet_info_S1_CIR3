@@ -61,6 +61,7 @@ export class AppController {
   @Post('/statsVentes')
   async stats() {
     const clients = await requete(ip_db+':3000/client/getAllClient',{});
+    
     const produits = await requete(ip_db+':3000/produit/getAllProduit',{});
 
     var tabVentes = {};

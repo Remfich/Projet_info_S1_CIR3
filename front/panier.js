@@ -26,6 +26,13 @@ function getCookie(cname) {
 }
 isconnectedclient();
 
+async function envoigpt(){
+  // On récupère la liste d'achats pour envoyer à chatgpt une question
+  data={};
+
+  const reponse = requete(ip_serveur+":3000/gpt",data);
+  alert(reponse);
+}
 
 // test//
 var i = 0;

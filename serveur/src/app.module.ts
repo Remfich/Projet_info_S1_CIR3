@@ -6,10 +6,11 @@ import { ClientModule } from './mongoDB/clientDB/clientDB.module';
 import { ProduitModule } from './mongoDB/produitDB/produitDB.module';
 import { ClientBackModule } from './client_back/client.module';
 import { ConnexionBackModule } from './connexion_back/connexion.module';
+import { ChatGPTModule } from './chatGPT/chatGPT.module';
 
 @Module({
   imports: [MongooseModule.forRoot('mongodb://localhost/Projet_Info'),
-    ClientModule,ProduitModule,ClientBackModule,ConnexionBackModule],
+    ClientModule,ProduitModule,ClientBackModule,ConnexionBackModule,ChatGPTModule],
   controllers: [AppController],
   providers: [AppService],
 })
