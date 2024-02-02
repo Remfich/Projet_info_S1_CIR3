@@ -1,4 +1,4 @@
-var ip_front = "http://localhost";
+var ip_front = "http://10.224.2.92";
 function isconnectedclient(){
   let user = getCookie("user");
   let admin = getCookie("admin");

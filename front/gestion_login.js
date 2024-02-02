@@ -29,7 +29,8 @@ async function requete(url,donnees) {
         return undefined;
     }
 }
-var ip_front = "http://localhost";
+var ip_front = "http://10.224.2.92";
+const ip_serveur = "http://10.224.2.87";
 
 document.cookie = "user=nom, path=/, max-age=86400";
 document.cookie = "admin=true, path=/,  max-age=86400";
@@ -52,9 +53,6 @@ function checkconnect(){
 }
 
 
-
-const ip_serveur = "http://localhost";
-const ip_db = "http://localhost";
 
 
 async function connexion(){

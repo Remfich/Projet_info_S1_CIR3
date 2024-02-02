@@ -61,7 +61,7 @@ body {
   border-color: #f5cb5c;
 }
 
-.box input[type="submit"] {
+.box input[type="button"] {
   border: 0;
   background: none;
   display: block;

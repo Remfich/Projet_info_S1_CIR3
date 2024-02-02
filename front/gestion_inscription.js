@@ -12,7 +12,7 @@ function getCookie(cname) {
   }
   return "";
 }
-var ip_front = "http://localhost";
+var ip_front = "http://10.224.2.92";
 
 checkconnect();
 function checkconnect(){
