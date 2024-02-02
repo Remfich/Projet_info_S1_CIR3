@@ -1,4 +1,20 @@
-var ip_front = "http://localhost";
+var ip_front = "http://10.224.2.92";
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
 function isconnectedclient(){
   let user = getCookie("user");
   let admin = getCookie("admin");
@@ -28,8 +44,10 @@ isconnectedclient();
 
 async function envoigpt(){
   // On récupère la liste d'achats pour envoyer à chatgpt une question
-  data={};
-
+  data={
+    liste:JSON.parse("["+getCookie("panier")+"]")
+  };
+  console.log(data);
   const reponse = requete(ip_serveur+":3000/gpt",data);
   alert(reponse);
 }

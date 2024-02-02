@@ -12,7 +12,8 @@ function getCookie(cname) {
     }
     return "";
 }
-var ip_front="http://localhost";
+var ip_front="http://10.224.2.92";
+var ip_serveur = "http://10.224.87";
   
 function isconnectedadmin(){
     let user = getCookie("user");
@@ -72,9 +73,6 @@ async function requete(url,donnees) {
       return undefined;
     }
   }
-
-var ip_serveur = "http://localhost";
-var ip_db = "http://localhost";
 
 var nbrow = 0;
 

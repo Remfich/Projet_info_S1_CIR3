@@ -12,7 +12,8 @@ function getCookie(cname) {
     }
     return "";
 }
-var ip_front="http://localhost";
+var ip_front="http://10.224.2.92";
+const ip_serveur = "http://10.224.2.87";
   
 function isconnectedadmin(){
     let user = getCookie("user");
@@ -52,10 +53,6 @@ function logout(){
     document.location.replace(ip_front +":3001/loginAdmin.html")
 }
 
-
-
-const ip_serveur = "http://localhost";
-const ip_db = "http://localhost";
 
 
 var nbrow = 0;

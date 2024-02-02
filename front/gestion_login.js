@@ -32,8 +32,6 @@ async function requete(url,donnees) {
 var ip_front = "http://10.224.2.92";
 const ip_serveur = "http://10.224.2.87";
 
-document.cookie = "user=nom, path=/, max-age=86400";
-document.cookie = "admin=true, path=/,  max-age=86400";
 
 checkconnect();
 
