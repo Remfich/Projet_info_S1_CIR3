@@ -31,12 +31,12 @@ async function requete(url,donnees) {
 }
 var ip_front = "http://localhost";
 
-console.log(document.cookie);
+document.cookie = "user=nom, path=/, max-age=86400";
+document.cookie = "admin=true, path=/,  max-age=86400";
 
 checkconnect();
 
 function checkconnect(){
-    alert(document.cookie);
     var user = getCookie("user");
     var admin = getCookie("admin");
     if (user != "") {

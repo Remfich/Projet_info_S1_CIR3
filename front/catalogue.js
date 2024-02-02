@@ -46,7 +46,7 @@ async function requete(url,donnees) {
 
 const ip_serveur = "http://localhost";
 const ip_db = "http://localhost";
-const ip_front = "http://localhost";
+
 isconnectedclient();
 
 let url = ip_serveur + ":3000/api/data";
