@@ -18,6 +18,12 @@ export class ClientBackController {
     return reponse;
   }
 
+  @Post('/getProduit')
+  async getClient(@Body() nom_produit : any){
+    const reponse = await requete(ip_db+":3000/produit/getProduit",nom_produit);
+    return reponse.prix;
+  }
+
   @Post('/ajoutPanier')
   async ajoutPanier(@Body() nom_produit:object) : Promise<boolean>{
     console.log(nom_produit);
