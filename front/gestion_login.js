@@ -1,6 +1,3 @@
-import "../utilitaire";
-import { getCookie } from "../utilitaire";
-
 async function requete(url,donnees) {
     try {
       const data = {
@@ -38,6 +35,20 @@ async function requete(url,donnees) {
     }
   }
 
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
 
 const ip_serveur = "http://localhost";
 const ip_db = "http://localhost";
