@@ -9,7 +9,6 @@ export class ClientBackController {
   // Requête pour récupérer les articles de la base de données à l'initialisation de la page
   @Post('/init')
   async init_client() : Promise<Object[]>{
-    console.log("Init");
     // On doit demander à la DB la liste des produits pour pouvoir la renvoyer à l'utilisateur
     const reponse = await requete(ip_db+':3000/produit/getAllProduit',{});
     for (let i=0;i<reponse.length;i++){
