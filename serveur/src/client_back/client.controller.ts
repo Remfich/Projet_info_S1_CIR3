@@ -20,7 +20,7 @@ export class ClientBackController {
 
   @Post('/ajoutPanier')
   async ajoutPanier(@Body() nom_produit:object) : Promise<boolean>{
-    console.log("AjoutPanier : "+nom_produit);
+    console.log(nom_produit);
     // On reçoit le nom d'un produit, on va interroger la DB sur ce produit pour obtenir ses informations
     const reponse = await requete(ip_db+':3000/produit/getProduit',nom_produit);
     if (reponse.nbstock>0){
