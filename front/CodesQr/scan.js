@@ -29,5 +29,13 @@ async function requete(url,donnees) {
     requete(url,data);
 }
 
+async function logout(){
+  document.cookie = "user=; max-duration = 0; path=/;";
+  document.cookie = "admin=; max-duration = 0; path=/;";
+  await new Promise(r => setTimeout(r, 1000));
+  document.location.replace(ip_front +":3001/loginAdmin.html")
+}
+
+
 var html5QrcodeScanner = new Html5QrcodeScanner("reader", { fps: 10, qrbox: 250 });
 html5QrcodeScanner.render(onScanSuccess);
