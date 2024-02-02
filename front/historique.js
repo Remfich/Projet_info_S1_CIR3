@@ -24,6 +24,12 @@ function getCookie(cname) {
   }
   return "";
 }
+function logout(){
+  document.cookie = "user=; max-duration = 0; path=/;";
+  document.cookie = "admin=; max-duration = 0; path=/;";
+  document.location.replace(ip_front +":3001/loginAdmin.html")
+}
+
 isconnectedclient();
 
 const ip_serveur = "http://10.224.2.87";
