@@ -105,6 +105,20 @@ async function returnStock() {
   }
 };
 
+async function retireStock(nomProduct) {
+  try {
+    const resultat = await requete(ip_serveur+":3000/client_back/ajoutPanier",{nom:nomProduct});
+    if (resultat!=undefined) {
+      console.log('Modif Stock');
+
+
+       } else {
+      console.error('Erreur maj stock', response.statusText);
+    }
+  } catch (error) {
+    console.error('Erreur lors de la requête :', error);
+  }
+};
 
 
 
@@ -274,10 +288,12 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit, nbStock
     var nomArticle = noms[buttonId];
     //si il y en a en stock
     if(nbStock>0){
+      retireStock(nomArticle);
       mettreDansPanier(nomArticle);
       alert(nomArticle + " ajouté au panier !");
       nbStock--;
-      
+      titleH5.textContent = "Stock :" + nbStock;
+
     }else{
       alert("Stock épuisé !");
     }
