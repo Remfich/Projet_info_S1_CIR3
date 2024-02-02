@@ -1,10 +1,12 @@
 statsProduits();
 
-function logout(){
+async function logout(){
     document.cookie = "user=; max-duration = 0; path=/;";
     document.cookie = "admin=; max-duration = 0; path=/;";
+    await new Promise(r => setTimeout(r, 1000));
     document.location.replace(ip_front +":3001/loginAdmin.html")
 }
+
 async function statsProduits(){//Pour récupérer tous les clients de la BDD
     console.log("balala");
     var rep = await fetch('http://10.224.2.87:3000/api/data/statsVentes', {
