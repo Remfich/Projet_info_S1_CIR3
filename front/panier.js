@@ -1,11 +1,11 @@
-import "../utilitaire";
-import { isconnectedclient } from "../utilitaire";
-isconnectedclient();
+
 
 
 // test//
 var i = 0;
 var prix_stock = [];
+var listeNoms = [];
+
 
 addArticle("./img/coke.png", "2", "Coca", 1);
 addArticle("./img/coke.png", "2", "Coca", 2);
@@ -34,6 +34,7 @@ function addArticle(imgProduit, prixProduit, titreProduit, Quantite) {
   var titleProduit = document.createElement("div");
   titleProduit.className = "title_produit";
   textProduit.appendChild(titleProduit);
+  listeNoms.push(titreProduit);
 
   var titre = document.createElement("h2");
   titre.textContent = titreProduit;
@@ -83,8 +84,6 @@ function createButton(text, index) {
       if (currentQuantityElement) {
         var currentQuantityText = currentQuantityElement.textContent;
         var currentQuantity = parseInt(currentQuantityText.substring(6)); // Extrait la quantité du texte
-        console.log(currentQuantity);
-        console.log(currentQuantityText);
         if (!isNaN(currentQuantity)) { // Vérification pour éviter NaN
           if (text === "+") {
             positif = 1;
@@ -96,6 +95,7 @@ function createButton(text, index) {
             prix_stock.splice(index, 1);
             prix_stock.splice(index, 0, 0); // Insérez l'élément à l'index désiré (nouvelIndex)
             calculPrixTotal();
+            listeNoms.splice(index, 1);
             var articleASupprimer = bouton.parentElement.parentElement.parentElement;
             articleASupprimer.remove();
             
@@ -105,6 +105,8 @@ function createButton(text, index) {
             prix_stock.splice(index, 1);
             prix_stock.splice(index, 0, 0); // Insérez l'élément à l'index désiré (nouvelIndex)
             calculPrixTotal();
+
+            listeNoms.splice(index, 1);
             // Supprimer l'article parent du bouton "x"
             var articleASupprimer = bouton.parentElement.parentElement.parentElement;
             articleASupprimer.remove();
@@ -197,5 +199,26 @@ function calculPrixTotal(){
     // Mettez à jour le contenu de l'élément avec le prix total calculé
     totalElement.textContent = "Total : " + prixTotalCalculé + "€";
 }
+/*
+
+document.querySelector(".chatgpt").onclick = function () {
+    // Effectuez une requête POST vers la route /chat du serveur avec le tableau de noms
+    fetch("http://192.168.1.40:3000/serveur/client_back/chat", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ noms: listeNoms })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Traitez la réponse de votre fonction chatWithGPT ici
+        console.log(data.message); // C'est la réponse de GPT-3.5 Turbo
+    })
+    .catch(error => {
+        console.error(error);
+    });
+};*/
+
 
 calculPrixTotal();
