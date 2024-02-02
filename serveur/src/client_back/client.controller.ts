@@ -9,6 +9,7 @@ export class ClientBackController {
   // Requête pour récupérer les articles de la base de données à l'initialisation de la page
   @Post('/init')
   async init_client() : Promise<Object[]>{
+    console.log("Init");
     // On doit demander à la DB la liste des produits pour pouvoir la renvoyer à l'utilisateur
     const reponse = await requete(ip_db+':3000/produit/getAllProduit',{});
     for (let i=0;i<reponse.length;i++){
@@ -20,12 +21,16 @@ export class ClientBackController {
 
   @Post('/getProduit')
   async getClient(@Body() nom_produit : any){
+    console.log("Get Produit");
+    console.log(nom_produit);
     const reponse = await requete(ip_db+":3000/produit/getProduit",nom_produit);
+    console.log(reponse);
     return reponse.prix;
   }
 
   @Post('/ajoutPanier')
   async ajoutPanier(@Body() nom_produit:object) : Promise<boolean>{
+    console.log("Ajout Panier : ");
     console.log(nom_produit);
     // On reçoit le nom d'un produit, on va interroger la DB sur ce produit pour obtenir ses informations
     const reponse = await requete(ip_db+':3000/produit/getProduit',nom_produit);
@@ -70,6 +75,8 @@ export class ClientBackController {
   // {email:"emailduclient",commande:[{nom:"nomProdui1",prix:prixProduit1,quantite:quantiteProduit1},...]}
   @Post('/achatPanier')
   async achatPanier(@Body() panier:any) : Promise<boolean>{
+    console.log("Achat Panier");
+    console.log(panier);
     try{
     // Ici on va "transvaser" le contenu du panier dans l'historique du client
     // Commençons par identifier le client
@@ -87,6 +94,8 @@ export class ClientBackController {
 
   @Post('/getHisto')
   async getHisto(@Body() email_client : any) : Promise<Object[][]>{
+    console.log("Get Historique");
+    console.log(email_client);
     // On va récupérer le client et renvoyer son historique
     const client = await requete(ip_db+":3000/client/getClient",{email : email_client.email});
     return client.histo;

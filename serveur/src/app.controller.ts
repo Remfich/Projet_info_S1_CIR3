@@ -13,6 +13,7 @@ export class AppController {
   }
   @Post('/afficheClients')
   async receiveData() : Promise<Client[]>{
+    console.log("Demande liste client");
     const tabClients = await requete(ip_db+':3000/client/getAllClient',{});
     console.log(tabClients);
     return tabClients;
@@ -33,18 +34,20 @@ export class AppController {
 
   @Post('/suprClient')
   async SuprClient(@Body() client: any) {
+    console.log("Suppression Client");
     await requete(ip_db+':3000/client/deleteClient',client);
   }
 
   @Post('/afficheStock')
   async receiveStock() {
+    console.log("Demande stock complet");
     const tabStocks = await requete(ip_db+':3000/produit/getAllProduit',{});
     return { data: tabStocks };
   }
 
   @Post('/ajoutStock')
   async AjoutStock(@Body() stock: any) {
-    console.log("Ajout Stock",stock);
+    console.log("Ajout Stock");
     // On doit regarder si le produit existe déjà ou non
     const existe = await requete(ip_db+":3000/produit/getProduit",{id : stock.id});
     if (existe!=undefined){ // Si l'ip est déjà attribué
