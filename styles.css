@@ -1,0 +1,70 @@
+body {
+  padding-top: 20px;
+  background-color: #242423;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  
+}
+.navbar-brand img {
+  width: 170px; /* Ajustez la taille du logo selon vos besoins */
+  height: auto;
+  margin-right: 10px; /* Espace entre le logo et le texte */
+}
+
+.navbar {
+  background-color: #F5CB5C;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+h2 {
+  color: white;
+}
+
+.table {
+  margin-top: 20px;
+  background-color: #CFDBD5;
+}
+
+@media (max-width: 576px) {
+  .navbar-nav {
+    flex-direction: column;
+  }
+  .navbar-nav .nav-item {
+    margin-bottom: 10px;
+  }
+  
+  .container {
+    margin-left: 0;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .save-button {
+    float: right;
+    margin-top: 10px;
+  }
+ 
+  .edit-mode {
+    background-color: white;
+  }
+}
+.logo-container {
+  flex-shrink: 0; /* Empêche le logo de réduire la largeur de la barre de navigation */
+  margin-right: 10px; /* Espace entre le logo et les autres éléments de la barre de navigation */
+}
+
+.logo {
+  max-width: 10%; /* Garantit que le logo ne dépasse pas la taille du conteneur */
+  height: auto;
+}
+/* Styles spécifiques pour la page "Gestion des Ventes" */
+body.gestion-ventes {
+  background-color: #CFDBD5; /* Remplacez "NouvelleCouleur" par la couleur de fond que vous souhaitez */
+  /* Autres styles spécifiques à cette page */
+}
