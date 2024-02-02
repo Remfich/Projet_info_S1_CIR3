@@ -47,11 +47,14 @@ function isconnectedclient(){
 }
 
 isconnectedclient();
-function logout(){
+
+async function logout(){
   document.cookie = "user=; max-duration = 0; path=/;";
   document.cookie = "admin=; max-duration = 0; path=/;";
+  await new Promise(r => setTimeout(r, 1000));
   document.location.replace(ip_front +":3001/loginAdmin.html")
 }
+
 
 async function envoigpt(){
   // On récupère la liste d'achats pour envoyer à chatgpt une question
@@ -71,6 +74,8 @@ async function returnPrix(nomProduite) {
       console.log('Stock chargé avec succès');
       
       console.log(resultat);
+      //met le resultat dans le tableau prix stock
+
       addArticle(resultat, nomProduite, 1);
 
         
@@ -285,9 +290,11 @@ function calculPrixTotal(){
     //console.log(prix_stock);
     // Calcul du prix total du panier en additionnant chaque valeur dans le tableau prix_stock converti en entier pour l'addition
     var prixTotalCalculé = prix_stock.reduce(function (a, b) {
+        console.log(a);
         return parseInt(a) + parseInt(b);
     }, 0); 
     
+    console.log(prixTotalCalculé);
     
 
     // Sélectionnez l'élément HTML où vous souhaitez afficher le prix total
@@ -319,3 +326,4 @@ document.querySelector(".chatgpt").onclick = function () {
 
 
 calculPrixTotal();
+console.log(prix_stock);
