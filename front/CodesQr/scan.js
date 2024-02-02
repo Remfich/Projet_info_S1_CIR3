@@ -19,8 +19,13 @@ async function requete(url,donnees) {
   function onScanSuccess(message) {
     alert("Article Scanné");
     var url = ip_serveur +":3000/client_back/ajoutPanier";
-    var data = JSON.parse(message);
-    console.log(typeof(data));
+    
+    console.log(data);
+    try{var data = JSON.parse(message)}
+    catch(erreur){
+      console.log("erreur",erreur);
+    }
+    
     requete(url,data);
 }
 
