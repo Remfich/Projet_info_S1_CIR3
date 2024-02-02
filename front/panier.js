@@ -1,19 +1,27 @@
-var ip_front = "http://10.224.2.92";
+var ip_front = "http://localhost";
+var i = 0;
+var prix_stock = [];
+var listeNoms = [];
 
-function getCookie(cname) {
-  let name = cname + "=";
-  let ca = document.cookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
+
+async function requete(url,donnees) {
+  try {
+    const data = {
+      method: "POST",
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(donnees)
     }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
+    const reponse = await fetch(url, data);
+    const resultat = await reponse.json();
+    return resultat;
+  } catch (erreur) {
+    return undefined;
   }
-  return "";
 }
+
 
 function isconnectedclient(){
   let user = getCookie("user");
@@ -42,29 +50,85 @@ function getCookie(cname) {
 }
 isconnectedclient();
 
-async function envoigpt(){
-  // On récupère la liste d'achats pour envoyer à chatgpt une question
-  data={
-    liste:JSON.parse("["+getCookie("panier")+"]")
-  };
-  console.log(data);
-  const reponse = requete(ip_serveur+":3000/gpt",data);
-  alert(reponse);
+
+
+
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }
 
-// test//
-var i = 0;
-var prix_stock = [];
-var listeNoms = [];
+const ip_serveur = "http://10.224.2.87";
 
 
+
+async function returnPrix(nomProduite) {
+  try {
+    const resultat = await requete(ip_serveur+":3000/client_back/getProduit",{nom : nomProduite});
+    if (resultat!=undefined) {
+      console.log('Stock chargé avec succès');
+      
+      console.log(resultat);
+      addArticle(resultat, nomProduite, 1);
+
+        
+      
+     /* var panierCookie = getCookie("panier");
+        if (panierCookie !== "") {
+          var panier = JSON.parse(panierCookie);
+          for (var i = 0; i < panier.length; i++) {
+            var article = panier[i];
+            addArticle(prix, titre, quantitation);
+        }
+      }*/
+
+       } else {
+      console.error('Erreur lors du chargement du stock', response.statusText);
+    }
+  } catch (error) {
+    console.error('Erreur lors de la requête :', error);
+  }
+};
+
+//fais moi une boucle qui va lire le cookie panier et qui va faire la fonction addArticle pour chaque article dans le panier
+
+
+/*
 addArticle("2", "Coca", 1);
 addArticle("2", "Coca", 2);
 addArticle("2", "Coca", 1);
 addArticle("2", "Coca", 2);
 addArticle("2", "Coca", 1);
 addArticle("2", "Coca", 2);
+*/
 
+//returnPrix("CocaCola");
+
+//lecture du cookie 
+var panierCookie = getCookie("panier");
+// Divisez la chaîne en un tableau en utilisant la virgule comme délimiteur
+var tableauProduits = panierCookie.split(',');
+
+// Supprimez les espaces inutiles autour de chaque élément
+tableauProduits = tableauProduits.map(function(produit) {
+  return produit.trim();
+});
+console.log(tableauProduits);
+for(var i = 0; i < tableauProduits.length; i++){
+  console.log(tableauProduits[i]);
+  returnPrix(tableauProduits[i]);
+}
 
 
 
@@ -237,7 +301,7 @@ document.querySelector(".chatgpt").onclick = function () {
     }
 };
 function calculPrixTotal(){
-    console.log(prix_stock);
+    //console.log(prix_stock);
     // Calcul du prix total du panier en additionnant chaque valeur dans le tableau prix_stock converti en entier pour l'addition
     var prixTotalCalculé = prix_stock.reduce(function (a, b) {
         return parseInt(a) + parseInt(b);
