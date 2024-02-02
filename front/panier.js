@@ -1,8 +1,5 @@
-var ip_front = "http://localhost";
-var i = 0;
-var prix_stock = [];
-var listeNoms = [];
-
+var ip_front = "http://10.224.2.92";
+const ip_serveur = "http://10.224.2.87";
 
 async function requete(url,donnees) {
   try {
@@ -22,6 +19,20 @@ async function requete(url,donnees) {
   }
 }
 
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
 
 function isconnectedclient(){
   let user = getCookie("user");
@@ -34,20 +45,7 @@ function isconnectedclient(){
     window.open(ip_front+":3001/loginAdmin.html","_self");
   }
 }
-function getCookie(cname) {
-  let name = cname + "=";
-  let ca = document.cookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
-}
+
 isconnectedclient();
 function logout(){
   document.cookie = "user=; max-duration = 0; path=/;";
@@ -55,28 +53,15 @@ function logout(){
   document.location.replace(ip_front +":3001/loginAdmin.html")
 }
 
-
-
-
-
-function getCookie(cname) {
-  let name = cname + "=";
-  let ca = document.cookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
+async function envoigpt(){
+  // On récupère la liste d'achats pour envoyer à chatgpt une question
+  data={
+    liste:JSON.parse("["+getCookie("panier")+"]")
+  };
+  console.log(data);
+  const reponse = requete(ip_serveur+":3000/gpt",data);
+  alert(reponse);
 }
-
-const ip_serveur = "http://10.224.2.87";
-
-
 
 async function returnPrix(nomProduite) {
   try {
@@ -111,16 +96,6 @@ async function returnPrix(nomProduite) {
 //fais moi une boucle qui va lire le cookie panier et qui va faire la fonction addArticle pour chaque article dans le panier
 
 
-/*
-addArticle("2", "Coca", 1);
-addArticle("2", "Coca", 2);
-addArticle("2", "Coca", 1);
-addArticle("2", "Coca", 2);
-addArticle("2", "Coca", 1);
-addArticle("2", "Coca", 2);
-*/
-
-//returnPrix("CocaCola");
 
 //lecture du cookie 
 var panierCookie = getCookie("panier");
