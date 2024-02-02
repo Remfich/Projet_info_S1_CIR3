@@ -1,4 +1,4 @@
-const ctx = document.getElementById('myChart');
+const ctx = document.getElementById('myChart').getContext('2d')
 
 var tabVentes = [12, 19, 3, 5, 2, 3];
 var tabNomProduits = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
@@ -15,9 +15,12 @@ data: {
 },
 options: {
     scales: {
-    y: {
-        beginAtZero: true
-    }
-    }
+        y: {
+            beginAtZero: true
+        }
+    },
+    responsive: true, // Permet au graphique de s'adapter à la taille de la fenêtre
+    maintainAspectRatio: false // Empêche le graphique de maintenir un aspect ratio fixe
 }
+
 });

@@ -43,3 +43,8 @@ h2 {
     background-color: white;
   }
 }
+/* Styles spécifiques pour la page "Gestion des Ventes" */
+body.gestion-ventes {
+  background-color: #CFDBD5; /* Remplacez "NouvelleCouleur" par la couleur de fond que vous souhaitez */
+  /* Autres styles spécifiques à cette page */
+}
