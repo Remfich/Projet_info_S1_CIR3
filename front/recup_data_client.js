@@ -13,7 +13,7 @@ function getCookie(cname) {
     return "";
 }
 var ip_front="http://10.224.2.92";
-var ip_serveur = "http://10.224.87";
+var ip_serveur = "http://10.224.2.87";
   
 function isconnectedadmin(){
     let user = getCookie("user");
@@ -41,7 +41,6 @@ function getCookie(cname) {
     }
     return "";
 }
-var ip_front="http://localhost";
   
 function isconnectedadmin(){
     let user = getCookie("user");
@@ -79,7 +78,6 @@ var nbrow = 0;
 function logout(){
     document.cookie = "user=; max-duration = 0; path=/;";
     document.cookie = "admin=; max-duration = 0; path=/;";
-    alert(document.cookie);
     document.location.replace(ip_front +":3001/loginAdmin.html")
 }
 

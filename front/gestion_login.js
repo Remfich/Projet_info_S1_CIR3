@@ -26,7 +26,7 @@ async function requete(url,donnees) {
       const resultat = await reponse.json();
       return resultat;
     } catch (erreur) {
-        return undefined;
+        return erreur;
     }
 }
 var ip_front = "http://10.224.2.92";

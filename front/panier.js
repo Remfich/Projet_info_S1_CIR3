@@ -49,6 +49,11 @@ function getCookie(cname) {
   return "";
 }
 isconnectedclient();
+function logout(){
+  document.cookie = "user=; max-duration = 0; path=/;";
+  document.cookie = "admin=; max-duration = 0; path=/;";
+  document.location.replace(ip_front +":3001/loginAdmin.html")
+}
 
 
 

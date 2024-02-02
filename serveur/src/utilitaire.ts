@@ -16,4 +16,4 @@ export async function requete(url:string,donnees:any) {
   }
 
 export const ip_serveur = "http://10.224.2.87";
-export const ip_db = "http://10.224.2.97";
+export const ip_db = "http://10.224.2.87";
