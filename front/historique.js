@@ -56,9 +56,9 @@ async function requete(url,donnees) {
                 async function genererCorpsDePage() {
                     // Créer le conteneur principal
                     var container = document.getElementById('facturesContainer');
-
+                    let user = getCookie("user");
                     // Données d'entrée
-                    var histo = await requete(ip_serveur+":3000/client_back/getHisto",{email : "star.morte@gmail.com"});
+                    var histo = await requete(ip_serveur+":3000/client_back/getHisto",{email : user});
                     console.log(histo);
                     // Parcourir les données et générer les factures
                     for (var i = 0; i < histo.length; i++) {
