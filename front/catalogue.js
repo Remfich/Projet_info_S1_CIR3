@@ -43,12 +43,13 @@ async function requete(url,donnees) {
     return undefined;
   }
 }
+
 const ip_serveur = "http://localhost";
 const ip_db = "http://localhost";
+const ip_front = "http://localhost";
+isconnectedclient();
 
-
-
-let url = "http://127.0.0.1:3000/api/data";
+let url = ip_serveur + ":3000/api/data";
 let method = "POST";
 var noms = [];
 var categories = [];
@@ -60,14 +61,16 @@ let id = 0;
 
 
 // Fonction pour récupérer la valeur d'un cookie en fonction de son nom
-function getCookie(cookieName) {
-  var name = cookieName + "=";
-  var decodedCookie = decodeURIComponent(document.cookie);
-  var cookieArray = decodedCookie.split(';');
-  for (var i = 0; i < cookieArray.length; i++) {
-    var cookie = cookieArray[i].trim();
-    if (cookie.indexOf(name) === 0) {
-      return cookie.substring(name.length, cookie.length);
+function getCookie(cname) {
+  let name = cname + "=";
+  let ca = document.cookie.split(';');
+  for(let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
     }
   }
   return "";
@@ -91,7 +94,7 @@ async function returnStock() {
           createCategory(categorie, "./img/coke.png");
           categories.push(categorie);
         }
-        createProduct(nom, prix, categorie, "./img/coke.png");
+        createProduct(nom, prix, categorie, "./img/coke.png", nbStock);
       });
 
        } else {
@@ -104,32 +107,6 @@ async function returnStock() {
 
 
 
-
-async function ajoutPanier (id) {
-  const dataraw = {
-     nom: noms[id]
-  };
-  try {
-    const resultat = await requete(ip_serveur+":3000/client_back/ajoutPanier",dataraw);
-    console.log(resultat);
-    if (resultat) {
-      console.log("Article ajouté avec succès !");
-      console.log(noms[id - 1]);
-      mettreDansPanier(noms[id - 1]);
-     
-
-    } else {
-      console.error(
-        "Erreur lors de l'ajout de l'article",
-      );
-    
-    }
-  } catch (error) {
-    console.error("Erreur lors de la requête :", error);
-    
-  }
-
-};
 
 
 
@@ -193,23 +170,27 @@ function createCategory(nomCategorie, imgCategory) {
 // CREATION DES COOKIES////////////////////////////////////////////////////////////////////
 // Fonction pour créer ou mettre à jour le cookie "panier"
 function mettreDansPanier(nomArticle) {
-  // Lire le cookie "panier"
-  var panierJSON = getCookie("panier");
-  var panier = [];
 
-  if (panierJSON) {
+
+ // var panierJSON = getCookie("panier");
+ // var panier = [];
+  //alert("panierjson :",panierJSON);
+  
     // Convertir la chaîne JSON en tableau d'objets
-    panier = JSON.parse(panierJSON);
-  }
+   // panier = JSON.parse(panierJSON);
+  
 
   // Ajouter le nom de l'article au panier
-  panier.push({ nom: nomArticle });
+ // panier.push({ nom: nomArticle });
 
   // Convertir le tableau mis à jour en une chaîne JSON
-  var nouveauPanierJSON = JSON.stringify(panier);
-
+  //var nouveauPanierJSON = JSON.stringify(panier);
+  document.cookie = "admin=true, path=/,  max-age=86400";
+  alert(document.cookie);
   // Mettre à jour le cookie "panier" avec le nouveau contenu
-  document.cookie = "panier=" + nouveauPanierJSON;
+  
+  
+  //alert("cookies :",document.cookie);
   
 }
 
@@ -219,7 +200,7 @@ function mettreDansPanier(nomArticle) {
 
 // CREATION DES PRODUITS////////////////////////////////////////////////////////////////////
 
-function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit) {
+function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit, nbStock) {
   var productDiv = document.createElement("div");
 
   productDiv.className = "product";
@@ -248,13 +229,17 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit) {
   imageDiv.appendChild(image);
   productDiv.appendChild(imageDiv);
 
-  // Création de la div avec la classe "title_produit" et les titres à l'intérieur
-  var titleDiv = document.createElement("div");
-  titleDiv.className = "title_produit";
-  var titleH4 = document.createElement("h4");
-  titleH4.textContent = nomProduit;
-  titleDiv.appendChild(titleH4);
-  productDiv.appendChild(titleDiv);
+   // Création de la div avec la classe "title_produit" et les titres à l'intérieur
+   var titleDiv = document.createElement("div");
+   titleDiv.className = "title_produit";
+   var titleH4 = document.createElement("h4");
+   var titleH5 = document.createElement("h5");
+   titleH4.textContent = nomProduit;
+  
+   titleDiv.appendChild(titleH4);
+   titleH5.textContent = "Stock :" + nbStock;
+   titleDiv.appendChild(titleH5);
+   productDiv.appendChild(titleDiv);
 
   // Création de la div avec la classe "prix_produit" et le prix à l'intérieur
   var priceDiv = document.createElement("div");
@@ -275,8 +260,11 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit) {
   noms.push(nomProduit);
 
   button.addEventListener("click", function(event) {
-    var buttonId = event.currentTarget.getAttribute("data-id");   
-    ajoutPanier(buttonId);
+    var buttonId = event.currentTarget.getAttribute("data-id");
+    //si le nom n'existe pas dans le panier, on l'ajoute sinon on augmente sa quantité dans le panier
+    var nomArticle = noms[buttonId];
+    mettreDansPanier(nomArticle);
+    alert(nomArticle + " ajouté au panier !");
     
     
   });
@@ -284,6 +272,17 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit) {
   id++;
   
 }
+
+
+document.querySelector(".menu").onclick = function(){
+  document.querySelector(".barre-lat").style["display"]="block";
+  document.querySelector(".main-part").style["display"]="none";
+};
+
+document.querySelector(".menucat").onclick = function(){
+  document.querySelector(".barre-lat").style["display"]="none";
+  document.querySelector(".main-part").style["display"]="block";
+};
 
 returnStock();
 

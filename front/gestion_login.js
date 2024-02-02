@@ -52,6 +52,7 @@ function checkconnect(){
 }
 
 
+
 const ip_serveur = "http://localhost";
 const ip_db = "http://localhost";
 

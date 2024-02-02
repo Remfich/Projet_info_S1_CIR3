@@ -52,6 +52,8 @@ function logout(){
     document.location.replace(ip_front +":3001/loginAdmin.html")
 }
 
+
+
 const ip_serveur = "http://localhost";
 const ip_db = "http://localhost";
 

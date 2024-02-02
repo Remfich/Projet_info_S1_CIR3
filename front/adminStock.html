@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <script src="./recup_data_stock.js"></script>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <a class="navbar-brand">Nom de l'entreprise</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,6 +22,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" href="adminClient.html">Gestion des Clients</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="adminVente.html">Gestion des Ventes</a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
@@ -43,11 +47,10 @@
           <table class="table table-striped" id="product-table">
             <thead>
               <tr>
-                <th contenteditable="false">ID du produit</th>
+                <th>ID du produit</th>
                 <th>Nom du produit</th>
-                <th>Nombre en stock</th>
-                <th>Prix</th>
-                <th>Catégorie</th>
+                <th contenteditable="false">Nombre en stock</th>
+                <th contenteditable="false">Prix</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -64,6 +67,5 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-  <script src="./recup_data_stock.js"></script>
 </body>
 </html>

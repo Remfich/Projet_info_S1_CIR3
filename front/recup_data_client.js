@@ -26,7 +26,56 @@ function isconnectedadmin(){
     }
 }
 
+function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+}
+var ip_front="http://localhost";
+  
+function isconnectedadmin(){
+    let user = getCookie("user");
+    let admin = getCookie("admin");
+    if(user != "" && admin != ""){
+      //c'est bon
+    }
+    else{    
+        alert("Accès refusé, vous n'êtes pas connecté en tant qu'admin");
+        window.location.replace(ip_front+":3001/catalogue.html");
+    }
+}
+
 isconnectedadmin();
+
+async function requete(url,donnees) {
+    try {
+      const data = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(donnees)
+      }
+      const reponse = await fetch(url, data);
+      const resultat = await reponse.json();
+      return resultat;
+    } catch (erreur) {
+      return undefined;
+    }
+  }
+
+var ip_serveur = "http://localhost";
+var ip_db = "http://localhost";
+
 var nbrow = 0;
 
 function logout(){
@@ -37,35 +86,21 @@ function logout(){
 }
 
 async function affichageClientsBDD(){//Pour récupérer tous les clients de la BDD
-    var test;
-    var rep = await fetch('http://127.0.0.1:3000/api/data/afficheClients', {
-    method: 'Post',
-    mode:'cors',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(),
-    })
-    if(rep.ok){
-        var data = await rep.json();
-        var clients = data.data;
-        console.log("clients",clients);
-
-        for (let index = 0; index < clients.length; index++) {
-            const element = clients[index];
-            var table1 = document.getElementById("product-table");
-            var newRow = table1.insertRow(-1);
-            newRow.classList.add("Clients");
-            newRow.id = nbrow;
-            newRow.innerHTML = `
-            <td contenteditable="true">`+element.nom+`</td> 
-            <td contenteditable="true">`+element.prenom+`</td>
-            <td contenteditable="true">`+element.email+`</td>
-            <td contenteditable="true">`+element.mdp+`</td>
-            <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
-            `;
-            nbrow+=1;
-        }
+    var clients = await requete(ip_serveur+":3000/api/data/afficheClients",{});
+    for (let index = 0; index < clients.length; index++) {
+        const element = clients[index];
+        var table1 = document.getElementById("product-table");
+        var newRow = table1.insertRow(-1);
+        newRow.classList.add("Clients");
+        newRow.id = nbrow;
+        newRow.innerHTML = `
+        <td contenteditable="true">`+element.prenom+`</td> 
+        <td contenteditable="true">`+element.nom+`</td>
+        <td contenteditable="false">`+element.email+`</td>
+        <td contenteditable="true">`+element.mdp+`</td>
+        <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
+        `;
+        nbrow+=1;
     }
 }
 
@@ -136,27 +171,25 @@ function data_pull(datalist,n,isall,option){
 
             datalist.push(donnees);
 
-            if(option == !"suppr"){
-                if(prenom == "" ){
-                    alert("Erreur : prenom invalide");
-                    console.log("alerte prenom");
-                    return false;
-                }
-                else if(nom == ""){
-                    alert("Erreur : Nom invalide");
-                    console.log("alerte nom");
-                    return false;
-                }
-                else if(mail == ""){
-                    alert("Erreur : mail invalide");
-                    console.log("alerte mail");
-                    return false;
-                }
-                else if(mdp == ""){
-                    alert("Erreur : Mot de passe invalide");
-                    console.log("alerte mdp");
-                    return false;
-                }
+            if(prenom == "" ){
+                alert("Erreur : prenom invalide");
+                console.log("alerte prenom");
+                return false;
+            }
+            else if(nom == ""){
+                alert("Erreur : Nom invalide");
+                console.log("alerte nom");
+                return false;
+            }
+            else if(mail == ""){
+                alert("Erreur : mail invalide");
+                console.log("alerte mail");
+                return false;
+            }
+            else if(mdp == ""){
+                alert("Erreur : Mot de passe invalide");
+                console.log("alerte mdp");
+                return false;
             }
             if(prenom == "" && nom == "" && mail == "" && mdp == ""){
                 option = "void";
@@ -183,27 +216,25 @@ function data_pull(datalist,n,isall,option){
         let donnees = [prenom,nom, mail, mdp,option];
         datalist.push(donnees);
 
-        if(option == !"suppr"){
-            if(prenom == "" ){
-                alert("Erreur : prenom invalide");
-                console.log("alerte prenom");
-                return false;
-            }
-            else if(nom == ""){
-                alert("Erreur : Nom invalide");
-                console.log("alerte nom");
-                return false;
-            }
-            else if(mail == ""){
-                alert("Erreur : mail invalide");
-                console.log("alerte mail");
-                return false;
-            }
-            else if(mdp == ""){
-                alert("Erreur : Mot de passe invalide");
-                console.log("alerte mdp");
-                return false;
-            }
+        if(prenom == "" ){
+            alert("Erreur : prenom invalide");
+            console.log("alerte prenom");
+            return false;
+        }
+        else if(nom == ""){
+            alert("Erreur : Nom invalide");
+            console.log("alerte nom");
+            return false;
+        }
+        else if(mail == ""){
+            alert("Erreur : mail invalide");
+            console.log("alerte mail");
+            return false;
+        }
+        else if(mdp == ""){
+            alert("Erreur : Mot de passe invalide");
+            console.log("alerte mdp");
+            return false;
         }
         if(option == "suppr" && prenom == "" && nom == "" && mail == "" && mdp == ""){
             return false;
@@ -214,29 +245,21 @@ function data_pull(datalist,n,isall,option){
 }
 
 
-function ajoutClientBDD(client){//tableau contenant toutes les infos du client
-    fetch('http://127.0.0.1:3000/api/data/ajoutClient', {
-    method: 'Post',
-    mode:'cors',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(client),
-    })
-    .then(response => response.json())
-    .then(console.log("Client ajouté !"))
-    .catch((error) => console.error('Error:', error));
+async function ajoutClientBDD(client){//tableau contenant toutes les infos du client
+    const data = {
+        nom : client[1],
+        prenom : client[0],
+        email : client[2],
+        mdp : client[3]
+    }
+    await requete(ip_serveur+":3000/api/data/ajoutClient",data);
 }
-function suprClientBDD(client){//tableau du client qui sera supprimé
-    fetch('http://127.0.0.1:3000/api/data/suprClient', {
-    method: 'Post',
-    mode:'cors',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(client),
-    })
-    .then(response => response.json())
-    .then(console.log("Client supprimé !"))
-    .catch((error) => console.error('Error:', error));
+async function suprClientBDD(client){//tableau du client qui sera supprimé
+    const data = {
+        nom : client[1],
+        prenom : client[0],
+        email : client[2],
+        mdp : client[3]
+    }
+    await requete(ip_serveur+":3000/api/data/suprClient",data);
 }
