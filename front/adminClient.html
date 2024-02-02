@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <script src="./recup_data_client.js"></script>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <a class="navbar-brand">Nom de l'entreprise</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,10 +22,13 @@
         <li class="nav-item">
           <a class="nav-link" href="adminClient.html">Gestion des Clients</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="adminVente.html">Gestion des Ventes</a>
+        </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="loginAdmin.html">Déconnexion</a>
+          <a class="nav-link" onclick="logout()" href="loginAdmin.html">Déconnexion</a>
         </li>
       </ul>
     </div>
@@ -61,33 +63,6 @@
   </div>
 </div>
 
-<script>
-  function save(){
-    recup_data(nbrow,"save",true);
-  }
-    function supprimerClient(button,n) {
-      recup_data(n,"suppr",false);
-      var row = button.parentNode.parentNode;
-      row.parentNode.removeChild(row);
-    }
-  </script>
-  <script>
-    var nbrow = 0;
-    function ajouterClient() {
-      var table1 = document.getElementById("product-table");
-      var newRow = table1.insertRow(-1);
-      newRow.classList.add("Clients");
-      newRow.id = nbrow;
-      newRow.innerHTML = `
-        <td contenteditable="true"></td>
-        <td contenteditable="true"></td>
-        <td contenteditable="true"></td>
-        <td contenteditable="true"></td>
-        <td><button class="btn btn-danger" onclick="supprimerClient(this,`+nbrow+`)">Supprimer</button></td>
-      `;
-      nbrow+=1;
-    }
-  </script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
