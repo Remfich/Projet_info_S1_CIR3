@@ -21,6 +21,7 @@ function onScanSuccess() {
     message.innerHTML= "Article scanné";
     var url = ip_serveur +":3000/client_back/ajoutPanier";
     var data = JSON.parse(message);
+    console.log(data);
     requete(url,data);
 }
 
