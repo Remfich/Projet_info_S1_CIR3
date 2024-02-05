@@ -26,11 +26,13 @@ function getCookie(cname) {
 }
 isconnectedclient();
 
-function logout(){
+async function logout(){
   document.cookie = "user=; max-duration = 0; path=/;";
   document.cookie = "admin=; max-duration = 0; path=/;";
+  await new Promise(r => setTimeout(r, 1000));
   document.location.replace(ip_front +":3001/loginAdmin.html")
 }
+
 async function requete(url,donnees) {
   try {
     const data = {
@@ -213,16 +215,9 @@ else{
 
   // Convertir le tableau mis à jour en une chaîne JSON
 document.cookie = "panier="+panierJSON3;
-//alert("nouveaupanierjson",nouveauPanierJSON);
-  // Mettre à jour le cookie "panier" avec le nouveau contenu
 
-
-  
-  //alert("cookies :",document.cookie);
-  
 }
 
-// Utilisation de la fonction pour ajouter un article au panier
 
 
 
@@ -237,7 +232,7 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit, nbStock
 
   var lien = document.createElement("a");
   lien.href = ""; // Spécifie l'URL du lien
-  productDiv.appendChild(lien); // Ajoute le lien à la fin du corps du document, vous pouvez choisir un autre emplacement selon vos besoins
+  productDiv.appendChild(lien); // Ajoute le lien à la fin du corps du document
 
   // Création du bouton avec la classe "hidden-button" et le contenu "<h3>+</h3>"
   var button = document.createElement("button");
@@ -276,14 +271,7 @@ function createProduct(nomProduit, prixProduit, nomCategorie,imgProduit, nbStock
   priceH4.textContent = prixProduit + "€";
   priceDiv.appendChild(priceH4);
   productDiv.appendChild(priceDiv);
-/*
-  var papy = document.querySelector(".category_product").children[1];
-  var papa = children[0];
-  var moi = children[2];
-  var fiston = children[0];
-  var nom = papy.papa.moi.fiston.innerHTML;
-  Merci julien le sang
-  */
+
 
   noms.push(nomProduit);
 

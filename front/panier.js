@@ -80,16 +80,7 @@ async function returnPrix(nomProduite) {
 
       addArticle(resultat, nomProduite, 1);
 
-        
-      
-     /* var panierCookie = getCookie("panier");
-        if (panierCookie !== "") {
-          var panier = JSON.parse(panierCookie);
-          for (var i = 0; i < panier.length; i++) {
-            var article = panier[i];
-            addArticle(prix, titre, quantitation);
-        }
-      }*/
+     
 
        } else {
       console.error('Erreur lors du chargement du stock', response.statusText);
@@ -99,7 +90,7 @@ async function returnPrix(nomProduite) {
   }
 };
 
-//fais moi une boucle qui va lire le cookie panier et qui va faire la fonction addArticle pour chaque article dans le panier
+
 
 
 
@@ -208,7 +199,7 @@ function createButton(text, index) {
             return; // Arrêtez l'exécution ici pour éviter de mettre à jour la quantité après la suppression
           } else if (text === "x") {
             prix_stock.splice(index, 1);
-            prix_stock.splice(index, 0, 0); // Insérez l'élément à l'index désiré (nouvelIndex)
+            prix_stock.splice(index, 0, 0); 
             calculPrixTotal();
 
             listeNoms.splice(index, 1);
@@ -217,7 +208,7 @@ function createButton(text, index) {
             articleASupprimer.remove();
             
           
-            return; // Arrêtez l'exécution ici pour éviter de mettre à jour la quantité après la suppression
+            return; 
           }
           
           currentQuantityElement.textContent = "Qté : " + currentQuantity;
@@ -248,8 +239,8 @@ function createButton(text, index) {
         currentQuantityElement.parentElement.parentElement.lastElementChild.appendChild(prix);
         
         prix_stock.splice(index, 1); // Supprimez l'élément de son emplacement actuel
-        prix_stock.splice(index, 0, prixTotal); // Insérez l'élément à l'index désiré (nouvelIndex)
-        //prix_stock.push(prix_stock[index]);
+        prix_stock.splice(index, 0, prixTotal); 
+        
         calculPrixTotal();
     
         }
@@ -259,7 +250,7 @@ function createButton(text, index) {
   }
   
 
-  // Sélectionnez le bouton "Vider le panier" par son ID ou une autre méthode appropriée
+  // Sélectionnez le bouton "Vider le panier" 
 var boutonViderPanier = document.querySelector(".Vider h2");
 
 // Ajoutez un gestionnaire d'événements pour le clic sur le bouton
@@ -295,7 +286,7 @@ document.querySelector(".chatgpt").onclick = function () {
     }
 };
 function calculPrixTotal(){
-    //console.log(prix_stock);
+ 
     // Calcul du prix total du panier en additionnant chaque valeur dans le tableau prix_stock converti en entier pour l'addition
     var somme = 0;
     for (var i = 0; i < prix_stock.length; i++) {
@@ -306,33 +297,15 @@ function calculPrixTotal(){
     console.log(somme);
     
 
-    // Sélectionnez l'élément HTML où vous souhaitez afficher le prix total
+    // Sélectionnez l'élément HTML où on souhaite afficher le prix total
     var totalElement = document.querySelector(".total h1");
 
     // Mettez à jour le contenu de l'élément avec le prix total calculé
     totalElement.textContent = "Total : " + somme + "€";
 }
-/*
 
-document.querySelector(".chatgpt").onclick = function () {
-    // Effectuez une requête POST vers la route /chat du serveur avec le tableau de noms
-    fetch("http://192.168.1.40:3000/serveur/client_back/chat", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ noms: listeNoms })
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Traitez la réponse de votre fonction chatWithGPT ici
-        console.log(data.message); // C'est la réponse de GPT-3.5 Turbo
-    })
-    .catch(error => {
-        console.error(error);
-    });
-};*/
+
+
 
 
 calculPrixTotal();
-console.log(prix_stock);
